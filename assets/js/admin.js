@@ -6,18 +6,16 @@
  */
 
 // any CSS you require will output into a single css file (admin_login.css in this case)
-require('../css/admin_login.css');
-
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
+require('../css/admin.css');
 
 require('../src/admin/vendors/mdi/css/materialdesignicons.min.css');
 require('../src/admin/vendors/flag-icon-css/css/flag-icon.min.css');
 require('../src/admin/vendors/css/vendor.bundle.base.css');
 require('../src/admin/css/vertical-layout-light/style.css');
 
-require('jquery/dist/jquery');
+
 require('popper.js/dist/umd/popper');
+window.PerfectScrollbar = require('perfect-scrollbar').default;
 require('../src/admin/vendors/js/vendor.bundle.base.js');
 require('../src/admin/js/off-canvas.js');
 require('../src/admin/js/hoverable-collapse.js');

@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
 
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
-                return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('app_forgotten_password');
             }
             $token = $tokenGenerator->generateToken();
 
@@ -65,7 +65,7 @@ class SecurityController extends AbstractController
                 $entityManager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
-                return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('app_forgotten_password');
             }
 
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
@@ -82,7 +82,7 @@ class SecurityController extends AbstractController
 
             $this->addFlash('notice', 'Mail envoyé');
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('app_forgotten_password');
         }
 
         return $this->render('security/forgotten_password.html.twig');
