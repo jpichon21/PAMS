@@ -13,6 +13,11 @@ class User implements UserInterface
 {
     use TimestampableEntity;
 
+    const ROLES = [
+        'ROLE_SUPER_ADMIN' => 'Super Admin',
+        'ROLE_ADMIN' => 'Admin'
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

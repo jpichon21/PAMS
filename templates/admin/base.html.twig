@@ -7,7 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pam's Admin</title>
 
-    {{ encore_entry_link_tags('admin') }}
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/vertical-layout-light/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/jquery-toast-plugin/jquery.toast.min.css') }}">
+
     {% block stylesheets %}{% endblock %}
 
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.png') }}"/>
@@ -65,7 +70,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('admin_user') }}">
                         <i class="mdi mdi-account-group menu-icon"></i>
-                        <span class="menu-title">Users</span>
+                        <span class="menu-title">Utilisateurs</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -94,7 +99,19 @@
     </div>
 
 </div>
-{{ encore_entry_script_tags('admin') }}
+
+<script src="{{ asset('assets/admin/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/popper.js') }}"></script>
+<script src="{{ asset('assets/admin/js/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/js/vendor.bundle.base.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/off-canvas.js') }}"></script>
+<script src="{{ asset('assets/admin/js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('assets/admin/js/template.js') }}"></script>
+
+
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
 {% block javascripts %}{% endblock %}
 
@@ -104,7 +121,7 @@
         {% for message in messages %}
         {% set bgColor = '#000000' %}
         {% if label=='success' %}
-            {% set bgColor = '#f96868' %}
+            {% set bgColor = '#2dce48' %}
         {% elseif label=='info' %}
             {% set bgColor = '#46c35f' %}
         {% elseif label=='warning' %}
@@ -120,7 +137,7 @@
                 text: '{{ message }}',
                 showHideTransition: 'slide',
                 icon: '{{ label }}',
-                loaderBg: '{{ bgColor }}',
+                bgColor : '{{ bgColor }}',
                 position: 'top-right'
             })
         {% endfor %}

@@ -1,17 +1,27 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('admin_user') }}
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
 {% endblock %}
 
 {% block body %}
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Liste des admins</h4>
+            <div class="row">
+                <div class="col-lg-8"><h4 class="card-title">Liste des admins</h4></div>
+                <div class="col-lg-2">
+                    <div class="d-block d-md-flex justify-content-between mt-4 mt-md-0">
+                        <div class="text-center mt-4 mt-md-0">
+                            <a href="{{ path('admin_user_new') }}" class="btn btn-outline-info">Nouveau</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table">
+                        <table id="order-listing" class="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -25,15 +35,25 @@
                                 <tr>
                                     <td>{{ user.id }}</td>
                                     <td>{{ user.email }}</td>
-                                    <td></td>
                                     <td>
-                                        <button class="btn btn-outline-primary">Edit</button>
-                                        {% if user != app.user and is_granted('ROLE_SUPER_ADMIN') %}
-                                            <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes vous vraiment sûr ?')">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                                                <button class="btn btn-outline-danger">Supprime</button>
-                                            </form>
+                                        <div class="form-check form-check-primary">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" checked="" id="enable_{{ user.id }}" {% if user.enable %}checked{% endif %} {% if is_granted('ROLE_SUPER_ADMIN') == false %}disabled{% endif %}>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {% if  is_granted('ROLE_SUPER_ADMIN') %}
+                                            <a href="{{ path('admin_user_edit',{'id' : user.id}) }}">
+                                                <button class="btn btn-outline-primary">Edit</button>
+                                            </a>
+                                            {% if user != app.user %}
+                                                <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes vous vraiment sûr ?')">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                                    <button class="btn btn-outline-danger">Supprime</button>
+                                                </form>
+                                            {% endif %}
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -49,9 +69,12 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('admin_user') }}
+
+    <script src="{{ asset('assets/admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
 
     <script>
+
         (function ($) {
             'use strict';
             $(function () {
@@ -77,6 +100,39 @@
                 });
             });
         })($);
+
+        $(document).on('change', "[id^='enable_']", function () {
+            //On recuperer l'identifiant
+            var UserID = this.id.substring(7, this.id.length);
+            var path = Routing.generate('admin_user_enable', {id: UserID});
+            $.ajax({
+                type: "GET",
+                url: path,
+                success: function (retour) {
+                    if (retour === "ok") {
+                        $.toast({
+                            heading: 'Success',
+                            text: 'User mis à jour',
+                            showHideTransition: 'slide',
+                            icon: 'sucess',
+                            bgColor: '#2dce48',
+                            position: 'top-right'
+                        })
+                    } else {
+                        $.toast({
+                            heading: 'danger',
+                            text: 'User mis à jour',
+                            showHideTransition: 'slide',
+                            icon: 'Danger',
+                            bgColor: '#f2a654',
+                            position: 'top-right'
+                        })
+                    }
+                }
+            });
+            return false;
+        });
+
     </script>
 
 {% endblock %}

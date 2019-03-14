@@ -2,13 +2,15 @@
 <html lang="fr">
 
 <head>
-    <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pam's Admin</title>
-    <!-- base:css -->
 
-    {{ encore_entry_link_tags('admin_login') }}
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/vertical-layout-light/style.css') }}">
 
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.png') }}"/>
@@ -31,8 +33,12 @@
     <!-- page-body-wrapper ends -->
 </div>
 
-{{ encore_entry_script_tags('admin_login') }}
-
+<script src="{{ asset('assets/admin/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/popper.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/js/vendor.bundle.base.js') }}"></script>
+<script src="{{ asset('assets/admin/js/off-canvas.js') }}"></script>
+<script src="{{ asset('assets/admin/js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('assets/admin/js/template.js') }}"></script>
 
 </body>
 
