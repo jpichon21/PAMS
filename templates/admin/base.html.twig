@@ -98,6 +98,36 @@
 
 {% block javascripts %}{% endblock %}
 
+<script>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+        {% set bgColor = '#000000' %}
+        {% if label=='success' %}
+            {% set bgColor = '#f96868' %}
+        {% elseif label=='info' %}
+            {% set bgColor = '#46c35f' %}
+        {% elseif label=='warning' %}
+            {% set bgColor = '#57c7d4' %}
+        {% elseif label=='danger' %}
+            {% set bgColor = '#f2a654' %}
+        {% else %}
+            {% set bgColor = '#f96868' %}
+        {% endif %}
+
+            $.toast({
+                heading: '{{ label }}',
+                text: '{{ message }}',
+                showHideTransition: 'slide',
+                icon: '{{ label }}',
+                loaderBg: '{{ bgColor }}',
+                position: 'top-right'
+            })
+        {% endfor %}
+    {% endfor %}
+
+</script>
+
 </body>
 
 </html>

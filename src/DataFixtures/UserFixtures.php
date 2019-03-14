@@ -32,6 +32,7 @@ class UserFixtures extends Fixture
                 $user,
                 'userpass'
             ));
+            $user->setEnable(true);
             $manager->persist($user);
         }
 

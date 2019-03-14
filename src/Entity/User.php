@@ -42,6 +42,11 @@ class User implements UserInterface
      */
     protected $resetToken;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enable;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,11 @@ class User implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function hasRole($role)
+    {
+        return in_array(strtoupper($role), $this->getRoles(), true);
     }
 
     /**
@@ -134,5 +144,26 @@ class User implements UserInterface
     public function setResetToken(?string $resetToken): void
     {
         $this->resetToken = $resetToken;
+    }
+
+    public function getEnable(): ?bool
+    {
+        return $this->enable;
+    }
+
+    public function setEnable(bool $enable): self
+    {
+        $this->enable = $enable;
+
+        return $this;
+    }
+
+    public function toogleEnable(): void
+    {
+        if($this->getEnable()){
+            $this->setEnable(false);
+        }else{
+            $this->setEnable(true);
+        }
     }
 }
