@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <a href="{{ path('admin_pams_code_index') }}">Retour à la liste</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">PamsCode</h4>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ pams_code.id }}</td>
+                </tr>
+                <tr>
+                    <th>Code Createur</th>
+                    <td>{{ pams_code.createurCode }}</td>
+                </tr>
+                <tr>
+                    <th>Code Destinataire</th>
+                    <td>{{ pams_code.destinataireCode }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{ include('admin/pams_code/_delete_form.html.twig') }}
+
+{% endblock %}

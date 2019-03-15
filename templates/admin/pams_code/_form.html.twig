@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+
+    {{ form_label(form.createurCode) }}
+    {{ form_widget(form.createurCode, {'attr': {'class': 'form-control'}}) }}
+
+<div class="form-error">
+    {{ form_errors(form.createurCode) }}
+</div>
+
+{{ form_label(form.destinataireCode) }}
+    {{ form_widget(form.destinataireCode, {'attr': {'class': 'form-control'}}) }}
+
+<div class="form-error">
+    {{ form_errors(form.destinataireCode) }}
+</div>
+
+
+{{ form_rest(form) }}
+
+<button type="submit" class="btn btn-primary mr-2">{{ button|default('Enregistrer') }}</button>
+{{ form_end(form) }}
