@@ -76,12 +76,16 @@ class DefaultController extends AbstractController
      */
     public function view(Request $request)
     {
+        /*********
+         * On contrôle que l'utilisateur est au bon endroit
+         ***************/
         $pamsCode = $this->session->get('pamscode');
         $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
         $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 2);
         if($route!==null) {
             return $this->redirectToRoute($route);
         }
+        /*****************/
 
         return $this->render('default/view.html.twig', [
 
@@ -94,12 +98,16 @@ class DefaultController extends AbstractController
      */
     public function create(Request $request)
     {
+        /*********
+         * On contrôle que l'utilisateur est au bon endroit
+         ***************/
         $pamsCode = $this->session->get('pamscode');
         $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
         $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
         if($route!==null) {
             return $this->redirectToRoute($route);
         }
+        /*****************/
 
         return $this->render('default/create.html.twig', [
 
@@ -113,6 +121,10 @@ class DefaultController extends AbstractController
     public function init(Request $request)
     {
         $pamsCode = $this->session->get('pamscode');
+
+        /*********
+         * On contrôle que l'utilisateur est au bon endroit
+         ***************/
         $retour = $this->pamsCodeService->getCodeValid($pamsCode);
         $codeRetour = $retour[0];
         /* @var $pams \App\Entity\PamsCode */
@@ -122,6 +134,7 @@ class DefaultController extends AbstractController
         if($route!==null) {
             return $this->redirectToRoute($route);
         }
+        /*****************/
 
         $form = $this->createForm(PamsInitType::class, $pams);
         $form->handleRequest($request);
