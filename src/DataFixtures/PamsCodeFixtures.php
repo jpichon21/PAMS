@@ -24,6 +24,8 @@ class PamsCodeFixtures extends Fixture
             $code = new PamsCode();
             $code->setCreateurCode($codes[0]);
             $code->setDestinataireCode($codes[1]);
+            $code->setNotifLecture(false);
+            $code->setHash($this->pamsCodeService->generateHash($codes[0],$codes[1]));
             $manager->persist($code);
         }
 

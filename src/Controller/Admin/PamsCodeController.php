@@ -32,6 +32,8 @@ class PamsCodeController extends AbstractController
         $codes = $pamsCodeService->generateValidCode();
         $pamsCode->setCreateurCode($codes[0]);
         $pamsCode->setDestinataireCode($codes[1]);
+        $pamsCode->setNotifLecture(false);
+        $pamsCode->setHash($this->pamsCodeService->generateHash($codes[0],$codes[1]));
         $form = $this->createForm(PamsCodeType::class, $pamsCode);
         $form->handleRequest($request);
 
@@ -50,7 +52,7 @@ class PamsCodeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="pams_code_show", methods={"GET"})
+     * @Route("/admin/pamscode/{id}", name="pams_code_show", methods={"GET"})
      */
     public function show(PamsCode $pamsCode): Response
     {
