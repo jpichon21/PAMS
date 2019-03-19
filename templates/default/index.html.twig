@@ -1,14 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
+{% block title %}My Pam's – Saisissez votre code My Pams{% endblock %}
 
-    {{ form(form) }}
+{% block body %}
+
+    <div class="container-fluid homepage">
+    <div id="videoContain">
+        <video autoplay muted id="myVideo"> 
+                <source src="{{ asset('images/bg.mp4') }}" type="video/mp4"> 
+            </video>
+    </div>
+    <div class="hidebox" id="bodyTimer">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="flash-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {{ form(form) }}
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
+
+

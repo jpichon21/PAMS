@@ -1,0 +1,168 @@
+
+html, body{
+  height: 100%;
+  background-color: #3b271c;
+}
+
+.container-fluid{
+  padding:0 15px;
+  width:100%;
+}
+
+.homepage{
+  background-color: #3b271c;
+  background-repeat: no-repeat;
+  background-position: center -160px;
+  background-size: cover;
+  height: 100%;
+  padding-top: 200px;
+}
+
+#videoContain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+
+#myVideo {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  min-height: 50%;
+  min-width: 50%;
+}
+
+.logo_pams{
+  position: absolute;
+  top:0px;
+  left:0px;
+  z-index: 1000;
+}
+
+.navbar-inverse{
+  display: none;
+  background: #3b271c;
+  border:none;
+  padding:10px 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+.navbar-nav{
+  float:right;
+}
+
+.navbar-nav > li > a,
+.navbar-inverse .navbar-nav > li > a{
+  color:#ffffff;
+  font-size: 24px;
+}
+
+.input-group-lg{
+  text-align: center;
+}
+
+.form-control.input-pams{
+  display: inline-block;
+  height: 82px;
+  line-height: 80px;
+  border-radius: 100px;
+  font-size: 36px;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2);
+  color:#3b271c;
+  margin-bottom: 50px;
+}
+
+.btn-go{
+  width:150px;
+  height:150px;
+  text-transform: uppercase;
+  font-size: 64px;
+  color:#ffffff;
+  border: 1px solid transparent;
+  background: #3b271ccc;
+  border-radius: 180px;
+}
+
+.btn-go:hover,
+.btn-go:focus{
+  background: #3b271c;
+  color:#ffffff;
+}
+
+.home-message{
+  color:#ffffff;
+  font-size: 36px;
+}
+
+.container-fluid.footer {
+  position: absolute;
+  bottom: 0px;
+}
+.footer p{
+  padding:10px 0;
+  color:#ffffff;
+  text-align: center;
+}
+
+.social-networks a{
+  display: inline-block;
+  background: #3b271ccc;
+  height: 60px;
+  width:60px;
+  line-height: 60px;
+  border-radius: 30px;
+  color:#fff;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  margin:0 15px;
+}
+
+.social-networks a:hover{
+  background: #3b271c;
+}
+
+.btn-go{
+  color:transparent;
+  background-image: url("../images/unlock.png");
+  background-position: center;
+  background-size: inherit;
+  background-repeat: no-repeat;
+}
+
+.btn-go:hover, .btn-go:focus, .btn-go:active{
+  color:transparent;
+  background-image: url("../images/unlock.png");
+  background-position: center;
+  background-size: inherit;
+  background-repeat: no-repeat;
+}
+
+.btn-go label{
+  display: none;
+}
+
+.homepage .input-group-lg{
+    text-align: center;
+    width: 66.6%;
+    margin: 0 auto;
+}
+
+#bodyTimer{
+  opacity: 1;
+  transition: opacity 5s;
+}
+
+/*
+.hidebox{
+  opacity: 0 !important;
+ }*/
