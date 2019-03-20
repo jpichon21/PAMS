@@ -147,9 +147,11 @@ html, body{
   background-repeat: no-repeat;
 }
 
-.btn-go label{
+#pams_entree label, .btn-go label{
   display: none;
 }
+
+
 
 .homepage .input-group-lg{
     text-align: center;
@@ -162,7 +164,6 @@ html, body{
   transition: opacity 5s;
 }
 
-/*
-.hidebox{
+.hidetimer{
   opacity: 0 !important;
- }*/
+ }

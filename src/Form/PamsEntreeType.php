@@ -14,9 +14,16 @@ class PamsEntreeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pamsCode', TextType::class, [
-            ])
-            ->add('submit', SubmitType::class)
+            ->add('pamsCode', TextType::class, array(
+                'attr' => array(
+                    'placeholder' => 'Entrez votre code',
+                    'class' => 'form-control input-pams',
+                    'maxlength' => 11,
+            )))
+            ->add('submit', SubmitType::class, array(
+                'attr' => array(
+                    'class' => 'btn btn-go',
+            )))
         ;
     }
 
