@@ -183,12 +183,14 @@ html, body{
  #firstform-body{
    background-color: #FFF;
    min-height: 920px;
+   height: 100%;
  }
 
+ /*
  #firstform-footer{
    height: 80px;
    background-color: #3b271c;
- }
+ }*/
 
   #firstform-content{
     margin-top: 15px;
