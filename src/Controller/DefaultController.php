@@ -65,7 +65,7 @@ class DefaultController extends AbstractController
 
         }
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/coffre.html.twig', [
             'form' => $form->createView()
         ]);
 
@@ -153,7 +153,7 @@ class DefaultController extends AbstractController
 
         }
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/premiere_connexion.html.twig', [
             'form' => $form->createView()
         ]);
 

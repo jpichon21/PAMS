@@ -29,9 +29,12 @@ class PamsInitType extends AbstractType
             ->add('nomCompletDestinataire', TextType::class, [
                 'required' => false
             ])
-            ->add('remiseDate', DateType::class, [])
+            ->add('remiseDate', DateType::class, [
+                'widget' => 'single_text',
+                'invalid_message' => 'Date de remise invalide'
+            ])
             ->add('titreHistoire', TextType::class, [])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }
 
