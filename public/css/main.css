@@ -1,11 +1,22 @@
+@font-face{
+  font-family:'Blenda';
+  src:url("../fonts/Blenda.otf")
+}
 
 html, body{
   height: 100%;
   background-color: #3b271c;
 }
 
+/*
 .container-fluid{
   padding:0 15px;
+  width:100%;
+}*/
+
+
+.container-fluid{
+  padding:0px;
   width:100%;
 }
 
@@ -42,6 +53,7 @@ html, body{
   top:0px;
   left:0px;
   z-index: 1000;
+  padding: 10px;
 }
 
 .navbar-inverse{
@@ -150,9 +162,6 @@ html, body{
 #pams_entree label, .btn-go label{
   display: none;
 }
-
-
-
 .homepage .input-group-lg{
     text-align: center;
     width: 66.6%;
@@ -167,3 +176,138 @@ html, body{
 .hidetimer{
   opacity: 0 !important;
  }
+
+ /* Page Firstform */
+
+
+ #firstform-body{
+   background-color: #FFF;
+   min-height: 920px;
+ }
+
+ #firstform-footer{
+   height: 80px;
+   background-color: #3b271c;
+ }
+
+  #firstform-content{
+    margin-top: 15px;
+  }
+  
+  .firstform-top-inputs{
+    max-width: 768px;
+    margin: 15px auto;
+  }
+
+  .firstform-below-inputs{
+    max-width: 636px;
+    margin: 15px auto;
+  }
+
+  .firstform-top-inputs .form-group{
+    display: inline-block;
+    width: 47%;
+    margin-right: 16px;
+  }
+
+  .firstform-content-row .form-group input{
+    padding: 25px;
+  }
+  
+ .firstform-header, .firstform-subheader{
+  text-align: center;
+ }
+
+ .firstform-header{
+   background-color: #2c2320;
+   color: #FFF;
+   height: 100px;
+   vertical-align: middle;
+   
+ }
+
+ .firstform-header h1{
+   font-family: 'Blenda', sans-serif;
+   color: #eeb638;
+   margin-top: 0px;
+   padding-top: 25px;
+ }
+
+ .firstform-subheader{
+   padding: 8px 0px 2px 0px;
+   background-color: #eaeaea;
+ }
+
+ .firstform-subheader div{
+   font-size: 14px;
+   font-weight: 600;
+  max-width: 960px;
+  margin: 0 auto;
+ }
+
+ #firstform-check label{
+   font-weight: 200;
+   color: #d8ba2a;
+ }
+
+ [type="checkbox"]:not(:checked),
+ [type="checkbox"]:checked {
+   width: 17px; height: 17px; 
+   border: 1px solid #d8ba2a;
+   background: #fff;
+   border-radius: 3px;
+ }
+
+
+.firstform-below-inputs label{
+  background-color:  #e3c534;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: -2px;
+  font-family: 'Blenda', sans-serif;
+  font-size: 22px;
+  font-weight: 100;
+  padding-left: 86px;
+}
+
+.firstform-below-inputs .form-group{
+  position: relative;
+  margin: 46px;
+}
+
+.firstform-below-inputs .form-group input{
+  border-top: none;
+  padding-left: 86px;
+  
+}
+
+#firstform-beneficiaire:before{
+  content:url(../images/accueil-beneficiaire-sm.png) ;
+}
+
+#firstform-date:before{
+  content:url(../images/accueil-date-sm.png) ;
+}
+
+#firstform-titre:before{
+  content:url(../images/accueil-titre-sm.png  ) ;
+
+}
+
+#firstform-titre:before, #firstform-date:before, #firstform-beneficiaire:before{
+  position: absolute;
+  top: -28px;
+  left: -64px;
+}
+
+#firstform-btn-container{
+  text-align: center;
+  margin: 25px;
+}
+
+#firstform-submit, #firstform-submit:hover, #firstform-submit:active, #firstform-submit:focus{
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  padding: 5px 35px;
+}

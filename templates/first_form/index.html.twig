@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Bienvenue sur My Pam's</title>
+        <meta name="description" content="My Pam's est un produit innovant qui permet d'offrir plus de bonheur avec un cadeau. Connectez vous sur My Pams avec votre code pour créer un contenu, ou consulter un message." />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body id="firstform-body">
+
+        <nav class="container-fluid">
+               <div class="logo_pams hidden-xs">
+                <a href=""><img src="{{ asset('images/logo-pams.png') }}" class="img-responsive" width="250px"></a>
+              </div>
+
+            <div class> 
+                <div class="firstform-header">
+                   <h1>Bienvenue sur My Pam's</h1>
+                </div>
+                <div class="firstform-subheader">
+                 <div>
+                    <p>Vous allez bientôt pouvoir commencer à créer votre histoire avec Pam's. Avant cela, nous vous invitons à renseigner les informations suivantes, afin d'alimenter la page de couverture de votre histoire.</p>
+                 </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="firstform-content" class="container">
+            <div class="firstform-content-row">
+                <form>
+                <div class="firstform-top-inputs">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nameInput"  placeholder="Prénom et Nom de l'Auteur">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="emailInput" placeholder="Adresse email">
+                    </div>
+             
+                    <div>
+                        <div class="form-check" id="firstform-check">
+                            <input type="checkbox" class="form-check-input" id="firstform-check-input">
+                            <label class="form-check-label" for="firstform-check-input">Je souhaite recevoir une notification lorsque mon histoire sera lue par le destinataire</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="firstform-below-inputs container">
+                    <div class="form-group" id="firstform-beneficiaire">
+                        <label>A qui souhaitez-vous offrir votre trésor ?</label>
+                        <input type="text" class="form-control" id="beneficiaireInput"  placeholder="Prénom et Nom du destinataire">
+                    </div>
+
+                    <div class="form-group" id="firstform-date">
+                        <label>Quand souhaitez-vous l'offrir ?</label>
+                        <input type="text" class="form-control" id="dateInput" placeholder="Date de remise">
+                    </div>
+
+                    <div class="form-group" id="firstform-titre">
+                        <label>Quel titre donnez-vous à votre histoire ?</label>
+                        <input type="text" class="form-control" id="titleInput"  placeholder="Titre (ex: Joyeux anniversaire Pascal)">
+                    </div>
+                        <div id ="firstform-btn-container">
+                            <button type="submit" class="btn btn-primary" id="firstform-submit">Valider</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+
+        <footer id="firstform-footer"></footer>
+      
+        <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <!--script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script-->
+        <!--script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script-->
+        <script src="{{ asset('js/main.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
