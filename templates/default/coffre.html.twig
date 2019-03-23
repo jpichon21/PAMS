@@ -49,6 +49,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
+                        <div id="check-error" style="display: none" class="flash-warning"></div>
                         {% for label, messages in app.flashes %}
                             {% for message in messages %}
                                 <div class="flash-{{ label }}">
@@ -83,6 +84,9 @@
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script src="{{ asset('js/checkError.js') }}"></script>
 
 </body>
 </html>
