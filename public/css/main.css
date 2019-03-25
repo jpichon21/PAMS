@@ -127,6 +127,12 @@ html, body{
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+#errorContainer{
+  position: absolute;
+  width: 100%;
+  top: -96px;
+}
+
 .container-fluid.footer {
   position: absolute;
   bottom: 0px;
@@ -327,3 +333,16 @@ html, body{
   border-color: #5cb85c;
   padding: 5px 35px;
 }
+
+/*Datepicker*/
+
+[type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+

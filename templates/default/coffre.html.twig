@@ -64,9 +64,11 @@
                         <div id="check-error" style="display: none" class="flash-warning"></div>
                         {% for label, messages in app.flashes %}
                             {% for message in messages %}
+                            <div id="errorContainer">
                                 <div class="flash-{{ label }}">
                                     {{ message }}
                                 </div>
+                            </div>
                             {% endfor %}
                         {% endfor %}
                         <div class="input-group-lg ">
