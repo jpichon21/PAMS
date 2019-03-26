@@ -197,6 +197,10 @@ html, body{
   transition: all 5s;
  }
 
+ .hide{
+   display: none;
+ }
+
  /* Page Firstform */
 
 
@@ -346,3 +350,99 @@ html, body{
   opacity: 0;
 }
 
+/*Page de Création*/
+
+#createBody{
+  background-color: pink;
+}
+
+#createNav{
+  padding-top: 25px;
+  display: inline-block;
+}
+
+#createContainer{
+    margin-top: 40vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
+
+#navLeft, #navRight{
+  display: inline-block;
+}
+
+#navLeft{
+  float: left;
+}
+#navRight{
+  float: right
+}
+
+#navLeft ul, #navRight ul{
+  margin-left: 0px;
+}
+
+#navRight ul{
+  padding-right: 40px;
+}
+
+#navLeft ul li, #navRight ul li{
+  display: inline-block;
+  margin: 0px 6px;
+}
+
+#navLeft ul li img, #navRight ul li img{
+  width: 52px;
+}
+
+#createContent1, #createContent2, #createContent3, #createContent4{
+  height: 320px;
+  padding: 30px;
+  text-align: center;
+  background-image: url("../images/ajout-contenu.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 42px;
+}
+
+#createContent1 div, #createContent2 div, #createContent3 div, #createContent4 div{
+  border: 3px dashed grey;
+  height: 100%;
+  border-radius: 25px;
+}
+
+#dispositionContainer{
+  background-color: white;
+  border-radius: 10px;
+  border: 4px solid black;
+  width: 420px;
+  position: absolute;
+  display: none;
+  padding: 25px;
+  left: 30px;
+  z-index: 2;
+}
+
+#dispositionContainer h2{
+  font-size: 18px;
+  text-align: center;
+}
+
+#dispositionContainer ul{
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+#dispositionContainer li{
+  display: inline-block;
+}
+
+#dispositionContainer .row{
+  margin: 15px 0px;
+}
+
+.disposition-text{
+  text-align: center;
+  color: #8f8f8f;
+}

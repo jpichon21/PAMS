@@ -1,4 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Créez votre Pam's</title>
+    <meta name="description" content="My Pam's est un produit innovant qui permet d'offrir plus de bonheur avec un cadeau. Connectez vous sur My Pams avec votre code pour créer un contenu, ou consulter un message."/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-new.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.qtip.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body id="createBody">
+
+<nav id="createNav" class="container-fluid">
+    <div id="navLeft">
+        <ul>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier l'arrière plan"><img src="{{ asset('images/arriere-plan.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition" onclick="toggleFunction()"><img src="{{ asset('images/disposition.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Ajouter une musique"><img src="{{ asset('images/musique.png') }}"/></li>
+        </ul>
+    </div>
+    <div id="navRight">
+        <ul>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Foire aux Questions"><img src="{{ asset('images/faq.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualiser le Pam's"><img src="{{ asset('images/visualiser.png') }}"/></li>
+        </ul>
+    </div>
+</nav>
+
+<!--Modal choix de la disposition -->
+<div id="dispositionContainer" class="container">
+        <h2>Sélectionnez votre disposition</h2>
+        <div class="row disposition-text">
+            <div class="col-4">1 bloc</div>
+            <div class="col-8">2 blocs</div>
+        </div>
+            <div class="row">
+                    <ul>
+                        <li><img src="{{ asset('images/create/1-bloc.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/2-blocs-a.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/2-blocs-b.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/2-blocs-c.png') }}" class="img-responsive" width="84px"/></li>
+                    </ul>
+            </div>
+        <div class="row disposition-text">
+            <div class="col-12">3 blocs</div>
+        </div>
+             <div class="row">
+                    <ul>
+                        <li><img src="{{ asset('images/create/3-blocs-a.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/3-blocs-b.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/3-blocs-c.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/3-blocs-d.png') }}" class="img-responsive" width="84px"/></li>
+                    </ul>
+            </div>
+        <div class="row disposition-text">
+            <div class="col-12">4 blocs</div>
+        </div>
+             <div class="row">
+                    <ul>
+                        <li><img src="{{ asset('images/create/4-blocs-a.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/4-blocs-b.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/4-blocs-c.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/4-blocs-d.png') }}" class="img-responsive" width="84px"/></li>
+                    </ul>
+            </div>
+            <div class="row">
+                    <ul>
+                        <li><img src="{{ asset('images/create/4-blocs-e.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/4-blocs-f.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/4-blocs-h.png') }}" class="img-responsive" width="84px"/></li>
+                        <li><img src="{{ asset('images/create/4-blocs-i.png') }}" class="img-responsive" width="84px"/></li>
+                    </ul>
+            </div>
+</div>
 
 
-    CREATION DU PAMS
+<div id="createContainer" class="container">
+    <div class="row">
+        <div id="createContent1" class="col-8">
+            <div>
+                <span class="add-content-img">
+                     <!--img src="{{ asset('images/ajout-contenu.png')}}" width="42px"/-->
+                </span>
+            </div>
+        </div>
+        <div id="createContent2" class="col-4">
+            <div></div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div id="createContent3" class="col-4">
+            <div></div>
+        </div>
+        <div id="createContent4" class="col-8">
+            <div></div>
+        </div>
+    </div>
+
+</div>
+
+   
+
+<script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('js/jquery.qtip.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
+
+</body>
+</html>
