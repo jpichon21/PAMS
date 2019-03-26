@@ -14,7 +14,9 @@ html, body{
   width:100%;
 }*/
 
-
+ul{
+  list-style-type: none;
+}
 .container-fluid{
   padding:0px;
   width:100%;
@@ -422,9 +424,15 @@ html, body{
   z-index: 2;
 }
 
-#dispositionContainer h2{
+#dispositionContainer h2, #musiqueContainer h2{
   font-size: 18px;
   text-align: center;
+}
+
+#backgroundContainer h2{
+  font-size: 18px;
+  text-align: left;
+  display: inline-block;
 }
 
 #dispositionContainer ul{
@@ -432,7 +440,6 @@ html, body{
   margin: 0px;
   padding: 0px;
 }
-
 
 #dispositionContainer li{
   display: inline-block;
@@ -445,4 +452,101 @@ html, body{
 .disposition-text{
   text-align: center;
   color: #8f8f8f;
+}
+
+#backgroundContainer{
+    background-color: white;
+    border-radius: 10px;
+    border: 4px solid black;
+    width: 200px;
+    position: absolute;
+    padding: 25px 0px 0px 0px;
+    left: 20px;
+    z-index: 2;
+    display: none;
+}
+
+#backgroundContainer ul li:first-of-type{
+  float:left;
+}
+
+#backgroundOpacityContainer{
+  background-color: black;
+  height: 82px;
+  padding: 10px;
+  color: white;
+}
+
+#musiqueContainer{
+  background-color: white;
+  border-radius: 10px;
+  border: 4px solid black;
+  width: 300px;
+  position: absolute;
+  padding: 25px;
+  left: 180px;
+  z-index: 2;
+  display: none;
+}
+
+.upload-drop-zone {
+  height: 200px;
+  border-width: 2px;
+  margin-bottom: 20px;
+}
+
+/* skin.css Style*/
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}
+
+/*Range Opacity*/
+
+.rangecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 5px;   
+  background: white;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; 
+  background: black;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: black;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+#opacityValue{
+  color:white;
+}
+
+#opacityValueContainer{
+  float:right;
 }

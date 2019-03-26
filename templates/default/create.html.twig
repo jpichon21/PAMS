@@ -6,7 +6,7 @@
     <meta name="description" content="My Pam's est un produit innovant qui permet d'offrir plus de bonheur avec un cadeau. Connectez vous sur My Pams avec votre code pour créer un contenu, ou consulter un message."/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-new.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.qtip.min.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/dropzone.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
@@ -16,8 +16,8 @@
 <nav id="createNav" class="container-fluid">
     <div id="navLeft">
         <ul>
-            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier l'arrière plan"><img src="{{ asset('images/arriere-plan.png') }}"/></li>
-            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition" onclick="toggleFunction()"><img src="{{ asset('images/disposition.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier l'arrière plan" onclick="backgroundToggle()"><img src="{{ asset('images/arriere-plan.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition" onclick="dispositionToggle()"><img src="{{ asset('images/disposition.png') }}"/></li>
             <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Ajouter une musique"><img src="{{ asset('images/musique.png') }}"/></li>
         </ul>
     </div>
@@ -28,6 +28,33 @@
         </ul>
     </div>
 </nav>
+
+<!--Modal choix de l'arrière plan -->
+<div id ="backgroundContainer" class="container">
+    <div class="row">
+    <ul>
+       <li><img src="{{ asset('images/couleur-fond.png') }}" class="img-responsive" width="52px"/></li>
+        <li><h2>Couleur de fond</h2></li>
+    </ul>
+    </div>
+    <div class="row">
+    <ul>
+        <li><img src="{{ asset('images/ajout-image.png') }}" class="img-responsive" width="52px"/></li>
+        <li><h2>Image de fond</h2></li>
+    </ul>
+    </div>
+    <div id="backgroundOpacityContainer">
+        <h2>Opacité</h2>
+        <div id="opacityValueContainer">
+            <span id="opacityValue"></span> 
+            <span>%</span>
+        </div>
+        <div class="rangecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="opacityRange">
+      
+        </div>
+    </div>
+</div>
 
 <!--Modal choix de la disposition -->
 <div id="dispositionContainer" class="container">
@@ -76,6 +103,20 @@
             </div>
 </div>
 
+<!--Modal choix de la musique-->
+<div id="musiqueContainer" class="container">
+    <div class="row">
+    <h2> Sélectionnez une musique</h2>
+        <form>
+            <div id="musiqueSelectForm" class="form-group">
+                <label for="exampleFormControlFile1">Ou</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+        </form>
+        <div class="dropzone my-dropzone" id="form_snippet_image" action=""></div>
+    </div>
+</div>
+
 
 <div id="createContainer" class="container">
     <div class="row">
@@ -106,7 +147,7 @@
 
 <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('js/jquery.qtip.min.js') }}"></script>
+<script src="{{ asset('js/dropzone.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
