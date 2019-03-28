@@ -356,6 +356,7 @@ ul{
 
 #createBody{
   background-color: pink;
+  overflow: hidden;
 }
 
 #createNav{
@@ -363,7 +364,7 @@ ul{
   display: inline-block;
 }
 
-#createContainer{
+.create-container{
     margin-top: 40vh; /* poussé de la moitié de hauteur de viewport */
     transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
 }
@@ -396,8 +397,33 @@ ul{
   width: 52px;
 }
 
-#createContent1, #createContent2, #createContent3, #createContent4{
+
+/**Layout Create Pams **/
+
+.Content50{
   height: 320px;
+}
+
+.Content75{
+  height: 480px;
+}
+
+.Content37{
+  height: 240px;
+}
+.Content25{
+  height: 160px;
+}
+
+.Content33{
+  height: 213px;
+}
+
+.Content100{
+  height: 640px;
+}
+
+#createContent1, #createContent2, #createContent3, #createContent4{
   padding: 30px;
   text-align: center;
   background-image: url("../images/ajout-contenu.png");
@@ -411,6 +437,33 @@ ul{
   height: 100%;
   border-radius: 25px;
 }
+
+.content-right-bottom-absolute{
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.content-left-top-absolute{
+  position: absolute;
+  left: 50%;
+  top: 0;
+}
+
+.content-right-absolute{
+  position: absolute;
+  left: 75%;
+  bottom: 0px;
+}
+
+.content-center-absolute{
+  position: absolute;
+  top: 0px;
+  left: 25%;
+}
+
+
+/**end layouts***/
 
 #dispositionContainer{
   background-color: white;
@@ -428,6 +481,13 @@ ul{
   font-size: 18px;
   text-align: center;
 }
+#dispositionContainer .button-container{
+  text-align: center;
+}
+
+.disposition-text div{
+  padding: 0px;
+}
 
 #backgroundContainer h2{
   font-size: 18px;
@@ -435,6 +495,7 @@ ul{
   display: inline-block;
 }
 
+/*Popup disposition*/
 #dispositionContainer ul{
   list-style-type: none;
   margin: 0px;
@@ -447,6 +508,11 @@ ul{
 
 #dispositionContainer .row{
   margin: 15px 0px;
+  padding: 0px 5px;
+}
+
+#dispositionContainer input{
+  display: none;
 }
 
 .disposition-text{
@@ -454,6 +520,8 @@ ul{
   color: #8f8f8f;
 }
 
+
+/*Popup Background*/
 #backgroundContainer{
     background-color: white;
     border-radius: 10px;
@@ -549,4 +617,14 @@ ul{
 
 #opacityValueContainer{
   float:right;
+}
+
+/***Layouts create**/
+
+.create-container{
+  display: none;
+}
+
+.disposition-active{
+  display: block;
 }
