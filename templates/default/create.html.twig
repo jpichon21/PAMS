@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-new.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -18,7 +18,7 @@
     <div id="navLeft">
         <ul>
             <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier l'arrière plan" id="backgroundToggle"><img src="{{ asset('images/arriere-plan.png') }}"/></li>
-            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition"  id="dispositionToggle"><img src="{{ asset('images/disposition.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition" id="dispositionToggle"><img src="{{ asset('images/disposition.png') }}"/></li>
             <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Ajouter une musique"><img src="{{ asset('images/musique.png') }}"/></li>
         </ul>
     </div>
@@ -83,10 +83,10 @@
             </div>
                 <div class="row">
                         <ul>
-                            <li id="li-input-1"><input class="input-disposition" type="radio" id="input1a" name="position" value="1a"><label for="input1a"><img src="{{ asset('images/create/1-bloc.png') }}" class="img-responsive image-on" width="84px"/><label></li>
-                            <li><input class="input-disposition" type="radio" id="input2a" name="position" value="2a"><label for="input2a"><img src="{{ asset('images/create/2-blocs-a.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input2b" name="position" value="2b"><label for="input2b"><img src="{{ asset('images/create/2-blocs-b.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input2c" name="position" value="2c"><label for="input2c"><img src="{{ asset('images/create/2-blocs-c.png') }}" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input1a" name="position" value="1a"><label for="input1a" id="input1aLabel"><img src="{{ asset('images/create/1-bloc.png') }}"    id="input1aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/1-bloc-select.png') }}"    id="input1aSelect" class="img-responsive" width="84px"/><label></li>
+                            <li><input class="input-disposition" type="radio" id="input2a" name="position" value="2a"><label for="input2a" id="input2aLabel"><img src="{{ asset('images/create/2-blocs-a.png') }}" id="input2aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-a-select.png') }}" id="input2aSelect" class="img-responsive"  width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input2b" name="position" value="2b"><label for="input2b" id="input2bLabel"><img src="{{ asset('images/create/2-blocs-b.png') }}" id="input2bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-b-select.png') }}" id="input2bSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input2c" name="position" value="2c"><label for="input2c" id="input2cLabel"><img src="{{ asset('images/create/2-blocs-c.png') }}" id="input2cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-c-select.png') }}" id="input2cSelect" class="img-responsive" width="84px"/></label></li>
                         </ul>
                 </div>
             <div class="row disposition-text">
@@ -94,10 +94,10 @@
             </div>
                 <div class="row">
                         <ul>
-                            <li><input class="input-disposition" type="radio" id="input3a" name="position" value="3a"><label for="input3a"><img src="{{ asset('images/create/3-blocs-a.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input3b" name="position" value="3b"><label for="input3b"><img src="{{ asset('images/create/3-blocs-b.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input3c" name="position" value="3c"><label for="input3c"><img src="{{ asset('images/create/3-blocs-c.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input3d" name="position" value="3d"><label for="input3d"><img src="{{ asset('images/create/3-blocs-d.png') }}" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input3a" name="position" value="3a"><label for="input3a" id="input3aLabel"><img src="{{ asset('images/create/3-blocs-a.png') }}" id="input3aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-a-select.png') }}" id="input3aSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input3b" name="position" value="3b"><label for="input3b" id="input3bLabel"><img src="{{ asset('images/create/3-blocs-b.png') }}" id="input3bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-b-select.png') }}" id="input3bSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input3c" name="position" value="3c"><label for="input3c" id="input3cLabel"><img src="{{ asset('images/create/3-blocs-c.png') }}" id="input3cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-c-select.png') }}" id="input3cSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input3d" name="position" value="3d"><label for="input3d" id="input3dLabel"><img src="{{ asset('images/create/3-blocs-d.png') }}" id="input3dGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-d-select.png') }}" id="input3dSelect" class="img-responsive" width="84px"/></label></li>
                         </ul>
                 </div>
             <div class="row disposition-text">
@@ -105,18 +105,18 @@
             </div>
                 <div class="row">
                         <ul>
-                            <li><input class="input-disposition" type="radio" id="input4a" name="position" value="4a"><label for="input4a"><img src="{{ asset('images/create/4-blocs-a.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input4b" name="position" value="4b"><label for="input4b"><img src="{{ asset('images/create/4-blocs-b.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input4c" name="position" value="4c"><label for="input4c"><img src="{{ asset('images/create/4-blocs-c.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input4d" name="position" value="4d"><label for="input4d"><img src="{{ asset('images/create/4-blocs-d.png') }}" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4a" name="position" value="4a"><label for="input4a" id="input4aLabel"><img src="{{ asset('images/create/4-blocs-a.png') }}" id="input4aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-a-select.png') }}" id="input4aSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4b" name="position" value="4b"><label for="input4b" id="input4bLabel"><img src="{{ asset('images/create/4-blocs-b.png') }}" id="input4bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-b-select.png') }}" id="input4bSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4c" name="position" value="4c"><label for="input4c" id="input4cLabel"><img src="{{ asset('images/create/4-blocs-c.png') }}" id="input4cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-c-select.png') }}" id="input4cSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4d" name="position" value="4d"><label for="input4d" id="input4dLabel"><img src="{{ asset('images/create/4-blocs-d.png') }}" id="input4dGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-d-select.png') }}" id="input4dSelect" class="img-responsive" width="84px"/></label></li>
                         </ul>
                 </div>
                 <div class="row">
                         <ul>
-                            <li><input class="input-disposition" type="radio" id="input4e" name="position" value="4e"><label for="input4e"><img src="{{ asset('images/create/4-blocs-e.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input4f" name="position" value="4f"><label for="input4f"><img src="{{ asset('images/create/4-blocs-f.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input4g" name="position" value="4g"><label for="input4g"><img src="{{ asset('images/create/4-blocs-h.png') }}" class="img-responsive" width="84px"/></label></li>
-                            <li><input class="input-disposition" type="radio" id="input4h" name="position" value="4h"><label for="input4h"><img src="{{ asset('images/create/4-blocs-i.png') }}" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4e" name="position" value="4e"><label for="input4e" id="input4eLabel"><img src="{{ asset('images/create/4-blocs-e.png') }}" id="input4eGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-e-select.png') }}" id="input4eSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4f" name="position" value="4f"><label for="input4f" id="input4fLabel"><img src="{{ asset('images/create/4-blocs-f.png') }}" id="input4fGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-f-select.png') }}" id="input4fSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4g" name="position" value="4g"><label for="input4g" id="input4gLabel"><img src="{{ asset('images/create/4-blocs-h.png') }}" id="input4gGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-h-select.png') }}" id="input4gSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4h" name="position" value="4h"><label for="input4h" id="input4hLabel"><img src="{{ asset('images/create/4-blocs-i.png') }}" id="input4hGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-i-select.png') }}" id="input4hSelect" class="img-responsive" width="84px"/></label></li>
                         </ul>
                 </div>
                 <div class="button-container">

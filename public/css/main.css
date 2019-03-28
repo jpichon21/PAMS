@@ -524,6 +524,30 @@ ul{
   color: #8f8f8f;
 }
 
+/*images select*/
+
+#input1aSelect, #input2aSelect, #input2bSelect, #input2cSelect, #input3aSelect, #input3bSelect, #input3cSelect, #input3dSelect, #input4aSelect, #input4bSelect, #input4cSelect, #input4dSelect, #input4eSelect, #input4fSelect, #input4gSelect, #input4hSelect{
+  display: none;
+}
+
+#input1aLabel:hover #input1aSelect, #input2aLabel:hover #input2aSelect, #input2bLabel:hover #input2bSelect, #input2cLabel:hover #input2cSelect, #input3aLabel:hover #input3aSelect, #input3bLabel:hover #input3bSelect, #input3cLabel:hover #input3cSelect, #input3dLabel:hover #input3dSelect, #input4aLabel:hover #input4aSelect, #input4bLabel:hover #input4bSelect, #input4cLabel:hover #input4cSelect, #input4dLabel:hover #input4dSelect, #input4eLabel:hover #input4eSelect, #input4fLabel:hover #input4fSelect, #input4gLabel:hover #input4gSelect, #input4hLabel:hover #input4hSelect{
+ display: inline-block;
+}
+
+#input1a:checked+label #input1aSelect, #input2a:checked+label #input2aSelect, #input2b:checked+label #input2bSelect, #input2c:checked+label #input2cSelect, #input3a:checked+label #input3aSelect, #input3b:checked+label #input3bSelect, #input3c:checked+label #input3cSelect, #input3d:checked+label #input3dSelect, #input4a:checked+label #input4aSelect, #input4b:checked+label #input4bSelect, #input4c:checked+label #input4cSelect, #input4d:checked+label #input4dSelect, #input4e:checked+label #input4eSelect, #input4f:checked+label #input4fSelect, #input4g:checked+label #input4gSelect, #input4h:checked+label #input4hSelect{
+  display: inline-block;
+ }
+
+ #input1aLabel:hover #input1aGrey, #input2aLabel:hover #input2aGrey, #input2bLabel:hover #input2bGrey, #input2cLabel:hover #input2cGrey, #input3aLabel:hover #input3aGrey, #input3bLabel:hover #input3bGrey, #input3cLabel:hover #input3cGrey, #input3dLabel:hover #input3dGrey, #input4aLabel:hover #input4aGrey, #input4bLabel:hover #input4bGrey, #input4cLabel:hover #input4cGrey, #input4dLabel:hover #input4dGrey, #input4eLabel:hover #input4eGrey, #input4fLabel:hover #input4fGrey, #input4gLabel:hover #input4gGrey, #input4hLabel:hover #input4hGrey{
+  display: none;
+ }
+
+ #input1a:checked+label #input1aGrey, #input2a:checked+label #input2aGrey, #input2b:checked+label #input2bGrey, #input2c:checked+label #input2cGrey, #input3a:checked+label #input3aGrey, #input3b:checked+label #input3bGrey, #input3c:checked+label #input3cGrey, #input3d:checked+label #input3dGrey, #input4a:checked+label #input4aGrey, #input4b:checked+label #input4bGrey, #input4c:checked+label #input4cGrey, #input4d:checked+label #input4dGrey, #input4e:checked+label #input4eGrey, #input4f:checked+label #input4fGrey, #input4g:checked+label #input4gSelect, #input4h:checked+label #input4hGrey{
+  display: none;
+ }
+
+ 
+
 
 /*Popup Background*/
 
