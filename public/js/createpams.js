@@ -60,7 +60,7 @@ slider.oninput = function() {
 /*couleur arrière-plan*/
 function changeBgColor(){
   var color = $("#colorPicker").spectrum("get");
-  document.body.style.backgroundColor = color;
+  document.getElementById("createBody").style.backgroundColor = color;
 }
 
 function changeBgOpacity(){
