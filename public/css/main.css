@@ -355,6 +355,8 @@ ul{
 
 #createBody{
   background-color: pink;
+  background-position: center;
+  background-size: cover;
   position: absolute;
   top: 0px;
   width: 100%;
