@@ -6,8 +6,8 @@
     <meta name="description" content="My Pam's est un produit innovant qui permet d'offrir plus de bonheur avec un cadeau. Connectez vous sur My Pams avec votre code pour créer un contenu, ou consulter un message."/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-new.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/dropzone.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -31,10 +31,18 @@
 
 <!--Modal choix de l'arrière plan -->
 <div id ="backgroundContainer" class="container">
+<form>
     <div class="row">
-    <ul>
-       <li><img src="{{ asset('images/couleur-fond.png') }}" class="img-responsive" width="52px"/></li>
-        <li><h2>Couleur de fond</h2></li>
+    <ul>  
+       <li>
+            <label for="colorPicker" id="colorPickerLabel">
+                <img src="{{ asset('images/couleur-fond.png') }}" class="img-responsive" width="52px"/>
+                 <h2>Couleur de fond</h2>
+                  <div id="colorPickerContainer">
+                      <input type='text' id="colorPicker" value="" />
+                  </div>
+             </label>
+        </li>
     </ul>
     </div>
     <div class="row">
@@ -54,6 +62,7 @@
       
         </div>
     </div>
+    </form>
 </div>
 
 <!--Modal choix de la disposition -->
@@ -124,356 +133,233 @@
 </div>
 
 
-<!--Layout Default-->
-<div id="position-0Container" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-8">
-            <div>
-                <span class="add-content-img">
-                     <!--img src="{{ asset('images/ajout-contenu.png')}}" width="42px"/-->
-                </span>
-            </div>
-        </div>
-        <div id="createContent2" class="col-4">
-            <div></div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent3" class="col-4">
-            <div></div>
-        </div>
-        <div id="createContent4" class="col-8">
-            <div></div>
-        </div>
-    </div>
-</div>
-
-
 <!--//////////////////////////////////////////////////////
 /////////////////////// ALL LAYOUTS //////////////////////
 ////////////////////////////////////////////////////////// -->
 
-<!--Layout1a-->
-<div id="1a" class="create-container container">
-    <div class="row">
-        <div id="createContent1" class="col-12 Content100">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout1a-->
+    <div id="1a" class="create-container container">
+        <div class="row">
+            <div id="createContent1" class="col-12 Content100">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Layout2a-->
-<div id="2a" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-12 Content25">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout2a-->
+    <div id="2a" class="create-container container ">
+        <div class="row">
+            <div id="createContent1" class="col-12 Content25">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent1" class="col-12 Content75">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div id="createContent1" class="col-12 Content75">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--Layout2b-->
-<div id="2b" class="create-container container">
-    <div class="row">
-        <div id="createContent1" class="col-6 Content100 ">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-6 Content100 ">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Layout2c-->
-<div id="2c" class="create-container container">
-    <div class="row">
-        <div id="createContent1" class="col-12 Content50 ">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent1" class="col-12 Content50 ">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-    </div>
-</div>
 
 
-<!--Layout3a-->
-<div id="3a" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout2b-->
+    <div id="2b" class="create-container container">
+        <div class="row">
+            <div id="createContent1" class="col-6 Content100 ">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
-        </div>
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent1" class="col-12 Content50">
-            <div>
-                <span class="add-content-img"></span>
+            <div id="createContent1" class="col-6 Content100 ">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Layout3b-->
-<div id="3b" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-3 Content100">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout2c-->
+    <div id="2c" class="create-container container">
+        <div class="row">
+            <div id="createContent1" class="col-12 Content50 ">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
-        <div id="createContent1" class="col-6 Content100">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-3 Content100">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Layout3c-->
-<div id="3c" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-6 Content100">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    
-        <div id="createContent1" class="col-6 Content50 content-right-bottom-absolute">
-            <div>
-                <span class="add-content-img"></span>
+        <div class="row">
+            <div id="createContent1" class="col-12 Content50 ">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
         </div>
     </div>
 
-</div>
 
-<!--Layout3d-->
-<div id="3d" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-12 Content25">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout3a-->
+    <div id="3a" class="create-container container ">
+        <div class="row">
+            <div id="createContent1" class="col-6 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-6 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent1" class="col-12 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div id="createContent1" class="col-6 Content75">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-6 Content75">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!--Layout4a-->
-<div id="4a" class="create-container container disposition-active ">
-    <div class="row">
-        <div id="createContent1" class="col-8 Content50">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout3b-->
+    <div id="3b" class="create-container container ">
+        <div class="row">
+            <div id="createContent1" class="col-3 Content100">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
-        </div>
-        <div id="createContent1" class="col-4 Content50">
-            <div>
-                <span class="add-content-img"></span>
+            <div id="createContent1" class="col-6 Content100">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent1" class="col-4 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-8 Content50">
-            <div>
-                <span class="add-content-img"></span>
+            <div id="createContent1" class="col-3 Content100">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-
-<!--Layout4b-->
-<div id="4b" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-12 Content25">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent1" class="col-12 Content33">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Layout4c-->
-<div id="4c" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-6 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Layout4d-->
-<div id="4d" class="create-container container ">
-    <div class="row">
-        <div id="createContent1" class="col-4 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-4 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-        <div id="createContent1" class="col-4 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="createContent1" class="col-12 Content50">
-            <div>
-                <span class="add-content-img"></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Layout4e-->
-<div id="4e" class="create-container container">
-    <div class="container">
+    <!--Layout3c-->
+    <div id="3c" class="create-container container ">
         <div class="row">
             <div id="createContent1" class="col-6 Content100">
                 <div>
                     <span class="add-content-img"></span>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container content-left-top-absolute">
-        <div class="row">
-                <div id="createContent1" class="col-6 Content33">
-                    <div>
-                        <span class="add-content-img"></span>
-                    </div>
+            <div id="createContent1" class="col-6 Content50">
+                <div>
+                    <span class="add-content-img"></span>
                 </div>
-        </div>
-        <div class="row">
-                <div id="createContent1" class="col-6 Content33">
-                    <div>
-                        <span class="add-content-img"></span>
-                    </div>
+            </div>
+        
+            <div id="createContent1" class="col-6 Content50 content-right-bottom-absolute">
+                <div>
+                    <span class="add-content-img"></span>
                 </div>
+            </div>
+            </div>
         </div>
-        <div class="row">
-                <div id="createContent1" class="col-6 Content33">
-                    <div>
-                        <span class="add-content-img"></span>
-                    </div>
-                </div>
-        </div>
-    </div>
-</div>
 
-<!--Layout4f-->
-<div id="4f" class="create-container container">
-    <div class="container">
+    </div>
+
+    <!--Layout3d-->
+    <div id="3d" class="create-container container ">
         <div class="row">
-            <div id="createContent1" class="col-3 Content100">
+            <div id="createContent1" class="col-12 Content25">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent1" class="col-6 Content75">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-6 Content75">
                 <div>
                     <span class="add-content-img"></span>
                 </div>
             </div>
         </div>
     </div>
-     <div class="container content-center-absolute">
+
+    <!--Layout4a-->
+    <div id="4a" class="create-container container disposition-active ">
         <div class="row">
+            <div id="createContent1" class="col-8 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-4 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent1" class="col-4 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-8 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4b-->
+    <div id="4b" class="create-container container ">
+        <div class="row">
+            <div id="createContent1" class="col-12 Content25">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent1" class="col-6 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-6 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent1" class="col-12 Content33">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4c-->
+    <div id="4c" class="create-container container ">
+        <div class="row">
+            <div id="createContent1" class="col-6 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
             <div id="createContent1" class="col-6 Content50">
                 <div>
                     <span class="add-content-img"></span>
@@ -486,86 +372,181 @@
                     <span class="add-content-img"></span>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container content-right-absolute">
-        <div class="row">
-            <div id="createContent1" class="col-3 Content100">
+            <div id="createContent1" class="col-6 Content50">
                 <div>
                     <span class="add-content-img"></span>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Layout4g-->
-<div id="4g" class="create-container container">
-    <div class="row">
-        <div id="createContent1" class="col-6 Content25">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout4d-->
+    <div id="4d" class="create-container container ">
+        <div class="row">
+            <div id="createContent1" class="col-4 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-4 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-4 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
-        <div id="createContent1" class="col-6 Content25">
-            <div>
-                <span class="add-content-img"></span>
+        <div class="row">
+            <div id="createContent1" class="col-12 Content50">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-         <div id="createContent1" class="col-6 Content75">
-            <div>
-                <span class="add-content-img"></span>
+
+    <!--Layout4e-->
+    <div id="4e" class="create-container container">
+        <div class="container">
+            <div class="row">
+                <div id="createContent1" class="col-6 Content100">
+                    <div>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="createContent1" class="col-6 Content75">
-            <div>
-                <span class="add-content-img"></span>
+        <div class="container content-left-top-absolute">
+            <div class="row">
+                    <div id="createContent1" class="col-6 Content33">
+                        <div>
+                            <span class="add-content-img"></span>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                    <div id="createContent1" class="col-6 Content33">
+                        <div>
+                            <span class="add-content-img"></span>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                    <div id="createContent1" class="col-6 Content33">
+                        <div>
+                            <span class="add-content-img"></span>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Layout4h-->
-<div id="4h" class="create-container container">
-    <div class="row">
-        <div id="createContent1" class="col-12 Content25">
-            <div>
-                <span class="add-content-img"></span>
+    <!--Layout4f-->
+    <div id="4f" class="create-container container">
+        <div class="container">
+            <div class="row">
+                <div id="createContent1" class="col-3 Content100">
+                    <div>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container content-center-absolute">
+            <div class="row">
+                <div id="createContent1" class="col-6 Content50">
+                    <div>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="createContent1" class="col-6 Content50">
+                    <div>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container content-right-absolute">
+            <div class="row">
+                <div id="createContent1" class="col-3 Content100">
+                    <div>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-         <div id="createContent1" class="col-6 Content75">
-            <div>
-                <span class="add-content-img"></span>
+
+    <!--Layout4g-->
+    <div id="4g" class="create-container container">
+        <div class="row">
+            <div id="createContent1" class="col-6 Content25">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-6 Content25">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
-        <div id="createContent1" class="col-6 Content37">
-            <div>
-                <span class="add-content-img"></span>
+        <div class="row">
+            <div id="createContent1" class="col-6 Content75">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-6 Content75">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row ">
-     <div id="createContent1" class="col-6 Content37 content-right-bottom-absolute">
-            <div>
-                <span class="add-content-img"></span>
+
+    <!--Layout4h-->
+    <div id="4h" class="create-container container">
+        <div class="row">
+            <div id="createContent1" class="col-12 Content25">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent1" class="col-6 Content75">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent1" class="col-6 Content37">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+        <div id="createContent1" class="col-6 Content37 content-right-bottom-absolute">
+                <div>
+                    <span class="add-content-img"></span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-
-   
 </div>
 <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('js/dropzone.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/spectrum.js') }}"></script>
 <script src="{{ asset('js/createpams.js') }}"></script>
 <script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
 

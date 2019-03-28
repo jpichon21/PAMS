@@ -352,7 +352,9 @@ ul{
   opacity: 0;
 }
 
-/*Page de Création*/
+/*******************************************************
+********************Page de Création ********************
+*********************************************************/
 
 #createBody{
   background-color: pink;
@@ -398,7 +400,7 @@ ul{
 }
 
 
-/**Layout Create Pams **/
+/**Layouts Create Pams **/
 
 .Content50{
   height: 320px;
@@ -462,7 +464,6 @@ ul{
   left: 25%;
 }
 
-
 /**end layouts***/
 
 #dispositionContainer{
@@ -522,6 +523,7 @@ ul{
 
 
 /*Popup Background*/
+
 #backgroundContainer{
     background-color: white;
     border-radius: 10px;
@@ -536,6 +538,12 @@ ul{
 
 #backgroundContainer ul li:first-of-type{
   float:left;
+}
+#colorPickerContainer{
+  position: absolute;
+  left: 208px;
+  top: 0px;
+  display: none;
 }
 
 #backgroundOpacityContainer{
