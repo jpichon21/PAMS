@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
@@ -12,7 +11,6 @@ $(document).on('click', '#colorPickerLabel', function () {
   colorPickerPopupToggle();
   return false;
 });
-
 
 $(document).on('click', '#dispositionToggle', function () {
     dispositionPopupToggle();
@@ -31,6 +29,11 @@ $(document).on('change', '#colorPicker', function(e) {
   return false;
 });
 
+$(document).on('change', '#opacityRange', function(e) {
+  changeBgOpacity();
+  return false;
+});
+
 /*opacity & colorpicker*/
 
 $("#colorPicker").spectrum({
@@ -38,8 +41,7 @@ $("#colorPicker").spectrum({
   flat: true,
   showInput: true,
   showAlpha: true,
-  allowEmpty:true,
-  palette: [["red", "rgba(0, 255, 0, .5)", "rgb(0, 0, 255)"]]
+  allowEmpty:true
 });
 
 var slider = document.getElementById("opacityRange");
@@ -58,10 +60,28 @@ slider.oninput = function() {
 /*couleur arrière-plan*/
 function changeBgColor(){
   var color = $("#colorPicker").spectrum("get");
-  console.log(color);
   document.body.style.backgroundColor = color;
 }
 
+function changeBgOpacity(){
+  var bgopacity = $("#opacityRange").val();
+  console.log(bgopacity);
+  $("#createBody").css('opacity', bgopacity/100);
+}
+
+/*Upload image*/
+document.getElementById('imagePicker').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("imagePicker").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('createBody').style.backgroundImage = "url(" + reader.result + ")";        
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
 
 
 /**Gestion des popups*/

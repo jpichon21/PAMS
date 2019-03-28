@@ -11,7 +11,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
-<body id="createBody">
+<body >
+<div id="createBody"></div>
 
 <nav id="createNav" class="container-fluid">
     <div id="navLeft">
@@ -33,35 +34,41 @@
 <div id ="backgroundContainer" class="container">
 <form>
     <div class="row">
-    <ul>  
-       <li>
-            <label for="colorPicker" id="colorPickerLabel">
-                <img src="{{ asset('images/couleur-fond.png') }}" class="img-responsive" width="52px"/>
-                 <h2>Couleur de fond</h2>
-                  <div id="colorPickerContainer">
-                      <input type='text' id="colorPicker" value="" />
-                  </div>
-             </label>
-        </li>
-    </ul>
+        <ul>  
+             <li>
+                <label for="colorPicker" id="colorPickerLabel">
+                    <img src="{{ asset('images/couleur-fond.png') }}" class="img-responsive" width="52px"/>
+                    <h2>Couleur de fond</h2>
+                    <div id="colorPickerContainer">
+                        <input type='text' id="colorPicker" value="" />
+                    </div>
+                </label>
+            </li>
+        </ul>
     </div>
     <div class="row">
-    <ul>
-        <li><img src="{{ asset('images/ajout-image.png') }}" class="img-responsive" width="52px"/></li>
-        <li><h2>Image de fond</h2></li>
-    </ul>
+        <ul>
+            <li>
+                <label for="imagePicker" id="imagePickerLabel">
+                    <img src="{{ asset('images/ajout-image.png') }}" class="img-responsive" width="52px"/>
+                    <h2>Image de fond</h2>
+                    <div id ="imagePickerContainer">
+                       <input type='file' id='imagePicker' value="" />
+                    </div>
+                </label>
+            </li>
+        </ul>
     </div>
-    <div id="backgroundOpacityContainer">
-        <h2>Opacité</h2>
-        <div id="opacityValueContainer">
-            <span id="opacityValue"></span> 
-            <span>%</span>
+        <div id="backgroundOpacityContainer">
+            <h2>Opacité</h2>
+                <div id="opacityValueContainer">
+                    <span id="opacityValue"></span> 
+                    <span>%</span>
+                </div>
+                <div class="rangecontainer">
+                    <input type="range" min="1" max="100" value="" class="slider" id="opacityRange">
+                </div>
         </div>
-        <div class="rangecontainer">
-            <input type="range" min="1" max="100" value="50" class="slider" id="opacityRange">
-      
-        </div>
-    </div>
     </form>
 </div>
 
