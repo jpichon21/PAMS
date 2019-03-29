@@ -159,14 +159,17 @@
       </div>
       <div class="modal-body">
         <ul>
-          <li><img src="{{ asset('images/ajout-texte.png') }}"  id="" class="img-responsive" width="84px"/><span>Texte</span></li>
+          <li id="modalTextFormToggle"><img src="{{ asset('images/ajout-texte.png') }}"  id="" class="img-responsive" width="84px"/><span>Texte</span></li>
           <li><img src="{{ asset('images/ajout-image.png') }}"  id="" class="img-responsive" width="84px"/><span>Photo</span></li>
           <li><img src="{{ asset('images/ajout-video.png') }}"  id="" class="img-responsive" width="84px"/><span>Vidéo</span></li>
           <li><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
-          <form id="modalTextForm">
-            <textarea id="toFill"></textarea>
-            <button type="submit"> valider </button>
-        </form>
+
+            <div id="modalTextFormContainer">
+            <form id="modalTextForm">
+                <textarea id="toFill"></textarea>
+                <button type="submit"> valider </button>
+            </form>
+            </div>
         </ul>
       </div>
       

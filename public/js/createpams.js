@@ -39,6 +39,11 @@ $(document).on('click', '#dispositionToggle', function () {
     return false;
 });
 
+$(document).on('click', '#modalTextFormToggle', function () {
+  modalTextFormContainerToggle();
+  return false;
+});
+
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function(e) {
 	var $this = $(this);
@@ -159,6 +164,16 @@ function colorPickerPopupToggle() {
       x.style.display = "none";
     }
   }
+
+function modalTextFormContainerToggle() {
+    var x = document.getElementById("modalTextFormContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
 
 
   $('#dispositionForm').submit(function () {

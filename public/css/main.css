@@ -698,3 +698,7 @@ ul{
   display: block;
   text-align: center;
 }
+
+#modalTextFormContainer{
+  display: none;
+}
