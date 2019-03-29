@@ -56,6 +56,12 @@ $(document).on('change', '#opacityRange', function(e) {
   return false;
 });
 
+/*trigger reset*/
+$('#createContentModal').on('hidden.bs.modal', function () {
+  resetCurrentBlockValue();
+  resetTextArea();
+});
+
 /********************* ajout de texte ****************************/
 
 $(document).on('submit','#modalTextForm', function(e){
@@ -72,13 +78,13 @@ function findModalBlock(elementClicked){
   var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
   var block_id = $block.attr('id');
   current_block_id = block_id;
-  console.log(current_block_id);
+  
 }
 
 /**ajout dynamique de texte */
 function populateText(){
   var user_text = $("#toFill").val();
-  $('#'+current_block_id).find('.to-populate').text(user_text);
+  $('#'+current_block_id).find('.to-populate').html(user_text);
 }
 
 
@@ -87,6 +93,17 @@ function populateText(){
    /**************
      * Functions*
     ****************/
+
+
+  
+/*reset à la fermeture des modals*/
+function resetCurrentBlockValue(){
+  current_block_id = null;
+}
+
+function resetTextArea(){
+  $("#toFill").val("");
+}
 
 /*couleur arrière-plan*/
 function changeBgColor(){

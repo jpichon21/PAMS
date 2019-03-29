@@ -9,7 +9,15 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <!--froala-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 <body >
 <div id="createBody"></div>
@@ -176,7 +184,7 @@
         <div class="row">
             <div id="createContent1a-1" class="createContent col-12 Content100">
                 <div class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                     <p class="to-populate"></p>
+                     <p class="to-populate fr-view"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -634,6 +642,16 @@
 <script src="{{ asset('js/spectrum.js') }}"></script>
 <script src="{{ asset('js/createpams.js') }}"></script>
 <script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
+
+<!--froala-->
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+ 
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/js/froala_editor.pkgd.min.js"></script>
+ 
+    <!-- Initialize the editor. -->
+    <script> $(function() { $('textarea').froalaEditor() }); </script>
 
 </body>
 </html>
