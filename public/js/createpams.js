@@ -1,3 +1,25 @@
+var current_block_id = null;
+
+/*opacity & colorpicker*/
+
+$("#colorPicker").spectrum({
+  preferredFormat: "hex",
+  flat: true,
+  showInput: true,
+  showAlpha: true,
+  allowEmpty:true
+});
+
+var slider = document.getElementById("opacityRange");
+var output = document.getElementById("opacityValue");
+output.innerHTML = slider.value; 
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+
+/*events*/
+
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
@@ -34,23 +56,32 @@ $(document).on('change', '#opacityRange', function(e) {
   return false;
 });
 
-/*opacity & colorpicker*/
+/********************* ajout de texte ****************************/
 
-$("#colorPicker").spectrum({
-  preferredFormat: "hex",
-  flat: true,
-  showInput: true,
-  showAlpha: true,
-  allowEmpty:true
+$(document).on('submit','#modalTextForm', function(e){
+  populateText();
+  return false;
 });
 
-var slider = document.getElementById("opacityRange");
-var output = document.getElementById("opacityValue");
-output.innerHTML = slider.value; 
+$(document).on('click','.trigger-modal-block', function(e){
+  findModalBlock(this);
+});
 
-slider.oninput = function() {
-  output.innerHTML = this.value;
+function findModalBlock(elementClicked){
+  var $this = $(elementClicked); // on récup l'élément cliqué en jQuery
+  var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
+  var block_id = $block.attr('id');
+  current_block_id = block_id;
+  console.log(current_block_id);
 }
+
+/**ajout dynamique de texte */
+function populateText(){
+  var user_text = $("#toFill").val();
+  $('#'+current_block_id).find('.to-populate').text(user_text);
+}
+
+
 
 
    /**************
@@ -111,6 +142,14 @@ function colorPickerPopupToggle() {
       x.style.display = "none";
     }
   }
+
+
+  $('#dispositionForm').submit(function () {
+    dispositionPopupToggle();
+    return false;
+   });
+
+
   
   /*Layouts*/
   function toggleDisposition(disposition) {

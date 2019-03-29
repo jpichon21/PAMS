@@ -103,12 +103,6 @@ ul{
   border-radius: 180px;
 }
 
-/*.btn-go:hover,
-.btn-go:focus{
-  background: #3b271c;
-  color:#ffffff;
-}*/
-
 .home-message{
   color:#ffffff;
   font-size: 36px;
@@ -428,16 +422,19 @@ ul{
   height: 640px;
 }
 
-#createContent1, #createContent2, #createContent3, #createContent4{
+
+.createContent{
   padding: 30px;
   text-align: center;
+
+}
+
+
+.createContent div{
   background-image: url("../images/ajout-contenu.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 42px;
-}
-
-#createContent1 div, #createContent2 div, #createContent3 div, #createContent4 div{
   border: 3px dashed grey;
   height: 100%;
   border-radius: 25px;
@@ -675,4 +672,29 @@ ul{
 
 .disposition-active{
   display: block;
+}
+
+
+/**ajout contenu bloc**/
+
+.modal-content{
+  background-color: white;
+  border-radius: 10px;
+  border: 4px solid black;
+}
+
+.content-modal ul{
+  padding: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.content-modal ul li{
+  display: inline-block;
+  margin: 0px 8px;
+}
+
+.content-modal ul li span{
+  display: block;
+  text-align: center;
 }
