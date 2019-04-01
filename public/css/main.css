@@ -430,7 +430,7 @@ ul{
 }
 
 
-.createContent div{
+.createContent div, .removed-content{
   background-image: url("../images/ajout-contenu.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -558,6 +558,17 @@ ul{
     left: 20px;
     z-index: 2;
     display: none;
+}
+
+#bgImageContainer{
+  background-color: white;
+  border-radius: 10px;
+  border: 4px solid black;
+  width: 200px;
+  position: absolute;
+  padding: 25px 0px 0px 0px;
+  left: 20px;
+  z-index: 2;
 }
 
 #backgroundContainer ul li:first-of-type{
@@ -709,4 +720,12 @@ ul{
 
 .filled-block{
   background: none!important;
+}
+
+.content-added{
+  content: url("../images/supprimer-bloc-xs.png");
+  position: absolute;
+  top: -32px;
+  right: 24px;
+  display: none;
 }

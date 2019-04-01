@@ -72,6 +72,14 @@ $('#createContentModal').on('hidden.bs.modal', function () {
   resetTextArea();
 });
 
+/**trigger delete image */
+$('.content-added').click(function() {
+  findModalBlock(this);
+  removeContent();
+});
+
+
+
 /********************* ajout de texte ****************************/
 
 $(document).on('submit','#modalTextForm', function(e){
@@ -152,9 +160,12 @@ function readURL(){
     var file = document.getElementById("addImageContent").files[0];
     var reader = new FileReader();
     reader.onloadend = function(){
+      $('#trigger'+current_block_id).removeClass("removed-content");
+      document.getElementById('trigger'+current_block_id).style.border ="none";  
       document.getElementById('trigger'+current_block_id).style.backgroundImage = "url(" + reader.result + ")";  
       document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
       document.getElementById('trigger'+current_block_id).style.backgroundPosition = "center";  
+      document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
     }
     if(file){
         reader.readAsDataURL(file);
@@ -198,6 +209,21 @@ function modalTextFormContainerToggle() {
     } else {
       x.style.display = "none";
     }
+  }
+
+/*suppression image block*/
+  function removeContent(){
+    document.getElementById('trigger'+current_block_id).style.backgroundImage = "";  
+    document.getElementById('trigger'+current_block_id).style.backgroundSize = "";  
+    document.getElementById('trigger'+current_block_id).style.backgroundPosition = "";  
+    document.getElementById('trigger'+current_block_id).style.border = "";  
+    document.getElementById('content-added'+current_block_id).style.display ="none";  
+    resetBlockContent();
+
+  }
+  
+  function resetBlockContent(){
+    $('#trigger'+current_block_id).addClass("removed-content");
   }
 
  
