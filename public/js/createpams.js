@@ -61,6 +61,11 @@ $(document).on('change', '#opacityRange', function(e) {
   return false;
 });
 
+$('#dispositionForm').submit(function () {
+  dispositionPopupToggle();
+  return false;
+ });
+
 /*trigger reset*/
 $('#createContentModal').on('hidden.bs.modal', function () {
   resetCurrentBlockValue();
@@ -71,7 +76,9 @@ $('#createContentModal').on('hidden.bs.modal', function () {
 
 $(document).on('submit','#modalTextForm', function(e){
   populateText();
+  closeBsModal();
   return false;
+
 });
 
 $(document).on('click','.trigger-modal-block', function(e){
@@ -83,16 +90,14 @@ function findModalBlock(elementClicked){
   var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
   var block_id = $block.attr('id');
   current_block_id = block_id;
-  
 }
 
 /**ajout dynamique de texte */
 function populateText(){
   var user_text = $("#toFill").val();
   $('#'+current_block_id).find('.to-populate').html(user_text);
+  $('#trigger'+current_block_id).addClass('filled-block');
 }
-
-
 
 
    /**************
@@ -106,8 +111,14 @@ function resetCurrentBlockValue(){
   current_block_id = null;
 }
 
+function closeBsModal(){
+  $('#createContentModal').modal('hide');
+  resetCurrentBlockValue();
+  resetTextArea();
+}
+
 function resetTextArea(){
-  $("#toFill").val("");
+  $('#modalTextFormContainer').froalaEditor('html.set', '');
 }
 
 /*couleur arrière-plan*/
@@ -118,7 +129,6 @@ function changeBgColor(){
 
 function changeBgOpacity(){
   var bgopacity = $("#opacityRange").val();
-  console.log(bgopacity);
   $("#createBody").css('opacity', bgopacity/100);
 }
 
@@ -174,15 +184,7 @@ function modalTextFormContainerToggle() {
     }
   }
 
-
-
-  $('#dispositionForm').submit(function () {
-    dispositionPopupToggle();
-    return false;
-   });
-
-
-  
+ 
   /*Layouts*/
   function toggleDisposition(disposition) {
 	var $active = $('.disposition-active');

@@ -702,3 +702,11 @@ ul{
 #modalTextFormContainer{
   display: none;
 }
+
+.to-populate{
+  padding: 10px;
+}
+
+.filled-block{
+  background: none!important;
+}
