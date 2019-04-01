@@ -160,7 +160,13 @@
       <div class="modal-body">
         <ul>
           <li id="modalTextFormToggle"><img src="{{ asset('images/ajout-texte.png') }}"  id="" class="img-responsive" width="84px"/><span>Texte</span></li>
-          <li><img src="{{ asset('images/ajout-image.png') }}"  id="" class="img-responsive" width="84px"/><span>Photo</span></li>
+          <li>
+           <label for="addImageContent" id="addImageContentLabel">
+                    <img src="{{ asset('images/ajout-image.png') }}"  id="" class="img-responsive" width="84px"/>
+                       <input type='file' id='addImageContent' value="" />
+                        <span>Photo</span>  
+             </label>
+            </li>
           <li><img src="{{ asset('images/ajout-video.png') }}"  id="" class="img-responsive" width="84px"/><span>Vidéo</span></li>
           <li><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
 

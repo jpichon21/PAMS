@@ -90,6 +90,7 @@ function findModalBlock(elementClicked){
   var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
   var block_id = $block.attr('id');
   current_block_id = block_id;
+  console.log(current_block_id);
 }
 
 /**ajout dynamique de texte */
@@ -100,10 +101,9 @@ function populateText(){
 }
 
 
-   /**************
-     * Functions*
-    ****************/
-
+/**************
+  * Functions*
+****************/
 
   
 /*reset à la fermeture des modals*/
@@ -139,6 +139,22 @@ function readURL(){
     var reader = new FileReader();
     reader.onloadend = function(){
         document.getElementById('createBody').style.backgroundImage = "url(" + reader.result + ")";        
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
+
+/* ajout image à block */
+document.getElementById('addImageContent').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("addImageContent").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      document.getElementById('trigger'+current_block_id).style.backgroundImage = "url(" + reader.result + ")";  
+      document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
+      document.getElementById('trigger'+current_block_id).style.backgroundPosition = "center";  
     }
     if(file){
         reader.readAsDataURL(file);
