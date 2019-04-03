@@ -32,6 +32,19 @@ class PamsCodeService
         $this->flashBag = $flashBag;
     }
 
+    public function checkCodeExist($code){
+        $pamsCode = $this->pamsCodeRepository->findByCreateurCode($code);
+        if(count($pamsCode)>0){
+            return true;
+        }
+        $pamsCode = $this->pamsCodeRepository->findByDestinataireCode($code);
+        if(count($pamsCode)>0){
+            return true;
+        }
+
+        return false;
+    }
+
     // 1 : Createur
     // 2 : Destinataire
     // 3 : premiere connexion createur
