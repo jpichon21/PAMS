@@ -1,4 +1,791 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Créez votre Pam's</title>
+    <meta name="description" content="My Pam's est un produit innovant qui permet d'offrir plus de bonheur avec un cadeau. Connectez vous sur My Pams avec votre code pour créer un contenu, ou consulter un message."/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-new.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <!--froala-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body >
+<div id="createBody"></div>
+
+<!-- Top Menu -->
+<nav id="createNav" class="container-fluid">
+    <div id="navLeft">
+        <ul>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier l'arrière plan" id="backgroundToggle"><img src="{{ asset('images/arriere-plan.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition" id="dispositionToggle"><img src="{{ asset('images/disposition.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Ajouter une musique"     id="audioToggle"><img src="{{ asset('images/musique.png') }}"/></li>
+        </ul>
+    </div>
+    <div id="navRight">
+        <ul>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Foire aux Questions"><img src="{{ asset('images/faq.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualiser le Pam's"><img src="{{ asset('images/visualiser.png') }}"/></li>
+        </ul>
+    </div>
+</nav>
+
+<!--Modal choix de l'arrière plan -->
+<div id="backgroundContainer" class="container">
+<form>
+    <div class="row">
+        <ul>  
+             <li>
+                <label for="colorPicker" id="colorPickerLabel">
+                    <img src="{{ asset('images/couleur-fond.png') }}" class="img-responsive" width="52px"/>
+                    <h2>Couleur de fond</h2>
+                    <div id="colorPickerContainer">
+                        <input type='text' id="colorPicker" value="" />
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <ul>
+            <li>
+                <label for="" id="imageGalleryToggleLabel">
+                    <img src="{{ asset('images/ajout-image.png') }}" class="img-responsive" width="52px"/>
+                    <h2>Image de fond</h2>
+                </label>
+            </li>
+        </ul>
+    </div>
+        <div id="backgroundOpacityContainer">
+            <h2>Opacité</h2>
+                <div id="opacityValueContainer">
+                    <span id="opacityValue"></span> 
+                    <span>%</span>
+                </div>
+                <div class="rangecontainer">
+                    <input type="range" min="1" max="100" value="" class="slider" id="opacityRange">
+                </div>
+        </div>
+    </form>
+</div>
+
+<!--Modal choix de la disposition -->
+<div id="dispositionContainer" class="container">
+        <h2>Sélectionnez votre disposition</h2>
+        <form id="dispositionForm">
+            <div class="row disposition-text">
+                <div class="col-4">─ 1 bloc ─</div>
+                <div class="col-8">─────── 2 blocs ──────</div>
+            
+            </div>
+                <div class="row">
+                        <ul>
+                            <li><input class="input-disposition" type="radio" id="input1a" name="position" value="1a"><label for="input1a" id="input1aLabel"><img src="{{ asset('images/create/1-bloc.png') }}"    id="input1aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/1-bloc-select.png') }}"    id="input1aSelect" class="img-responsive" width="84px"/><label></li>
+                            <li><input class="input-disposition" type="radio" id="input2a" name="position" value="2a"><label for="input2a" id="input2aLabel"><img src="{{ asset('images/create/2-blocs-a.png') }}" id="input2aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-a-select.png') }}" id="input2aSelect" class="img-responsive"  width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input2b" name="position" value="2b"><label for="input2b" id="input2bLabel"><img src="{{ asset('images/create/2-blocs-b.png') }}" id="input2bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-b-select.png') }}" id="input2bSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input2c" name="position" value="2c"><label for="input2c" id="input2cLabel"><img src="{{ asset('images/create/2-blocs-c.png') }}" id="input2cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-c-select.png') }}" id="input2cSelect" class="img-responsive" width="84px"/></label></li>
+                        </ul>
+                </div>
+            <div class="row disposition-text">
+                <div class="col-12">───────────── 3 blocs ────────────</div>
+            </div>
+                <div class="row">
+                        <ul>
+                            <li><input class="input-disposition" type="radio" id="input3a" name="position" value="3a"><label for="input3a" id="input3aLabel"><img src="{{ asset('images/create/3-blocs-a.png') }}" id="input3aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-a-select.png') }}" id="input3aSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input3b" name="position" value="3b"><label for="input3b" id="input3bLabel"><img src="{{ asset('images/create/3-blocs-b.png') }}" id="input3bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-b-select.png') }}" id="input3bSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input3c" name="position" value="3c"><label for="input3c" id="input3cLabel"><img src="{{ asset('images/create/3-blocs-c.png') }}" id="input3cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-c-select.png') }}" id="input3cSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input3d" name="position" value="3d"><label for="input3d" id="input3dLabel"><img src="{{ asset('images/create/3-blocs-d.png') }}" id="input3dGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-d-select.png') }}" id="input3dSelect" class="img-responsive" width="84px"/></label></li>
+                        </ul>
+                </div>
+            <div class="row disposition-text">
+                <div class="col-12">───────────── 4 blocs ────────────</div>
+            </div>
+                <div class="row">
+                        <ul>
+                            <li><input class="input-disposition" type="radio" id="input4a" name="position" value="4a"><label for="input4a" id="input4aLabel"><img src="{{ asset('images/create/4-blocs-a.png') }}" id="input4aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-a-select.png') }}" id="input4aSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4b" name="position" value="4b"><label for="input4b" id="input4bLabel"><img src="{{ asset('images/create/4-blocs-b.png') }}" id="input4bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-b-select.png') }}" id="input4bSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4c" name="position" value="4c"><label for="input4c" id="input4cLabel"><img src="{{ asset('images/create/4-blocs-c.png') }}" id="input4cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-c-select.png') }}" id="input4cSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4d" name="position" value="4d"><label for="input4d" id="input4dLabel"><img src="{{ asset('images/create/4-blocs-d.png') }}" id="input4dGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-d-select.png') }}" id="input4dSelect" class="img-responsive" width="84px"/></label></li>
+                        </ul>
+                </div>
+                <div class="row">
+                        <ul>
+                            <li><input class="input-disposition" type="radio" id="input4e" name="position" value="4e"><label for="input4e" id="input4eLabel"><img src="{{ asset('images/create/4-blocs-e.png') }}" id="input4eGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-e-select.png') }}" id="input4eSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4f" name="position" value="4f"><label for="input4f" id="input4fLabel"><img src="{{ asset('images/create/4-blocs-f.png') }}" id="input4fGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-f-select.png') }}" id="input4fSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4g" name="position" value="4g"><label for="input4g" id="input4gLabel"><img src="{{ asset('images/create/4-blocs-h.png') }}" id="input4gGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-h-select.png') }}" id="input4gSelect" class="img-responsive" width="84px"/></label></li>
+                            <li><input class="input-disposition" type="radio" id="input4h" name="position" value="4h"><label for="input4h" id="input4hLabel"><img src="{{ asset('images/create/4-blocs-i.png') }}" id="input4hGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-i-select.png') }}" id="input4hSelect" class="img-responsive" width="84px"/></label></li>
+                        </ul>
+                </div>
+                <div class="button-container">
+                     <button type="submit" class="btn btn-primary" id="firstform-submit">Valider</button>
+                 </div>
+            </form>
+</div>
+
+<!--Modal choix de la musique-->
+<div id="musiqueContainer" class="container">
+    <form id="musiqueSelectForm" class="dropzone">
+          <div id ="musiqueUploaderContainer">
+                  <h2>Faites Glisser une musique(.mp3)</h2>
+                  <span>ou</span>
+                  <label for="musiqueUploader" id="musiqueUploaderLabel">
+                     <input name="file" type='file' id='musiqueUploader'  value="" />
+              
+                  </label>  
+            </div>
+
+            <div id="musiqueGallery">
+            <h2>Notre Sélection</h2>
+            <div id="musiqueGalleryTitle">catégorie :
+            <select id="musiqueSelect">
+                <option value="ALL" selected="selected">Toutes les musiques</option>
+                <option value="1">Noël</option>
+                <option value="2">Anniversaire</option>
+                <option value="3">Etc</option>
+            </select>
+            </div>
+
+            <div id="musiqueGalleryList">
+                <ul class="submenu">
+                    <li id="musique1-1" class="music-list-item"><audio id="Audiomusique1-1" class="player-audio"><source src="{{ asset('audio/dumb-audio-1.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-2" class="music-list-item"><audio id="Audiomusique1-2" class="player-audio"><source src="{{ asset('audio/dumb-audio-2.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-3" class="music-list-item"><audio id="Audiomusique1-3" class="player-audio"><source src="{{ asset('audio/dumb-audio-3.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-4" class="music-list-item"><audio id="Audiomusique1-4" class="player-audio"><source src="{{ asset('audio/dumb-audio-4.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-5" class="music-list-item"><audio id="Audiomusique1-5" class="player-audio"><source src="{{ asset('audio/dumb-audio-5.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-6" class="music-list-item"><audio id="Audiomusique1-6" class="player-audio"><source src="{{ asset('audio/dumb-audio-6.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-7" class="music-list-item"><audio id="Audiomusique1-7" class="player-audio"><source src="{{ asset('audio/dumb-audio-7.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-8" class="music-list-item"><audio id="Audiomusique1-8" class="player-audio"><source src="{{ asset('audio/dumb-audio-8.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-9" class="music-list-item"><audio id="Audiomusique1-9" class="player-audio"><source src="{{ asset('audio/dumb-audio-9.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique2-1" class="music-list-item"><audio id="Audiomusique2-1" class="player-audio"><source src="{{ asset('audio/dumb-audio-1.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
+                    <li id="musique2-2" class="music-list-item"><audio id="Audiomusique2-2" class="player-audio"><source src="{{ asset('audio/dumb-audio-2.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
+                    <li id="musique3-1" class="music-list-item"><audio id="Audiomusique3-1" class="player-audio"><source src="{{ asset('audio/dumb-audio-3.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">3</span></li>
+                </ul>
+            </div>
+            </div>
+            
+                <div class="button-container">
+                     <button id="submitAudio" type="submit" class="btn btn-primary submit-btn" >Valider</button>
+                 </div>
+            </form>
+</div>
+
+<!--Modal choix de l'image de fond -->
+<div id="imageGalleryContainer" class="container">
+        <form id="bgImageForm" action="" class="dropzone">
+           <div id ="imageUploaderContainer">
+                  <h2>Faites Glisser un fichier</h2>
+                  <span>ou</span>
+                  <label for="imagePicker" id="imagePickerLabel">
+                    <input type='file' id='imagePicker' value="" />
+                  </label>  
+            </div>
+            <div id="imageGallery">
+                <span id="imageGalleryTitle">Notre sélection</span>
+                <div id="imageGalleryList">
+                    <ul class="submenu">
+                        <li id="image1-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><input id="image1-1input" type="hidden" value="../images/image-library/gift1.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-2" class="image-list-item"><img src="{{ asset('images/image-library/gift2.jpg') }} " width="100px" height="100px"/><input id="image1-2input" type="hidden" value="../images/image-library/gift2.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-3" class="image-list-item"><img src="{{ asset('images/image-library/gift3.jpg') }} " width="100px" height="100px"/><input id="image1-3input" type="hidden" value="../images/image-library/gift3.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-4" class="image-list-item"><img src="{{ asset('images/image-library/gift4.jpg') }} " width="100px" height="100px"/><input id="image1-4input" type="hidden" value="../images/image-library/gift4.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-5" class="image-list-item"><img src="{{ asset('images/image-library/gift5.jpg') }} " width="100px" height="100px"/><input id="image1-5input" type="hidden" value="../images/image-library/gift5.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-6" class="image-list-item"><img src="{{ asset('images/image-library/gift6.jpg') }} " width="100px" height="100px"/><input id="image1-6input" type="hidden" value="../images/image-library/gift6.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-7" class="image-list-item"><img src="{{ asset('images/image-library/gift7.jpg') }} " width="100px" height="100px"/><input id="image1-7input" type="hidden" value="../images/image-library/gift7.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-8" class="image-list-item"><img src="{{ asset('images/image-library/gift8.jpg') }} " width="100px" height="100px"/><input id="image1-8input" type="hidden" value="../images/image-library/gift8.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-9" class="image-list-item"><img src="{{ asset('images/image-library/gift9.jpg') }} " width="100px" height="100px"/><input id="image1-9input" type="hidden" value="../images/image-library/gift9.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-10" class="image-list-item"><img src="{{ asset('images/image-library/gift10.jpg') }} " width="100px" height="100px"/><input id="image1-10input" type="hidden" value="../images/image-library/gift10.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-11" class="image-list-item"><img src="{{ asset('images/image-library/gift11.jpg') }} " width="100px" height="100px"/><input id="image1-11input" type="hidden" value="../images/image-library/gift11.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-12" class="image-list-item"><img src="{{ asset('images/image-library/gift12.jpg') }} " width="100px" height="100px"/><input id="image1-12input" type="hidden" value="../images/image-library/gift12.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    </ul>
+                </div>
+            </div>
+                <div class="button-container">
+                     <button type="submit" class="btn btn-primary submit-btn" >Valider</button>
+                 </div>
+        </form>
+</div>
+
+<!-- Modal Create Content-->
+<div class="modal fade content-modal" id="createContentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Choisissez un type de contenu</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+      <div class="modal-body">
+            <ul>
+            <li id="modalTextFormToggle"><img src="{{ asset('images/ajout-texte.png') }}"  id="" class="img-responsive" width="84px"/><span>Texte</span></li>
+            <li>
+            <label for="addImageContent" id="addImageContentLabel">
+                        <img src="{{ asset('images/ajout-image.png') }}"  id="" class="img-responsive" width="84px"/>
+                        <input type='file' id='addImageContent' value="" />
+                            <span>Photo</span>  
+                </label>
+                </li>
+            <li><img src="{{ asset('images/ajout-video.png') }}"  id="" class="img-responsive" width="84px"/><span>Vidéo</span></li>
+            <li><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
+
+                <div id="modalTextFormContainer">
+                    <form id="modalTextForm">
+                        <textarea id="toFill"></textarea>
+                        <button type="submit"> valider </button>
+                    </form>
+                </div>
+            </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
-    CREATION DU PAMS
+<!--//////////////////////////////////////////////////////
+/////////////////////// ALL LAYOUTS //////////////////////
+////////////////////////////////////////////////////////// -->
 
+    <!--Layout1a-->
+    <div id="1a" class="create-container container">
+        <div class="row">
+            <div id="createContent1a-1" class="createContent col-12 Content100">
+              <span id="content-addedcreateContent1a-1" class="content-added" ></span>
+                <div id="triggercreateContent1a-1"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate fr-view"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout2a-->
+    <div id="2a" class="create-container container ">
+        <div class="row">
+            <div id="createContent2a-1" class="createContent col-12 Content25">
+               <span id="content-addedcreateContent2a-1" class="content-added" ></span>
+                <div id="triggercreateContent2a-1"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent2a-2" class="createContent col-12 Content75">
+               <span id="content-addedcreateContent2a-2" class="content-added" ></span>
+                <div id="triggercreateContent2a-2"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Layout2b-->
+    <div id="2b" class="create-container container">
+        <div class="row">
+            <div id="createContent2b-1" class="createContent col-6 Content100">
+                <span id="content-addedcreateContent2b-1" class="content-added" ></span>
+                <div id="triggercreateContent2b-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent2b-2" class="createContent col-6 Content100 ">
+                <span id="content-addedcreateContent2b-2" class="content-added" ></span>
+                <div id="triggercreateContent2b-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout2c-->
+    <div id="2c" class="create-container container">
+        <div class="row">
+            <div id="createContent2c-1" class="createContent col-12 Content50 ">
+               <span id="content-addedcreateContent2c-1" class="content-added" ></span>
+                <div id="triggercreateContent2c-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent2c-2" class="createContent col-12 Content50 ">
+                <span id="content-addedcreateContent2c-2" class="content-added" ></span>
+               <div id="triggercreateContent2c-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <!--Layout3a-->
+    <div id="3a" class="create-container container ">
+        <div class="row">
+            <div id="createContent3a-1" class="createContent col-6 Content50">
+                <span id="content-addedcreateContent3a-1" class="content-added" ></span>
+                <div id="triggercreateContent3a-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent3a-2" class="createContent col-6 Content50">
+                <span id="content-addedcreateContent3a-2" class="content-added" ></span>
+                <div id="triggercreateContent3a-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent3a-3" class="createContent col-12 Content50">
+                <span id="content-addedcreateContent3a-3" class="content-added" ></span>
+                <div id="triggercreateContent3a-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout3b-->
+    <div id="3b" class="create-container container ">
+        <div class="row">
+            <div id="createContent3b-1" class="createContent col-3 Content100">
+                <span id="content-addedcreateContent3b-1" class="content-added" ></span>
+                <div id="triggercreateContent3b-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="triggercreateContent3b-2" class="createContent col-6 Content100">
+                <span id="content-addedcreateContent3b-2" class="content-added" ></span>
+                <div id="createContent3b-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="triggercreateContent3b-3" class="createContent col-3 Content100">
+                <span id="content-addedcreateContent3b-3" class="content-added" ></span>
+                <div  id="createContent3b-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout3c-->
+    <div id="3c" class="create-container container ">
+        <div class="row">
+            <div id="createContent3c-1" class="createContent col-6 Content100">
+             <span id="content-addedcreateContent3c-1" class="content-added" ></span>
+                <div  id="triggercreateContent3c-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent3c-2" class="createContent col-6 Content50">
+            <span id="content-addedcreateContent3c-2" class="content-added" ></span>
+                <div id="triggercreateContent3c-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        
+            <div id="createContent3c-3" class="createContent col-6 Content50 content-right-bottom-absolute">
+             <span id="content-addedcreateContent3c-3" class="content-added" ></span>
+                <div id="triggercreateContent3c-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Layout3d-->
+    <div id="3d" class="create-container container ">
+        <div class="row">
+           <div id="createContent3d-1" class="createContent col-12 Content25">
+           <span id="content-addedcreateContent3d-1" class="content-added" ></span>
+                <div id="triggercreateContent3d-1"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent3d-2" class="createContent col-6 Content75">
+                <span id="content-addedcreateContent3d-2" class="content-added" ></span>
+                <div id="triggercreateContent3d-2"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent3d-3" class="createContent col-6 Content75">
+                <span id="content-addedcreateContent3d-3" class="content-added" ></span>
+                <div id="triggercreateContent3d-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4a-->
+    <div id="4a" class="create-container container disposition-active ">
+        <div class="row">
+            <div id="createContent4a-1" class="createContent col-8 Content50">
+             <span id="content-addedcreateContent4a-1" class="content-added" ></span>
+                <div id="triggercreateContent4a-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4a-2" class="createContent col-4 Content50">
+              <span id="content-addedcreateContent4a-2" class="content-added" ></span>
+                <div id="triggercreateContent4a-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent4a-3" class="createContent col-4 Content50">
+              <span id="content-addedcreateContent4a-3" class="content-added" ></span>
+                <div id="triggercreateContent4a-3"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4a-4" class="createContent col-8 Content50">
+              <span id="content-addedcreateContent4a-4" class="content-added" ></span>
+                <div id="triggercreateContent4a-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4b-->
+    <div id="4b" class="create-container container ">
+        <div class="row">
+            <div id="createContent4b-1" class="createContent col-12 Content25">
+                <span id="content-addedcreateContent4b-1" class="content-added" ></span>
+                <div id="triggercreateContent4b-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent4b-2" class="createContent col-6 Content50">
+                <span id="content-addedcreateContent4b-2" class="content-added" ></span>
+                <div id="triggercreateContent4b-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4b-3" class="createContent col-6 Content50">
+                <span id="content-addedcreateContent4b-3" class="content-added" ></span>
+                <div id="triggercreateContent4b-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent4b-4" class="createContent col-12 Content33">
+                <span id="content-addedcreateContent4b-4" class="content-added" ></span>
+                <div id="triggercreateContent4b-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4c-->
+    <div id="4c" class="create-container container ">
+        <div class="row">
+            <div id="createContent4c-1" class="createContent col-6 Content50">
+                   <span id="content-addedcreateContent4c-1" class="content-added" ></span>
+                <div id="triggercreateContent4c-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4c-2" class="createContent col-6 Content50">
+                    <span id="content-addedcreateContent4c-2" class="content-added" ></span>
+                <div id="triggercreateContent4c-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent4c-3" class="createContent col-6 Content50">
+                   <span id="content-addedcreateContent4c-3" class="content-added" ></span>
+                <div id="triggercreateContent4c-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4c-4" class="createContent col-6 Content50">
+                   <span id="content-addedcreateContent4c-4" class="content-added" ></span>
+                <div id="triggercreateContent4c-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4d-->
+    <div id="4d" class="create-container container ">
+        <div class="row">
+            <div id="createContent4d-1" class="createContent col-4 Content50">
+                <span id="content-addedcreateContent4d-1" class="content-added" ></span>
+                <div id="triggercreateContent4d-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4d-2" class="createContent col-4 Content50">
+                <span id="content-addedcreateContent4d-2" class="content-added" ></span>
+                <div id="triggercreateContent4d-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4d-3" class="createContent col-4 Content50">
+                <span id="content-addedcreateContent4d-3" class="content-added" ></span>
+                <div id="triggercreateContent4d-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent4d-4" class="createContent col-12 Content50">
+                <span id="content-addedcreateContent4d-4" class="content-added" ></span>
+                <div id="triggercreateContent4d-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4e-->
+    <div id="4e" class="create-container container">
+        <div class="container">
+            <div class="row">
+                <div id="createContent4e-1" class="createContent col-6 Content100">
+                    <span id="content-addedcreateContent4e-1" class="content-added" ></span>
+                    <div id="triggercreateContent4e-1"  class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container content-left-top-absolute">
+            <div class="row">
+                    <div id="createContent4e-2" class="createContent col-6 Content33">
+                        <span id="content-addedcreateContent4e-2" class="content-added" ></span>
+                        <div id="triggercreateContent4e-2"  class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                            <span class="add-content-img"></span>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                    <div id="createContent4e-3" class="createContent col-6 Content33">
+                        <span id="content-addedcreateContent4e-3" class="content-added" ></span>
+                        <div  id="triggercreateContent4e-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                            <span class="add-content-img"></span>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                    <div id="createContent4e-4" class="createContent col-6 Content33">
+                        <span id="content-addedcreateContent4e-4" class="content-added" ></span>
+                        <div id="triggercreateContent4e-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                            <span class="add-content-img"></span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4f-->
+    <div id="4f" class="create-container container">
+        <div class="container">
+            <div class="row">
+                <div id="createContent4f-1" class="createContent col-3 Content100">
+                    <span id="content-addedcreateContent4f-1" class="content-added" ></span>
+                    <div id="triggercreateContent4f-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container content-center-absolute">
+            <div class="row">
+                <div id="createContent4f-2" class="createContent col-6 Content50">
+                    <span id="content-addedcreateContent4f-2" class="content-added" ></span>
+                    <div id="triggercreateContent4f-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="createContent4f-3" class="createContent col-6 Content50">
+                    <span id="content-addedcreateContent4f-3" class="content-added" ></span>
+                    <div id="triggercreateContent4f-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container content-right-absolute">
+            <div class="row">
+                <div id="createContent4f-4" class="createContent col-3 Content100">
+                    <span id="content-addedcreateContent4f-4" class="content-added" ></span>
+                    <div id="triggercreateContent4f-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                        <span class="add-content-img"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4g-->
+    <div id="4g" class="create-container container">
+        <div class="row">
+            <div id="createContent4g-1" class="createContent col-6 Content25">
+                <span id="content-addedcreateContent4g-1" class="content-added" ></span>
+                <div id="triggercreateContent4g-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4g-2" class="createContent col-6 Content25">
+                <span id="content-addedcreateContent4g-2" class="content-added" ></span>
+                <div id="triggercreateContent4g-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent4g-3" class="createContent col-6 Content75">
+                <span id="content-addedcreateContent4g-3" class="content-added" ></span>
+                <div id="triggercreateContent4g-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4g-4" class="createContent col-6 Content75">
+                <span id="content-addedcreateContent4g-4" class="content-added" ></span>
+                <div id="triggercreateContent4g-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Layout4h-->
+    <div id="4h" class="create-container container">
+        <div class="row">
+            <div id="createContent4h-1" class="createContent col-12 Content25">
+                <span id="content-addedcreateContent4h-1" class="content-added" ></span>
+                <div id="triggercreateContent4h-1"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="createContent4h-2" class="createContent col-6 Content75">
+                <span id="content-addedcreateContent4h-2" class="content-added" ></span>
+                <div id="triggercreateContent4h-2"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+            <div id="createContent4h-3" class="createContent col-6 Content37">
+                <span id="content-addedcreateContent4h-3" class="content-added" ></span>
+                <div id="triggercreateContent4h-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+        <div id="createContent4h-4" class="createContent col-6 Content37 content-right-bottom-absolute">
+            <span id="content-addedcreateContent4h-4" class="content-added" ></span>
+                <div  id="triggercreateContent4h-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                     <p class="to-populate"></p>
+                    <span class="add-content-img"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/spectrum.js') }}"></script>
+<script src="{{ asset('js/createpams.js') }}"></script>
+<!--script src="{{ asset('js/dropzone.js') }}"></script-->
+<script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
+
+<!--froala-->
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+ 
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/js/froala_editor.pkgd.min.js"></script>
+ 
+    <!-- Initialize the editor. -->
+    <script> $(function() { $('textarea').froalaEditor({
+	toolbarButtons: ['fullscreen','emoticons', 'bold', 'italic', 'underline','|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'outdent', 'indent', 'undo', 'redo']
+}) });   </script>
+
+
+
+
+<audio id="sound" controls></audio>
+</body>
+</html>
