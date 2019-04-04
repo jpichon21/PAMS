@@ -1,5 +1,6 @@
 var current_block_id = null;
 var current_audio_id = null;
+var current_image_id = null;
 var playing = false;
 
 /*opacity & colorpicker*/
@@ -57,7 +58,6 @@ $(document).on('click', '#imageGalleryToggleLabel', function () {
   return false;
 });
 
-
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function(e) {
 	var $this = $(this);
@@ -97,13 +97,24 @@ $('.content-added').click(function() {
 *******************************************/
 
 /*cibler la vignette musique*/
-function findImageID(elementClicked){
-  var $this = $(elementClicked); // on récup l'élément cliqué en jQuery
-  $this.off("click");
-  var $li = $this.closest('.image-list-item') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
-  var li_id = $li.attr('id');
+$('.image-list-item').on('click', function(e){
+  var $this = $(this);
+  var li_id = $this.attr('id');
   current_image_id = li_id;
   console.log(current_image_id);
+  chooseImage();
+});
+
+
+function chooseImage(){
+  var file = $('#'+current_image_id+'input').val();
+  /*console.log(file);*/
+  document.getElementById('createBody').style.backgroundImage = "url(" + file + ")";   
+  console.log(current_image_id);           
+}
+
+function clearImage(){
+  document.getElementById('createBody').style.backgroundImage = "none";        
 }
 
 /*ajouter sélecteur image*/
@@ -112,14 +123,25 @@ $('.image-list-item img').on('click', function(e) {
   var $this = $(this);
   var $current = $('.selected-image');
   $current.removeClass('selected-image');
-  $this.addClass('selected-image');
-})
+  clearImage();
+  if ( ! $this.is($current) ) 
+  {
+    $this.addClass('selected-image');
+  } 
+});
+
 
 $('#bgImageForm').submit(function (e) {
+  resetImageId();
   imageGalleryContainerToggle();
   backgroundPopupToggle();
   return false;
  });
+
+ function resetImageId(){
+  current_image_id = null;
+  console.log(current_image_id);      
+}
 
 
 
@@ -172,10 +194,13 @@ $('.music-list-item img').on('click', function(e) {
   var $this = $(this);
   var $current = $('.selected-audio');
   $current.removeClass('selected-audio');
-  $this.addClass('selected-audio');
+  if ( ! $this.is($current) ) 
+  {
+    $this.addClass('selected-audio');
+  }
   displaySubmitAudio();
   playSelectedMusic();
-})
+});
 
 
 function playSelectedMusic(){

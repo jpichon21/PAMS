@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css" />
-
-
 </head>
 <body >
 <div id="createBody"></div>
@@ -178,7 +176,6 @@
             </form>
 </div>
 
-
 <!--Modal choix de l'image de fond -->
 <div id="imageGalleryContainer" class="container">
         <form id="bgImageForm" action="" class="dropzone">
@@ -192,64 +189,65 @@
             <div id="imageGallery">
                 <span id="imageGalleryTitle">Notre sélection</span>
                 <div id="imageGalleryList">
-                <ul class="submenu">
-                    <li id="image1-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-2" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-3" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-4" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-5" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-6" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-7" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-8" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image1-9" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
-                    <li id="image2-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
-                    <li id="image2-2" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
-                    <li id="image3-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">3</span></li>
-                </ul>
+                    <ul class="submenu">
+                        <li id="image1-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><input id="image1-1input" type="hidden" value="../images/image-library/gift1.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-2" class="image-list-item"><img src="{{ asset('images/image-library/gift2.jpg') }} " width="100px" height="100px"/><input id="image1-2input" type="hidden" value="../images/image-library/gift2.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-3" class="image-list-item"><img src="{{ asset('images/image-library/gift3.jpg') }} " width="100px" height="100px"/><input id="image1-3input" type="hidden" value="../images/image-library/gift3.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-4" class="image-list-item"><img src="{{ asset('images/image-library/gift4.jpg') }} " width="100px" height="100px"/><input id="image1-4input" type="hidden" value="../images/image-library/gift4.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-5" class="image-list-item"><img src="{{ asset('images/image-library/gift5.jpg') }} " width="100px" height="100px"/><input id="image1-5input" type="hidden" value="../images/image-library/gift5.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-6" class="image-list-item"><img src="{{ asset('images/image-library/gift6.jpg') }} " width="100px" height="100px"/><input id="image1-6input" type="hidden" value="../images/image-library/gift6.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-7" class="image-list-item"><img src="{{ asset('images/image-library/gift7.jpg') }} " width="100px" height="100px"/><input id="image1-7input" type="hidden" value="../images/image-library/gift7.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-8" class="image-list-item"><img src="{{ asset('images/image-library/gift8.jpg') }} " width="100px" height="100px"/><input id="image1-8input" type="hidden" value="../images/image-library/gift8.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-9" class="image-list-item"><img src="{{ asset('images/image-library/gift9.jpg') }} " width="100px" height="100px"/><input id="image1-9input" type="hidden" value="../images/image-library/gift9.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-10" class="image-list-item"><img src="{{ asset('images/image-library/gift10.jpg') }} " width="100px" height="100px"/><input id="image1-10input" type="hidden" value="../images/image-library/gift10.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-11" class="image-list-item"><img src="{{ asset('images/image-library/gift11.jpg') }} " width="100px" height="100px"/><input id="image1-11input" type="hidden" value="../images/image-library/gift11.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                        <li id="image1-12" class="image-list-item"><img src="{{ asset('images/image-library/gift12.jpg') }} " width="100px" height="100px"/><input id="image1-12input" type="hidden" value="../images/image-library/gift12.jpg" /><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    </ul>
+                </div>
             </div>
                 <div class="button-container">
                      <button type="submit" class="btn btn-primary submit-btn" >Valider</button>
                  </div>
-            </form>
+        </form>
 </div>
-
-
 
 <!-- Modal Create Content-->
 <div class="modal fade content-modal" id="createContentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Choisissez un type de contenu</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li id="modalTextFormToggle"><img src="{{ asset('images/ajout-texte.png') }}"  id="" class="img-responsive" width="84px"/><span>Texte</span></li>
-          <li>
-           <label for="addImageContent" id="addImageContentLabel">
-                    <img src="{{ asset('images/ajout-image.png') }}"  id="" class="img-responsive" width="84px"/>
-                       <input type='file' id='addImageContent' value="" />
-                        <span>Photo</span>  
-             </label>
-            </li>
-          <li><img src="{{ asset('images/ajout-video.png') }}"  id="" class="img-responsive" width="84px"/><span>Vidéo</span></li>
-          <li><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
 
-            <div id="modalTextFormContainer">
-            <form id="modalTextForm">
-                <textarea id="toFill"></textarea>
-                <button type="submit"> valider </button>
-            </form>
-            </div>
-        </ul>
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Choisissez un type de contenu</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+      <div class="modal-body">
+            <ul>
+            <li id="modalTextFormToggle"><img src="{{ asset('images/ajout-texte.png') }}"  id="" class="img-responsive" width="84px"/><span>Texte</span></li>
+            <li>
+            <label for="addImageContent" id="addImageContentLabel">
+                        <img src="{{ asset('images/ajout-image.png') }}"  id="" class="img-responsive" width="84px"/>
+                        <input type='file' id='addImageContent' value="" />
+                            <span>Photo</span>  
+                </label>
+                </li>
+            <li><img src="{{ asset('images/ajout-video.png') }}"  id="" class="img-responsive" width="84px"/><span>Vidéo</span></li>
+            <li><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
+
+                <div id="modalTextFormContainer">
+                    <form id="modalTextForm">
+                        <textarea id="toFill"></textarea>
+                        <button type="submit"> valider </button>
+                    </form>
+                </div>
+            </ul>
       </div>
+
     </div>
   </div>
 </div>
-
 
 
 <!--//////////////////////////////////////////////////////
