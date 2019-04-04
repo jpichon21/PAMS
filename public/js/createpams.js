@@ -51,6 +51,13 @@ $(document).on('click', '#modalTextFormToggle', function () {
   return false;
 });
 
+
+$(document).on('click', '#imageGalleryToggleLabel', function () {
+  imageGalleryContainerToggle();
+  return false;
+});
+
+
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function(e) {
 	var $this = $(this);
@@ -84,6 +91,36 @@ $('.content-added').click(function() {
   findModalBlock(this);
   removeContent();
 });
+
+/*******************************************
+**** Widget choix de l'image de fond*********
+*******************************************/
+
+/*cibler la vignette musique*/
+function findImageID(elementClicked){
+  var $this = $(elementClicked); // on récup l'élément cliqué en jQuery
+  $this.off("click");
+  var $li = $this.closest('.image-list-item') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
+  var li_id = $li.attr('id');
+  current_image_id = li_id;
+  console.log(current_image_id);
+}
+
+/*ajouter sélecteur image*/
+$('.image-list-item img').on('click', function(e) {
+  e.preventDefault();
+  var $this = $(this);
+  var $current = $('.selected-image');
+  $current.removeClass('selected-image');
+  $this.addClass('selected-image');
+})
+
+$('#bgImageForm').submit(function (e) {
+  imageGalleryContainerToggle();
+  backgroundPopupToggle();
+  return false;
+ });
+
 
 
 /*******************************************
@@ -303,6 +340,15 @@ function modalTextFormContainerToggle() {
 
   function toggleAudio(){
     var x = document.getElementById("musiqueContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  
+  function imageGalleryContainerToggle(){
+    var x = document.getElementById("imageGalleryContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {

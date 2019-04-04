@@ -22,6 +22,7 @@
 <body >
 <div id="createBody"></div>
 
+<!-- Top Menu -->
 <nav id="createNav" class="container-fluid">
     <div id="navLeft">
         <ul>
@@ -57,12 +58,9 @@
     <div class="row">
         <ul>
             <li>
-                <label for="imagePicker" id="imagePickerLabel">
+                <label for="" id="imageGalleryToggleLabel">
                     <img src="{{ asset('images/ajout-image.png') }}" class="img-responsive" width="52px"/>
                     <h2>Image de fond</h2>
-                    <div id ="imagePickerContainer">
-                       <input type='file' id='imagePicker' value="" />
-                    </div>
                 </label>
             </li>
         </ul>
@@ -181,38 +179,39 @@
 </div>
 
 
-<!--Modal choix de l'image de fond 
-<div id="bgImageContainer" class="container">
+<!--Modal choix de l'image de fond -->
+<div id="imageGalleryContainer" class="container">
         <form id="bgImageForm" action="" class="dropzone">
            <div id ="imageUploaderContainer">
                   <h2>Faites Glisser un fichier</h2>
                   <span>ou</span>
-                  <label for="imageUploader" id="imageUploaderLabel">
-                     <input name="file" type='file' id='imageUploader'  value="" />
+                  <label for="imagePicker" id="imagePickerLabel">
+                    <input type='file' id='imagePicker' value="" />
                   </label>  
             </div>
-            <div id="bgImageGallery">
-                <span id="bgImageGalleryTitle">Notre sélection</span>
-                <select id="bgImageGallerySelect" class="image-picker">
-                    <optgroup label="catégorie1">
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" data-img-class="first" value="1">  catégorie1 A  </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="2">  catégorie1 A  </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="3">  catégorie1 B  </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="4">  catégorie1 C   </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="5">  catégorie1 D   </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="6">  catégorie1 E   </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="7">  catégorie1 C   </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="8">  catégorie1 D   </option>
-                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="9">  catégorie1 E   </option>
-                    </optgroup>
-          
-                </select>
+            <div id="imageGallery">
+                <span id="imageGalleryTitle">Notre sélection</span>
+                <div id="imageGalleryList">
+                <ul class="submenu">
+                    <li id="image1-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-2" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-3" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-4" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-5" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-6" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-7" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-8" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-9" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image2-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
+                    <li id="image2-2" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
+                    <li id="image3-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">3</span></li>
+                </ul>
             </div>
                 <div class="button-container">
                      <button type="submit" class="btn btn-primary submit-btn" >Valider</button>
                  </div>
             </form>
-</div>-->
+</div>
 
 
 

@@ -487,7 +487,7 @@ ul{
   z-index: 2;
 }
 
-#dispositionContainer h2, #musiqueContainer h2, #bgImageContainer h2{
+#dispositionContainer h2, #musiqueContainer h2, #imageGalleryContainer h2{
   font-size: 18px;
   text-align: center;
 }
@@ -569,7 +569,7 @@ ul{
 }
 
 /*popup image librairie*/
-#bgImageContainer{
+#imageGalleryContainer{
   background-color: white;
   border-radius: 10px;
   border: 4px solid black;
@@ -577,7 +577,7 @@ ul{
   min-height: 400px;
   position: absolute;
   padding: 10px 0px 0px 0px;
-  left: 20px;
+  left: 232px;
   z-index: 2;
   display: none;
 }
@@ -595,7 +595,7 @@ ul{
 }
 
 
-#imageUploader, #musiqueUploader{
+#imagePicker, #musiqueUploader{
   width: 137px;
   display: block;
   margin: 0 auto;
@@ -636,7 +636,7 @@ ul{
   margin-bottom: 20px;
 }
 
-#imagePicker, #addImageContent{
+ #addImageContent{
   display: none;
 }
 
@@ -669,7 +669,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   border-radius: 4px;
 }
 
-#bgImageGalleryTitle, #musiqueGalleryTitle{
+#imageGalleryTitle, #musiqueGalleryTitle{
   width: 100%;
   background-color: #f1f1f1;
   display: inline-block;
@@ -705,33 +705,33 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   margin-top:20px;
 }
 
-#musiqueGallery ul{
+#musiqueGallery ul, #imageGallery ul{
   padding: 0px;
   width: 370px;
   margin: 0 auto;
 }
 
-#musiqueGalleryList{
+#musiqueGalleryList, #imageGalleryList{
   height: 254px;
   overflow: auto;
   padding-top: 20px;
 }
 
 
-#musiqueGallery ul li{
+#musiqueGallery ul li, #imageGallery ul li{
   display: inline-block;
   margin: 0px 10px;
   width: 100px;
   margin-bottom: 0px;
 }
 
-#musiqueGalleryList ul li p{
+#musiqueGalleryList ul li p, #imageGalleryList ul li p{
   text-align: center;
   font-size: 13px;
   font-weight: 600;
 }
 
-#musiqueGallery .categorie{
+#musiqueGallery .categorie, #imageGallery .categorie{
   display: none;
 }
 
@@ -742,7 +742,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 }
 
-.selected-audio{
+.selected-audio, .selected-image{
   border: 5px solid #5cb85c;
   border-radius: 20px;
 }
