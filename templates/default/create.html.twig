@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <!--froala-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -27,7 +27,7 @@
         <ul>
             <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier l'arrière plan" id="backgroundToggle"><img src="{{ asset('images/arriere-plan.png') }}"/></li>
             <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition" id="dispositionToggle"><img src="{{ asset('images/disposition.png') }}"/></li>
-            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Ajouter une musique"><img src="{{ asset('images/musique.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Ajouter une musique"     id="audioToggle"><img src="{{ asset('images/musique.png') }}"/></li>
         </ul>
     </div>
     <div id="navRight">
@@ -39,7 +39,7 @@
 </nav>
 
 <!--Modal choix de l'arrière plan -->
-<div id ="backgroundContainer" class="container">
+<div id="backgroundContainer" class="container">
 <form>
     <div class="row">
         <ul>  
@@ -135,30 +135,85 @@
 
 <!--Modal choix de la musique-->
 <div id="musiqueContainer" class="container">
-    <div class="row">
-    <h2> Sélectionnez une musique</h2>
-        <form>
-            <div id="musiqueSelectForm" class="form-group">
-                <label for="exampleFormControlFile1">Ou</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <form id="musiqueSelectForm" class="dropzone">
+          <div id ="musiqueUploaderContainer">
+                  <h2>Faites Glisser une musique(.mp3)</h2>
+                  <span>ou</span>
+                  <label for="musiqueUploader" id="musiqueUploaderLabel">
+                     <input name="file" type='file' id='musiqueUploader'  value="" />
+              
+                  </label>  
             </div>
-        </form>
-        <div class="dropzone my-dropzone" id="form_snippet_image" action=""></div>
-    </div>
-</div>
 
+            <div id="musiqueGallery">
+            <h2>Notre Sélection</h2>
+            <div id="musiqueGalleryTitle">catégorie :
+            <select id="musiqueSelect">
+                <option value="ALL" selected="selected">Toutes les musiques</option>
+                <option value="1">Noël</option>
+                <option value="2">Anniversaire</option>
+                <option value="3">Etc</option>
+            </select>
+            </div>
 
-<!--Modal choix de l'image de fond
-<div id="bgImageContainer" class="container">
-        <h2>Sélectionnez votre image de fond</h2>
-        <form id="bgImageForm">
-     
+            <div id="musiqueGalleryList">
+                <ul class="submenu">
+                    <li id="musique1-1" class="music-list-item"><audio id="Audiomusique1-1" class="player-audio"><source src="{{ asset('audio/dumb-audio-1.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-2" class="music-list-item"><audio id="Audiomusique1-2" class="player-audio"><source src="{{ asset('audio/dumb-audio-2.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-3" class="music-list-item"><audio id="Audiomusique1-3" class="player-audio"><source src="{{ asset('audio/dumb-audio-3.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-4" class="music-list-item"><audio id="Audiomusique1-4" class="player-audio"><source src="{{ asset('audio/dumb-audio-4.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-5" class="music-list-item"><audio id="Audiomusique1-5" class="player-audio"><source src="{{ asset('audio/dumb-audio-5.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-6" class="music-list-item"><audio id="Audiomusique1-6" class="player-audio"><source src="{{ asset('audio/dumb-audio-6.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-7" class="music-list-item"><audio id="Audiomusique1-7" class="player-audio"><source src="{{ asset('audio/dumb-audio-7.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-8" class="music-list-item"><audio id="Audiomusique1-8" class="player-audio"><source src="{{ asset('audio/dumb-audio-8.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique1-9" class="music-list-item"><audio id="Audiomusique1-9" class="player-audio"><source src="{{ asset('audio/dumb-audio-9.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="musique2-1" class="music-list-item"><audio id="Audiomusique2-1" class="player-audio"><source src="{{ asset('audio/dumb-audio-1.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
+                    <li id="musique2-2" class="music-list-item"><audio id="Audiomusique2-2" class="player-audio"><source src="{{ asset('audio/dumb-audio-2.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">2</span></li>
+                    <li id="musique3-1" class="music-list-item"><audio id="Audiomusique3-1" class="player-audio"><source src="{{ asset('audio/dumb-audio-3.mp3') }}"></source></audio><img src="{{ asset('images/musique-select.png') }} " width="100px"/><p>Lorem Ipsum Dolor</p><span class="categorie">3</span></li>
+                </ul>
+            </div>
+            </div>
+            
                 <div class="button-container">
-                     <button type="submit" class="btn btn-primary" id="firstform-submit">Valider</button>
+                     <button id="submitAudio" type="submit" class="btn btn-primary submit-btn" >Valider</button>
                  </div>
             </form>
 </div>
- -->
+
+
+<!--Modal choix de l'image de fond 
+<div id="bgImageContainer" class="container">
+        <form id="bgImageForm" action="" class="dropzone">
+           <div id ="imageUploaderContainer">
+                  <h2>Faites Glisser un fichier</h2>
+                  <span>ou</span>
+                  <label for="imageUploader" id="imageUploaderLabel">
+                     <input name="file" type='file' id='imageUploader'  value="" />
+                  </label>  
+            </div>
+            <div id="bgImageGallery">
+                <span id="bgImageGalleryTitle">Notre sélection</span>
+                <select id="bgImageGallerySelect" class="image-picker">
+                    <optgroup label="catégorie1">
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" data-img-class="first" value="1">  catégorie1 A  </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="2">  catégorie1 A  </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="3">  catégorie1 B  </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="4">  catégorie1 C   </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="5">  catégorie1 D   </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="6">  catégorie1 E   </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="7">  catégorie1 C   </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="8">  catégorie1 D   </option>
+                        <option data-img-src="{{ asset('images/image-library/gift1.jpg') }}" data-img-alt="Page 1" value="9">  catégorie1 E   </option>
+                    </optgroup>
+          
+                </select>
+            </div>
+                <div class="button-container">
+                     <button type="submit" class="btn btn-primary submit-btn" >Valider</button>
+                 </div>
+            </form>
+</div>-->
+
 
 
 <!-- Modal Create Content-->
@@ -192,10 +247,10 @@
             </div>
         </ul>
       </div>
-      
     </div>
   </div>
 </div>
+
 
 
 <!--//////////////////////////////////////////////////////
@@ -709,12 +764,14 @@
     </div>
 
 
+
 </div>
 <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/spectrum.js') }}"></script>
 <script src="{{ asset('js/createpams.js') }}"></script>
+<!--script src="{{ asset('js/dropzone.js') }}"></script-->
 <script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
 
 <!--froala-->
@@ -731,5 +788,7 @@
 
 
 
+
+<audio id="sound" controls></audio>
 </body>
 </html>

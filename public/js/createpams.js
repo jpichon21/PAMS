@@ -1,4 +1,6 @@
 var current_block_id = null;
+var current_audio_id = null;
+var playing = false;
 
 /*opacity & colorpicker*/
 
@@ -37,6 +39,11 @@ $(document).on('click', '#colorPickerLabel', function () {
 $(document).on('click', '#dispositionToggle', function () {
     dispositionPopupToggle();
     return false;
+});
+
+$(document).on('click', '#audioToggle', function () {
+  toggleAudio();
+  return false;
 });
 
 $(document).on('click', '#modalTextFormToggle', function () {
@@ -79,6 +86,92 @@ $('.content-added').click(function() {
 });
 
 
+/*******************************************
+******* Widget choix de la musique*********
+*******************************************/
+
+$('#musiqueSelect').change(function(){
+  var criteria = $(this).val();
+  if(criteria == 'ALL'){
+      $('.lilist').show();
+      return;
+  }
+  $('.categorie').each(function(i,option){
+      if($(this).html() == criteria){
+          $(this).parent().show();
+      }else {
+          $(this).parent().hide();
+      }
+  });
+});
+
+$('#musiqueUploader').change(function(){
+  var sound = document.getElementById('sound');
+  sound.src = URL.createObjectURL(this.files[0]);
+  // not really needed in this exact case, but since it is really important in other cases,
+  // don't forget to revoke the blobURI when you don't need it
+  sound.onend = function(e) {
+    URL.revokeObjectURL(this.src);
+  }
+  if (sound.style.display === "none") {
+    sound.style.display = "block";
+  } else {
+    sound.style.display = "none";
+  }
+});
+
+$(document).on('click','.music-list-item', function(e){
+  findMusicId(this);
+});
+
+/*cibler la vignette musique*/
+function findMusicId(elementClicked){
+  var $this = $(elementClicked); // on récup l'élément cliqué en jQuery
+  $this.off("click");
+  var $li = $this.closest('.music-list-item') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
+  var li_id = $li.attr('id');
+  current_audio_id = li_id;
+  playSelectedMusic();
+}
+
+/*ajouter sélecteur musique*/
+$('.music-list-item img').on('click', function(e) {
+  e.preventDefault();
+  var $this = $(this);
+  var $current = $('.selected-audio');
+  $current.removeClass('selected-audio');
+  $this.addClass('selected-audio');
+  displaySubmitAudio();
+  playSelectedMusic();
+})
+
+
+function playSelectedMusic(){
+  var audio = $("#Audio"+current_audio_id);
+   if (playing == false) {
+    audio[0].play();
+    playing = true;
+   } else {
+    audio[0].pause();
+    playing = false;
+   }
+}
+  
+function stopSelectedMusic(){
+  var audio = $("#Audio"+current_audio_id);
+  audio[0].pause();
+}
+
+function displaySubmitAudio(){
+  $('#submitAudio').show();
+}
+
+$('#musiqueSelectForm').submit(function (e) {
+  e.preventDefault();
+  toggleAudio();
+  stopSelectedMusic();
+  return false;
+ });
 
 /********************* ajout de texte ****************************/
 
@@ -86,7 +179,6 @@ $(document).on('submit','#modalTextForm', function(e){
   populateText();
   closeBsModal();
   return false;
-
 });
 
 $(document).on('click','.trigger-modal-block', function(e){
@@ -143,6 +235,7 @@ function changeBgOpacity(){
 /*Upload image*/
 document.getElementById('imagePicker').addEventListener('change', readURL, true);
 function readURL(){
+  console.log("test");
     var file = document.getElementById("imagePicker").files[0];
     var reader = new FileReader();
     reader.onloadend = function(){
@@ -151,12 +244,13 @@ function readURL(){
     if(file){
         reader.readAsDataURL(file);
     }else{
+      return false();
     }
 }
 
 /* ajout image à block */
-document.getElementById('addImageContent').addEventListener('change', readURL, true);
-function readURL(){
+document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
+function readBlockURL(){
     var file = document.getElementById("addImageContent").files[0];
     var reader = new FileReader();
     reader.onloadend = function(){
@@ -170,6 +264,7 @@ function readURL(){
     if(file){
         reader.readAsDataURL(file);
     }else{
+      return false();
     }
 }
 
@@ -211,6 +306,15 @@ function modalTextFormContainerToggle() {
     }
   }
 
+  function toggleAudio(){
+    var x = document.getElementById("musiqueContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
 /*suppression image block*/
   function removeContent(){
     document.getElementById('trigger'+current_block_id).style.backgroundImage = "";  
@@ -241,9 +345,3 @@ function modalTextFormContainerToggle() {
 	}
 	$target.addClass('disposition-active');
 }
-
-
-
-
-
-
