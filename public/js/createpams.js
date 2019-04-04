@@ -113,11 +113,6 @@ $('#musiqueUploader').change(function(){
   sound.onend = function(e) {
     URL.revokeObjectURL(this.src);
   }
-  if (sound.style.display === "none") {
-    sound.style.display = "block";
-  } else {
-    sound.style.display = "none";
-  }
 });
 
 $(document).on('click','.music-list-item', function(e){
