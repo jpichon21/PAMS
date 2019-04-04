@@ -255,6 +255,7 @@ function populateText(){
   var user_text = $("#toFill").val();
   $('#'+current_block_id).find('.to-populate').html(user_text);
   $('#trigger'+current_block_id).addClass('filled-block');
+  document.getElementById('trigger'+current_block_id).style.border ="none";  
 }
 
 
@@ -389,7 +390,6 @@ function modalTextFormContainerToggle() {
     document.getElementById('trigger'+current_block_id).style.border = "";  
     document.getElementById('content-added'+current_block_id).style.display ="none";  
     resetBlockContent();
-
   }
   
   function resetBlockContent(){
