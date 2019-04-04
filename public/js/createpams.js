@@ -292,7 +292,7 @@ function changeBgOpacity(){
 /*Upload image*/
 document.getElementById('imagePicker').addEventListener('change', readURL, true);
 function readURL(){
-  console.log("test");
+    clearImage();
     var file = document.getElementById("imagePicker").files[0];
     var reader = new FileReader();
     reader.onloadend = function(){
