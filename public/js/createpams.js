@@ -167,8 +167,6 @@ $('#musiqueSelect').change(function(){
 $('#musiqueUploader').change(function(){
   var sound = document.getElementById('sound');
   sound.src = URL.createObjectURL(this.files[0]);
-  // not really needed in this exact case, but since it is really important in other cases,
-  // don't forget to revoke the blobURI when you don't need it
   sound.onend = function(e) {
     URL.revokeObjectURL(this.src);
   }
@@ -186,7 +184,15 @@ function findMusicId(elementClicked){
   var li_id = $li.attr('id');
   current_audio_id = li_id;
   playSelectedMusic();
+  chooseMusic();
 }
+
+
+function chooseMusic(){
+  var audiofile = $('#'+ current_audio_id+'input').val();
+  document.getElementById('sound').src="/audio/"+ audiofile +"";
+}
+
 
 /*ajouter sélecteur musique*/
 $('.music-list-item img').on('click', function(e) {
