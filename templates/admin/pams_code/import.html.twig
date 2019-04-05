@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Import d'un fichier Pams</h4>
+            <div class="row">
+                <div class="col-12">
+                    <form method="post" enctype="multipart/form-data">
+                        <div>
+                            <label for="file">Sélectionner le fichier à import</label>
+                            <input type="file" id="file" name="file">
+                        </div>
+                        <div>
+                            <button>Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+                {% if(erreurs|length>0) %}
+                    <div class="col-12">
+                        <table>
+                            {% for erreur in erreurs %}
+                            <tr>
+                                <td>
+                                    {{ erreur }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
