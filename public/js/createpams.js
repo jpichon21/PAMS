@@ -142,7 +142,6 @@ $('#bgImageForm').submit(function (e) {
 
  $('#sendDataSubmit').on('click', function (e) {
   sendData();
-  console.log('data send !')
  });
  
 
@@ -434,9 +433,10 @@ function modalTextFormContainerToggle() {
  * ************************************/
 
 
-var obj = { 'Background-image': current_image_id, 'Musique': current_audio_id, 'Layout': current_layout_value };
 /*faire pointer URL au bon endroit*/
+var obj = { 'Background-image': current_image_id, 'Musique': current_audio_id, 'Layout': current_layout_value };
 function sendData() {
+
   $.ajax({
       url: '',
       async: true, 
@@ -444,8 +444,8 @@ function sendData() {
       data: JSON.stringify(obj),
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      success: function(obj) {
-          alert(obj);
-      }
+      success: function(result) {
+        console.log(result);
+        }
   });
 }
