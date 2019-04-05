@@ -442,7 +442,7 @@ function sendData() {
 var obj = { 'Background-image': send_image_id, 'Musique': send_audio_id, 'Layout': send_layout_value };
 console.log(obj);
   $.ajax({
-      url: '',
+      url: Routing.generate('pams_post'),
       async: true, 
       type: 'POST',
       data: JSON.stringify(obj),
