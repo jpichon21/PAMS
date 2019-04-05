@@ -739,7 +739,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   position: absolute;
   top: 22px;
   right: 200px;
-
+  outline:none;
 }
 
 .selected-audio, .selected-image{

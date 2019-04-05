@@ -262,6 +262,8 @@ function populateText(){
   $('#'+current_block_id).find('.to-populate').html(user_text);
   $('#trigger'+current_block_id).addClass('filled-block');
   document.getElementById('trigger'+current_block_id).style.border ="none";  
+  document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
+
 }
 
 
@@ -395,11 +397,13 @@ function modalTextFormContainerToggle() {
     document.getElementById('trigger'+current_block_id).style.backgroundPosition = "";  
     document.getElementById('trigger'+current_block_id).style.border = "";  
     document.getElementById('content-added'+current_block_id).style.display ="none";  
+    $('#'+current_block_id).find('.to-populate').html('');
     resetBlockContent();
   }
   
   function resetBlockContent(){
     $('#trigger'+current_block_id).addClass("removed-content");
+    $('#trigger'+current_block_id).removeClass('filled-block');
   }
 
  
