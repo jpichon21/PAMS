@@ -77,7 +77,10 @@
                     ],
                     "processing": true,
                     "serverSide": true,
-                    "ajax": Routing.generate('admin_pams_code_datatable'),
+                    "ajax": {
+                        "url": '{{ path('admin_pams_code_datatable') }}',
+                        "type": 'POST'
+                    },
                     "aLengthMenu": [
                         [5, 10, 15, -1],
                         [5, 10, 15, "All"]
