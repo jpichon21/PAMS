@@ -64,7 +64,8 @@ $(document).on('click', '#imageGalleryToggleLabel', function () {
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function(e) {
 	var $this = $(this);
-	var current_layout_value = $this.val();
+  var current_layout_value = $this.val();
+  send_layout_value = current_layout_value;
   toggleDisposition(current_layout_value);
   console.log(current_layout_value);
 });
@@ -105,6 +106,7 @@ $('.image-list-item').on('click', function(e){
   var $this = $(this);
   var li_id = $this.attr('id');
   current_image_id = li_id;
+  send_image_id = current_image_id;
   chooseImage();
 });
 
@@ -133,7 +135,6 @@ $('.image-list-item img').on('click', function(e) {
 
 
 $('#bgImageForm').submit(function (e) {
-  sendData();
   resetImageId();
   imageGalleryContainerToggle();
   backgroundPopupToggle();
@@ -189,6 +190,7 @@ function findMusicId(elementClicked){
   var $li = $this.closest('.music-list-item') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
   var li_id = $li.attr('id');
   current_audio_id = li_id;
+  send_audio_id = current_audio_id;
   playSelectedMusic();
   chooseMusic();
 }
@@ -259,6 +261,7 @@ function findModalBlock(elementClicked){
   var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
   var block_id = $block.attr('id');
   current_block_id = block_id;
+  send_block_id = current_block_id;
 }
 
 /**ajout dynamique de texte */
@@ -436,7 +439,7 @@ function modalTextFormContainerToggle() {
 /*faire pointer URL au bon endroit*/
 
 function sendData() {
-var obj = { 'Background-image': current_image_id, 'Musique': current_audio_id, 'Layout': current_layout_value };
+var obj = { 'Background-image': send_image_id, 'Musique': send_audio_id, 'Layout': send_layout_value };
 console.log(obj);
   $.ajax({
       url: '',
