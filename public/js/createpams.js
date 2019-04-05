@@ -434,9 +434,10 @@ function modalTextFormContainerToggle() {
 
 
 /*faire pointer URL au bon endroit*/
-var obj = { 'Background-image': current_image_id, 'Musique': current_audio_id, 'Layout': current_layout_value };
-function sendData() {
 
+function sendData() {
+var obj = { 'Background-image': current_image_id, 'Musique': current_audio_id, 'Layout': current_layout_value };
+console.log(obj);
   $.ajax({
       url: '',
       async: true, 
@@ -449,3 +450,4 @@ function sendData() {
         }
   });
 }
+
