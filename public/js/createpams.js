@@ -1,7 +1,10 @@
+/*initialisation des variables*/
 var current_block_id = null;
 var current_audio_id = null;
 var current_image_id = null;
+var current_layout_value = null;
 var playing = false;
+
 
 /*opacity & colorpicker*/
 
@@ -61,8 +64,9 @@ $(document).on('click', '#imageGalleryToggleLabel', function () {
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function(e) {
 	var $this = $(this);
-	var value = $this.val();
-	toggleDisposition(value);
+	var current_layout_value = $this.val();
+  toggleDisposition(current_layout_value);
+  console.log(current_layout_value);
 });
 
 $(document).on('change', '#colorPicker', function(e) {
@@ -101,16 +105,13 @@ $('.image-list-item').on('click', function(e){
   var $this = $(this);
   var li_id = $this.attr('id');
   current_image_id = li_id;
-  console.log(current_image_id);
   chooseImage();
 });
 
 
 function chooseImage(){
   var file = $('#'+current_image_id+'input').val();
-  /*console.log(file);*/
-  document.getElementById('createBody').style.backgroundImage = "url(" + file + ")";   
-  console.log(current_image_id);           
+  document.getElementById('createBody').style.backgroundImage = "url(" + file + ")";            
 }
 
 function clearImage(){
@@ -132,15 +133,21 @@ $('.image-list-item img').on('click', function(e) {
 
 
 $('#bgImageForm').submit(function (e) {
+  sendData();
   resetImageId();
   imageGalleryContainerToggle();
   backgroundPopupToggle();
   return false;
  });
 
+ $('#sendDataSubmit').on('click', function (e) {
+  sendData();
+  console.log('data send !')
+ });
+ 
+
  function resetImageId(){
-  current_image_id = null;
-  console.log(current_image_id);      
+  current_image_id = null;   
 }
 
 
@@ -253,7 +260,6 @@ function findModalBlock(elementClicked){
   var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
   var block_id = $block.attr('id');
   current_block_id = block_id;
-  console.log(current_block_id);
 }
 
 /**ajout dynamique de texte */
@@ -420,4 +426,26 @@ function modalTextFormContainerToggle() {
 		$active.removeClass('disposition-active');
 	}
 	$target.addClass('disposition-active');
+}
+
+
+/***************************************
+ * ************OBJET JSON **************
+ * ************************************/
+
+
+var obj = { 'Background-image': current_image_id, 'Musique': current_audio_id, 'Layout': current_layout_value };
+/*faire pointer URL au bon endroit*/
+function sendData() {
+  $.ajax({
+      url: '',
+      async: true, 
+      type: 'POST',
+      data: JSON.stringify(obj),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(obj) {
+          alert(obj);
+      }
+  });
 }
