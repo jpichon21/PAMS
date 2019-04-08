@@ -31,7 +31,7 @@
     </div>
     <div id="navRight">
         <ul>
-            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Foire aux Questions"><img src="{{ asset('images/faq.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Foire aux Questions" id="faqToggle" ><img src="{{ asset('images/faq.png') }}"/></li>
             <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualiser le Pam's"><img src="{{ asset('images/visualiser.png') }}"/></li>
         </ul>
     </div>
@@ -210,6 +210,47 @@
                  </div>
         </form>
 </div>
+
+<!--Modal FAQ-->
+<div id="FAQContainer" class="container">
+              <h2>FAQ</h2>
+              <div id="FAQQuestionsContainer">
+                <ul>
+                    <li data-toggle="modal" data-target="#question1Modal">Comment modifier l'image d'arrière plan ?</li>
+                    <li data-toggle="modal" data-target="#question2Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question3Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question4Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question5Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question6Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question7Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question8Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question9Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                    <li data-toggle="modal" data-target="#question10Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
+                </ul>
+              <div>
+</div>
+
+
+<!--Popups FAQ-->
+        <div class="modal fade" id="question1Modal" tabindex="0" role="dialog" aria-labelledby="question1Modal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Comment modifier l'image d'arrière plan ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Suspendisse ullamcorper auctor feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta augue eu porta congue. Aliquam malesuada quam vitae tincidunt maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis risus lacus, aliquam ac urna sit amet, ultricies fermentum magna. Integer rhoncus quis tortor hendrerit bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta nunc quam, eu gravida lectus sollicitudin elementum. Aliquam ex metus, euismod nec volutpat vitae, ornare a lorem. Integer vitae ex quis elit sodales sagittis. Curabitur pretium nisi sollicitudin odio condimentum, a commodo turpis semper. Suspendisse a elit eget sem vestibulum tincidunt a eget dolor.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
 
 <!-- Modal Create Content-->
 <div class="modal fade content-modal" id="createContentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

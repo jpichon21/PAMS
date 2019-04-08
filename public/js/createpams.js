@@ -58,6 +58,11 @@ $(document).on('click', '#imageGalleryToggleLabel', function () {
   return false;
 });
 
+$(document).on('click', '#faqToggle', function () {
+  faqContainerToggle();
+  return false;
+});
+
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function(e) {
 	var $this = $(this);
@@ -406,6 +411,15 @@ function modalTextFormContainerToggle() {
   
   function imageGalleryContainerToggle(){
     var x = document.getElementById("imageGalleryContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function faqContainerToggle(){
+    var x = document.getElementById("FAQContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {

@@ -552,7 +552,44 @@ ul{
   display: none;
  }
 
- 
+ /*Popup FAQ*/
+ #FAQContainer{
+  background-color: white;
+  border-radius: 10px;
+  border: 4px solid black;
+  width: 420px;
+  min-height: 400px;
+  position: absolute;
+  padding: 10px 0px 0px 0px;
+  right: 25px;
+  z-index: 1;
+  display: none;
+}
+
+#question1modal{
+  z-index: 1;
+}
+
+#FAQContainer h2{
+  text-align: center;
+  font-size: 24px;
+}
+
+#FAQContainer ul{
+  margin: 0 auto;
+  padding: 20px 40px;
+}
+
+#FAQContainer ul li{
+  margin-bottom: 12px;
+  color: #7575ff;
+  text-decoration: inline;
+}
+
+#FAQQuestionsContainer{
+  height: 420px;
+  overflow: auto;
+}
 
 /*Popup Background*/
 
@@ -820,6 +857,10 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 
 /**ajout contenu bloc**/
+
+.modal-backdrop{
+  z-index: 0;
+}
 
 .modal-content{
   background-color: white;
