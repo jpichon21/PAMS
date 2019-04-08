@@ -335,8 +335,8 @@ function readBlockURL(){
 }
 
 /* ajout vidéo à block */
-document.getElementById('addVideoContent').addEventListener('change', readBlockURL, true);
-function readBlockURL(){
+document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
+function readVideoBlockurl(){
     var file = document.getElementById("addVideoContent").files[0];
     var reader = new FileReader();
     reader.onloadend = function(){
@@ -347,7 +347,7 @@ function readBlockURL(){
       document.getElementById('trigger'+current_block_id).style.backgroundPosition = "center";  
       document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
       document.getElementById(current_block_id+'Video').setAttribute('src', reader.result);
-      document.getElementById(current_block_id+'Video').style.display = "block"  
+      document.getElementById(current_block_id+'Video').style.display = "block"  ;
     }
     if(file){
         reader.readAsDataURL(file);
@@ -421,7 +421,7 @@ function modalTextFormContainerToggle() {
     document.getElementById('trigger'+current_block_id).style.border = "";  
     document.getElementById('content-added'+current_block_id).style.display ="none";  
     document.getElementById(current_block_id+'Video').setAttribute('src', '');  
-    document.getElementById(current_block_id+'Video').style.display = "none"  
+    document.getElementById(current_block_id+'Video').style.display = "none"  ;
     $('#'+current_block_id).find('.to-populate').html('');
     resetBlockContent();
   }
