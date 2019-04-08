@@ -27,10 +27,10 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
-$(document).on('click', 'body', function () {
-  console.log("ok");
+
+$("#bodyBackdrop").click(function(event) {
+  event.stopPropagation();
   resetAllPopups();
-  return false;
 });
 
 $(document).on('click', '#backgroundToggle', function () {
@@ -385,6 +385,7 @@ function backgroundPopupToggle() {
     var x = document.getElementById("backgroundContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -394,6 +395,7 @@ function dispositionPopupToggle() {
     var x = document.getElementById("dispositionContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -403,6 +405,7 @@ function colorPickerPopupToggle() {
     var x = document.getElementById("colorPickerContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -412,6 +415,7 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("modalTextFormContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -421,6 +425,7 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("musiqueContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -430,6 +435,7 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("imageGalleryContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -439,10 +445,21 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("FAQContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
   }
+
+  /*
+  function showBodyBackdrop(){
+    var x = document.getElementById("bodyBackdrop");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }*/
 
 /*suppression contenu block*/
   function removeContent(){
