@@ -233,7 +233,12 @@
                             <span>Photo</span>  
                 </label>
                 </li>
-            <li><img src="{{ asset('images/ajout-video.png') }}"  id="" class="img-responsive" width="84px"/><span>Vidéo</span></li>
+            <li>
+                <label for="addVideoContent" id="addVideoContentLabel">
+                            <input type='file' id='addVideoContent' value="" />
+                            <img src="{{ asset('images/ajout-video.png') }}"  id="" class="img-responsive" width="84px"/><span>Vidéo</span>
+                </label>
+            </li>
             <li><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
 
                 <div id="modalTextFormContainer">
@@ -260,6 +265,9 @@
             <div id="createContent1a-1" class="createContent col-12 Content100">
               <span id="content-addedcreateContent1a-1" class="content-added" ></span>
                 <div id="triggercreateContent1a-1"class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
+                        <video controls autoplay-false muted id="createContent1a-1Video" class="createContentVideo">
+                            <source src="" type="video/mp4">
+                        </video>
                      <p class="to-populate fr-view"></p>
                     <span class="add-content-img"></span>
                 </div>

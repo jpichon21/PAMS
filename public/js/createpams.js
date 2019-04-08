@@ -334,6 +334,29 @@ function readBlockURL(){
     }
 }
 
+/* ajout vidéo à block */
+document.getElementById('addVideoContent').addEventListener('change', readBlockURL, true);
+function readBlockURL(){
+    var file = document.getElementById("addVideoContent").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      $('#trigger'+current_block_id).removeClass("removed-content");
+      document.getElementById('trigger'+current_block_id).style.border ="none";  
+      document.getElementById('trigger'+current_block_id).style.backgroundImage = "none";  
+      document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
+      document.getElementById('trigger'+current_block_id).style.backgroundPosition = "center";  
+      document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
+      document.getElementById(current_block_id+'Video').setAttribute('src', reader.result);
+      document.getElementById(current_block_id+'Video').style.display = "block"  
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+      return false();
+    }
+}
+
+
 
 /**Gestion des popups*/
 function backgroundPopupToggle() {
@@ -390,13 +413,15 @@ function modalTextFormContainerToggle() {
     }
   }
 
-/*suppression image block*/
+/*suppression contenu block*/
   function removeContent(){
     document.getElementById('trigger'+current_block_id).style.backgroundImage = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundSize = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundPosition = "";  
     document.getElementById('trigger'+current_block_id).style.border = "";  
     document.getElementById('content-added'+current_block_id).style.display ="none";  
+    document.getElementById(current_block_id+'Video').setAttribute('src', '');  
+    document.getElementById(current_block_id+'Video').style.display = "none"  
     $('#'+current_block_id).find('.to-populate').html('');
     resetBlockContent();
   }
