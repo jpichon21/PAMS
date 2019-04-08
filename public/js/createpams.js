@@ -27,6 +27,12 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+$(document).on('click', 'body', function () {
+  console.log("ok");
+  resetAllPopups();
+  return false;
+});
+
 $(document).on('click', '#backgroundToggle', function () {
     backgroundPopupToggle();
     return false;
@@ -364,6 +370,17 @@ function readVideoBlockurl(){
 
 
 /**Gestion des popups*/
+
+function resetAllPopups() {
+  document.getElementById("imageGalleryContainer").style.display = "none";
+  document.getElementById("FAQContainer").style.display = "none";
+  document.getElementById("musiqueContainer").style.display = "none";
+  document.getElementById("backgroundContainer").style.display = "none";
+  document.getElementById("dispositionContainer").style.display = "none";
+  document.getElementById("colorPickerContainer").style.display = "none";
+  document.getElementById("modalTextFormContainer").style.display = "none";
+}
+
 function backgroundPopupToggle() {
     var x = document.getElementById("backgroundContainer");
     if (x.style.display === "none") {
