@@ -54,7 +54,7 @@ class PamsCodeController extends AbstractController
         // Returned objects are of type Town
         $objects = $results["results"];
         // Get total number of objects
-        $total_objects_count = $pamsCodeRepository->count([]);
+        $total_objects_count = $pamsCodeRepository->countPams();
         // Get total number of results
         $selected_objects_count = count($objects);
         // Get total number of filtered data

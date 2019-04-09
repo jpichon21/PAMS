@@ -19,7 +19,7 @@ class PamsCodeRepository extends ServiceEntityRepository
         parent::__construct($registry, PamsCode::class);
     }
 
-    public function count($criteria)
+    public function countPams()
     {
         return $this
             ->createQueryBuilder('object')
