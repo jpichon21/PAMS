@@ -30,6 +30,12 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+
+$("#bodyBackdrop").click(function(event) {
+  event.stopPropagation();
+  resetAllPopups();
+});
+
 $(document).on('click', '#backgroundToggle', function () {
     backgroundPopupToggle();
     return false;
@@ -58,6 +64,11 @@ $(document).on('click', '#modalTextFormToggle', function () {
 
 $(document).on('click', '#imageGalleryToggleLabel', function () {
   imageGalleryContainerToggle();
+  return false;
+});
+
+$(document).on('click', '#faqToggle', function () {
+  faqContainerToggle();
   return false;
 });
 
@@ -342,12 +353,47 @@ function readBlockURL(){
     }
 }
 
+/* ajout vidéo à block */
+document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
+function readVideoBlockurl(){
+    var file = document.getElementById("addVideoContent").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      $('#trigger'+current_block_id).removeClass("removed-content");
+      document.getElementById('trigger'+current_block_id).style.border ="none";  
+      document.getElementById('trigger'+current_block_id).style.backgroundImage = "none";  
+      document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
+      document.getElementById('trigger'+current_block_id).style.backgroundPosition = "center";  
+      document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
+      document.getElementById(current_block_id+'Video').setAttribute('src', reader.result);
+      document.getElementById(current_block_id+'Video').style.display = "block"  ;
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+      return false();
+    }
+}
+
+
 
 /**Gestion des popups*/
+
+function resetAllPopups() {
+  document.getElementById("imageGalleryContainer").style.display = "none";
+  document.getElementById("FAQContainer").style.display = "none";
+  document.getElementById("musiqueContainer").style.display = "none";
+  document.getElementById("backgroundContainer").style.display = "none";
+  document.getElementById("dispositionContainer").style.display = "none";
+  document.getElementById("colorPickerContainer").style.display = "none";
+  document.getElementById("modalTextFormContainer").style.display = "none";
+}
+
 function backgroundPopupToggle() {
     var x = document.getElementById("backgroundContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -357,6 +403,7 @@ function dispositionPopupToggle() {
     var x = document.getElementById("dispositionContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -366,6 +413,7 @@ function colorPickerPopupToggle() {
     var x = document.getElementById("colorPickerContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -375,6 +423,7 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("modalTextFormContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -384,6 +433,7 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("musiqueContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -393,18 +443,41 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("imageGalleryContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
   }
 
-/*suppression image block*/
+  function faqContainerToggle(){
+    var x = document.getElementById("FAQContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  /*
+  function showBodyBackdrop(){
+    var x = document.getElementById("bodyBackdrop");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }*/
+
+/*suppression contenu block*/
   function removeContent(){
     document.getElementById('trigger'+current_block_id).style.backgroundImage = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundSize = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundPosition = "";  
     document.getElementById('trigger'+current_block_id).style.border = "";  
     document.getElementById('content-added'+current_block_id).style.display ="none";  
+    document.getElementById(current_block_id+'Video').setAttribute('src', '');  
+    document.getElementById(current_block_id+'Video').style.display = "none"  ;
     $('#'+current_block_id).find('.to-populate').html('');
     resetBlockContent();
   }
