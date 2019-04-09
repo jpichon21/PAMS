@@ -1,4 +1,14 @@
+/*initialisation des variables*/
 var current_block_id = null;
+var current_audio_id = null;
+var current_image_id = null;
+var current_layout_value = null;
+var playing = false;
+var send_audio_id = null;
+var send_image_id = null;
+var send_audio_id = null;
+var send_layout_value = null;
+var send_block_id = null;
 
 /*opacity & colorpicker*/
 
@@ -24,6 +34,12 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+
+$("#bodyBackdrop").click(function(event) {
+  event.stopPropagation();
+  resetAllPopups();
+});
+
 $(document).on('click', '#backgroundToggle', function () {
     backgroundPopupToggle();
     return false;
@@ -39,16 +55,33 @@ $(document).on('click', '#dispositionToggle', function () {
     return false;
 });
 
+$(document).on('click', '#audioToggle', function () {
+  toggleAudio();
+  return false;
+});
+
 $(document).on('click', '#modalTextFormToggle', function () {
   modalTextFormContainerToggle();
+  return false;
+});
+
+
+$(document).on('click', '#imageGalleryToggleLabel', function () {
+  imageGalleryContainerToggle();
+  return false;
+});
+
+$(document).on('click', '#faqToggle', function () {
+  faqContainerToggle();
   return false;
 });
 
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function(e) {
 	var $this = $(this);
-	var value = $this.val();
-	toggleDisposition(value);
+  var current_layout_value = $this.val();
+  send_layout_value = current_layout_value;
+  toggleDisposition(current_layout_value);
 });
 
 $(document).on('change', '#colorPicker', function(e) {
@@ -78,7 +111,151 @@ $('.content-added').click(function() {
   removeContent();
 });
 
+/*******************************************
+**** Widget choix de l'image de fond*********
+*******************************************/
 
+/*cibler la vignette musique*/
+$('.image-list-item').on('click', function(e){
+  var $this = $(this);
+  var li_id = $this.attr('id');
+  current_image_id = li_id;
+  send_image_id = current_image_id;
+  chooseImage();
+});
+
+
+function chooseImage(){
+  var file = $('#'+current_image_id+'input').val();
+  document.getElementById('createBody').style.backgroundImage = "url(" + file + ")";            
+}
+
+function clearImage(){
+  document.getElementById('createBody').style.backgroundImage = "none";        
+}
+
+/*ajouter sélecteur image*/
+$('.image-list-item img').on('click', function(e) {
+  e.preventDefault();
+  var $this = $(this);
+  var $current = $('.selected-image');
+  $current.removeClass('selected-image');
+  clearImage();
+  if ( ! $this.is($current) ) 
+  {
+    $this.addClass('selected-image');
+  } 
+});
+
+
+$('#bgImageForm').submit(function (e) {
+  resetImageId();
+  imageGalleryContainerToggle();
+  backgroundPopupToggle();
+  return false;
+ });
+
+ $('#sendDataSubmit').on('click', function (e) {
+  sendData();
+ });
+ 
+
+ function resetImageId(){
+  current_image_id = null;   
+}
+
+
+/*******************************************
+******* Widget choix de la musique*********
+*******************************************/
+
+$('#musiqueSelect').change(function(){
+  var criteria = $(this).val();
+  if(criteria == 'ALL'){
+      $('.lilist').show();
+      return;
+  }
+  $('.categorie').each(function(i,option){
+      if($(this).html() == criteria){
+          $(this).parent().show();
+      }else {
+          $(this).parent().hide();
+      }
+  });
+});
+
+$('#musiqueUploader').change(function(){
+  var sound = document.getElementById('sound');
+  sound.src = URL.createObjectURL(this.files[0]);
+  sound.onend = function(e) {
+    URL.revokeObjectURL(this.src);
+  }
+});
+
+$(document).on('click','.music-list-item', function(e){
+  findMusicId(this);
+});
+
+/*cibler la vignette musique*/
+function findMusicId(elementClicked){
+  var $this = $(elementClicked); // on récup l'élément cliqué en jQuery
+  $this.off("click");
+  var $li = $this.closest('.music-list-item') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
+  var li_id = $li.attr('id');
+  current_audio_id = li_id;
+  send_audio_id = current_audio_id;
+  playSelectedMusic();
+  chooseMusic();
+}
+
+
+function chooseMusic(){
+  var audiofile = $('#'+ current_audio_id+'input').val();
+  document.getElementById('sound').src="/audio/"+ audiofile +"";
+}
+
+
+/*ajouter sélecteur musique*/
+$('.music-list-item img').on('click', function(e) {
+  e.preventDefault();
+  var $this = $(this);
+  var $current = $('.selected-audio');
+  $current.removeClass('selected-audio');
+  if ( ! $this.is($current) ) 
+  {
+    $this.addClass('selected-audio');
+  }
+  displaySubmitAudio();
+  playSelectedMusic();
+});
+
+
+function playSelectedMusic(){
+  var audio = $("#Audio"+current_audio_id);
+   if (playing == false) {
+    audio[0].play();
+    playing = true;
+   } else {
+    audio[0].pause();
+    playing = false;
+   }
+}
+  
+function stopSelectedMusic(){
+  var audio = $("#Audio"+current_audio_id);
+  audio[0].pause();
+}
+
+function displaySubmitAudio(){
+  $('#submitAudio').show();
+}
+
+$('#musiqueSelectForm').submit(function (e) {
+  e.preventDefault();
+  toggleAudio();
+  stopSelectedMusic();
+  return false;
+ });
 
 /********************* ajout de texte ****************************/
 
@@ -86,7 +263,6 @@ $(document).on('submit','#modalTextForm', function(e){
   populateText();
   closeBsModal();
   return false;
-
 });
 
 $(document).on('click','.trigger-modal-block', function(e){
@@ -94,11 +270,11 @@ $(document).on('click','.trigger-modal-block', function(e){
 });
 
 function findModalBlock(elementClicked){
-  var $this = $(elementClicked); // on récup l'élément cliqué en jQuery
-  var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
+  var $this = $(elementClicked);
+  var $block = $this.closest('.createContent')
   var block_id = $block.attr('id');
   current_block_id = block_id;
-  console.log(current_block_id);
+ /* send_block_id = current_block_id;*/
 }
 
 /**ajout dynamique de texte */
@@ -106,6 +282,9 @@ function populateText(){
   var user_text = $("#toFill").val();
   $('#'+current_block_id).find('.to-populate').html(user_text);
   $('#trigger'+current_block_id).addClass('filled-block');
+  document.getElementById('trigger'+current_block_id).style.border ="none";  
+  document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
+  $('#'+current_block_id).addClass('user-content');
 }
 
 
@@ -143,6 +322,7 @@ function changeBgOpacity(){
 /*Upload image*/
 document.getElementById('imagePicker').addEventListener('change', readURL, true);
 function readURL(){
+    clearImage();
     var file = document.getElementById("imagePicker").files[0];
     var reader = new FileReader();
     reader.onloadend = function(){
@@ -151,16 +331,18 @@ function readURL(){
     if(file){
         reader.readAsDataURL(file);
     }else{
+      return false();
     }
 }
 
 /* ajout image à block */
-document.getElementById('addImageContent').addEventListener('change', readURL, true);
-function readURL(){
+document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
+function readBlockURL(){
     var file = document.getElementById("addImageContent").files[0];
     var reader = new FileReader();
     reader.onloadend = function(){
       $('#trigger'+current_block_id).removeClass("removed-content");
+      $('#'+current_block_id).addClass('user-content');
       document.getElementById('trigger'+current_block_id).style.border ="none";  
       document.getElementById('trigger'+current_block_id).style.backgroundImage = "url(" + reader.result + ")";  
       document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
@@ -170,15 +352,51 @@ function readURL(){
     if(file){
         reader.readAsDataURL(file);
     }else{
+      return false();
+    }
+}
+
+/* ajout vidéo à block */
+document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
+function readVideoBlockurl(){
+    var file = document.getElementById("addVideoContent").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      $('#trigger'+current_block_id).removeClass("removed-content");
+      $('#'+current_block_id).addClass('user-content');
+      document.getElementById('trigger'+current_block_id).style.border ="none";  
+      document.getElementById('trigger'+current_block_id).style.backgroundImage = "none";  
+      document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
+      document.getElementById('trigger'+current_block_id).style.backgroundPosition = "center";  
+      document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
+      document.getElementById(current_block_id+'Video').setAttribute('src', reader.result);
+      document.getElementById(current_block_id+'Video').style.display = "block"  ;
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+      return false();
     }
 }
 
 
 /**Gestion des popups*/
+
+function resetAllPopups() {
+  document.getElementById("imageGalleryContainer").style.display = "none";
+  document.getElementById("FAQContainer").style.display = "none";
+  document.getElementById("musiqueContainer").style.display = "none";
+  document.getElementById("backgroundContainer").style.display = "none";
+  document.getElementById("dispositionContainer").style.display = "none";
+  document.getElementById("colorPickerContainer").style.display = "none";
+  document.getElementById("modalTextFormContainer").style.display = "none";
+}
+
 function backgroundPopupToggle() {
     var x = document.getElementById("backgroundContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -188,6 +406,7 @@ function dispositionPopupToggle() {
     var x = document.getElementById("dispositionContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -197,6 +416,7 @@ function colorPickerPopupToggle() {
     var x = document.getElementById("colorPickerContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
@@ -206,24 +426,70 @@ function modalTextFormContainerToggle() {
     var x = document.getElementById("modalTextFormContainer");
     if (x.style.display === "none") {
       x.style.display = "block";
+      
     } else {
       x.style.display = "none";
     }
   }
 
-/*suppression image block*/
+  function toggleAudio(){
+    var x = document.getElementById("musiqueContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      
+    } else {
+      x.style.display = "none";
+    }
+  }
+  
+  function imageGalleryContainerToggle(){
+    var x = document.getElementById("imageGalleryContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function faqContainerToggle(){
+    var x = document.getElementById("FAQContainer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  /*
+  function showBodyBackdrop(){
+    var x = document.getElementById("bodyBackdrop");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }*/
+
+/*suppression contenu block*/
   function removeContent(){
+    $('#'+current_block_id).removeClass('user-content');
     document.getElementById('trigger'+current_block_id).style.backgroundImage = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundSize = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundPosition = "";  
     document.getElementById('trigger'+current_block_id).style.border = "";  
     document.getElementById('content-added'+current_block_id).style.display ="none";  
+    document.getElementById(current_block_id+'Video').setAttribute('src', '');  
+    document.getElementById(current_block_id+'Video').style.display = "none"  ;
+    $('#'+current_block_id).find('.to-populate').html('');
     resetBlockContent();
-
   }
   
   function resetBlockContent(){
+    $('#'+current_block_id).removeClass('user-content');
     $('#trigger'+current_block_id).addClass("removed-content");
+    $('#trigger'+current_block_id).removeClass('filled-block');
   }
 
  
@@ -243,7 +509,28 @@ function modalTextFormContainerToggle() {
 }
 
 
+/***************************************
+ * ************OBJET JSON **************
+ * ************************************/
 
 
-
+function sendData() {
+/*trouver les blocs avec du contenu*/
+var send_blocks_id = $('.user-content').map(function() {
+    return $(this).attr('id');
+});
+var obj = { 'background-image': send_image_id, 'music': send_audio_id, 'layout': send_layout_value, 'selected-blocks': send_blocks_id };
+console.log(obj);
+  $.ajax({
+      url: Routing.generate('pams_post'),
+      async: true, 
+      type: 'POST',
+      data: JSON.stringify(obj),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(result) {
+        console.log(result);
+        }
+  });
+}
 
