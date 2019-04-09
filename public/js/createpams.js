@@ -519,7 +519,7 @@ function sendData() {
 var send_blocks_id = $('.user-content').map(function() {
     return $(this).attr('id');
 });
-var obj = { 'Background-image': send_image_id, 'Musique': send_audio_id, 'Layout': send_layout_value, 'Blocs Sélectionnés': send_blocks_id };
+var obj = { 'background-image': send_image_id, 'music': send_audio_id, 'layout': send_layout_value, 'selected-blocks': send_blocks_id };
 console.log(obj);
   $.ajax({
       url: Routing.generate('pams_post'),
