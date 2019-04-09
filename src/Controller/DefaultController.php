@@ -9,6 +9,7 @@ use App\Service\PamsCodeService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -55,11 +56,11 @@ class DefaultController extends AbstractController
             $pamsCodeEntree = $form->get('pamsCode')->getData();
             $pamsCodeEntree = $this->pamsCodeService->normalizeCode($pamsCodeEntree);
 
-            $this->session->set('pamscode',$pamsCodeEntree);
+            $this->session->set('pamscode', $pamsCodeEntree);
             $codeRetour = $this->pamsCodeService->getCodeValid($pamsCodeEntree)[0];
 
-            $route = $this->pamsCodeService->checkCodeRoute($codeRetour, $codeRetour*-1);
-            if($route!==null) {
+            $route = $this->pamsCodeService->checkCodeRoute($codeRetour, $codeRetour * -1);
+            if ($route !== null) {
                 return $this->redirectToRoute($route);
             }
 
@@ -82,7 +83,7 @@ class DefaultController extends AbstractController
         $pamsCode = $this->session->get('pamscode');
         $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
         $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 2);
-        if($route!==null) {
+        if ($route !== null) {
             return $this->redirectToRoute($route);
         }
         /*****************/
@@ -104,7 +105,7 @@ class DefaultController extends AbstractController
         $pamsCode = $this->session->get('pamscode');
         $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
         $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
-        if($route!==null) {
+        if ($route !== null) {
             return $this->redirectToRoute($route);
         }
         /*****************/
@@ -129,9 +130,8 @@ class DefaultController extends AbstractController
         $codeRetour = $retour[0];
         /* @var $pams \App\Entity\PamsCode */
         $pams = $retour[1];
-        $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
         $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
-        if($route!==null) {
+        if ($route !== null) {
             return $this->redirectToRoute($route);
         }
         /*****************/
@@ -145,9 +145,8 @@ class DefaultController extends AbstractController
 
             $retour = $this->pamsCodeService->getCodeValid($pamsCode);
             $codeRetour = $retour[0];
-            $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
             $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
-            if($route!==null) {
+            if ($route !== null) {
                 return $this->redirectToRoute($route);
             }
 
@@ -180,7 +179,7 @@ class DefaultController extends AbstractController
 
 
     /**
-     * @Route("/get", name="pams_get", methods={"GET"}, options={"expose=true"})
+     * @Route("/get", name="pams_get", methods={"GET"}, options={"expose"=true})
      */
     public function getPams()
     {
@@ -189,12 +188,33 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/post", name="pams_post", methods={"POST"}, options={"expose=true"})
+     * @Route("/post", name="pams_post",  options={"expose"=true})
+     * @param Request $request
      */
-    public function postPams()
+    public function postPams(Request $request)
     {
+        if ($request->isXMLHttpRequest()) {
 
-        return null;
+            $pamsCode = $this->session->get('pamscode');
+            $retour = $this->pamsCodeService->getCodeValid($pamsCode);
+            $codeRetour = $retour[0];
+            /* @var $pams \App\Entity\PamsCode */
+            $pams = $retour[1];
+            $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+
+            if ($route !== null || $pams === null) {
+                throw $this->createAccessDeniedException();
+            } else {
+                $pamsJson = $request->request->get('pams');
+                $this->pamsCodeService->createChapitre($pams, $pamsJson);
+                $this->em->flush();
+
+                return new Response('ok');
+            }
+        }
+
+        return new Response('This is not ajax!', 400);
+
     }
 
 }

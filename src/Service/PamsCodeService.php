@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
+use App\Entity\PamsChapitre;
 use App\Entity\PamsCode;
+use App\Repository\PamsChapitreRepository;
 use App\Repository\PamsCodeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,17 +21,22 @@ class PamsCodeService
 
     private $pamsCodeRepository;
 
+    private $pamsChapitreRepository;
+
     private $flashBag;
 
     public function __construct(
         ObjectManager $em,
         PamsCodeRepository $pamsCodeRepository,
+        PamsChapitreRepository $pamsChapitreRepository,
         FlashBagInterface $flashBag
     )
     {
         $this->em = $em;
         $this->pamsCodeRepository = $pamsCodeRepository;
         $this->flashBag = $flashBag;
+        $this->pamsChapitreRepository = $pamsChapitreRepository;
+
     }
 
     public function checkCodeExist($code){
@@ -147,4 +154,33 @@ class PamsCodeService
 
         return $code;
     }
+
+    /**
+     * @param PamsCode $pams
+     * @param $pamsJson
+     * @return null
+     */
+    public function createChapitre($pams, $pamsJson) {
+
+        $pamsObj = json_decode($pamsJson);
+
+        //On verifie que le chapitre existe
+        //Si non on le cree
+
+        $chapitre = $this->pamsChapitreRepository->findOneBy(['pams' => $pams->getId(), 'numero' => $pamsObj->chapitre]);
+
+        if($chapitre===null){
+            $chapitre = new PamsChapitre();
+            $chapitre->setNumero($pamsObj->chapitre);
+            $chapitre->setPams($pams);
+            $this->em->persist($chapitre);
+        }
+
+        $chapitre->setBackgroundImage($pamsObj->backgroundImage);
+        $chapitre->setMusic($pamsObj->music);
+        $chapitre->setLayout($pamsObj->layout);
+
+        return null;
+    }
+
 }
