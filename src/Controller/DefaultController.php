@@ -159,4 +159,22 @@ class DefaultController extends AbstractController
 
     }
 
+    /**
+     * @Route("/get", name="pams_get", methods={"GET"}, options={"expose=true"})
+     */
+    public function getPams()
+    {
+
+        return null;
+    }
+
+    /**
+     * @Route("/post", name="pams_post", methods={"POST"}, options={"expose=true"})
+     */
+    public function postPams()
+    {
+
+        return null;
+    }
+
 }
