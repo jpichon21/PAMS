@@ -921,3 +921,16 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   height: 100%;
   display: none;
 }
+
+
+#sendDataSubmit, #sendDataSubmit:hover, #sendDataSubmit:active, #sendDatasubmit:focus{
+  position: absolute;
+  right: 45px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  width: 116px;
+  border-radius: 12px;
+  outline: none;
+}
+

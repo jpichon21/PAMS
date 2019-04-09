@@ -4,7 +4,11 @@ var current_audio_id = null;
 var current_image_id = null;
 var current_layout_value = null;
 var playing = false;
-
+var send_audio_id = null;
+var send_image_id = null;
+var send_audio_id = null;
+var send_layout_value = null;
+var send_block_id = null;
 
 /*opacity & colorpicker*/
 
@@ -78,7 +82,6 @@ $(document).on('change', '.input-disposition', function(e) {
   var current_layout_value = $this.val();
   send_layout_value = current_layout_value;
   toggleDisposition(current_layout_value);
-  console.log(current_layout_value);
 });
 
 $(document).on('change', '#colorPicker', function(e) {
@@ -160,7 +163,6 @@ $('#bgImageForm').submit(function (e) {
  function resetImageId(){
   current_image_id = null;   
 }
-
 
 
 /*******************************************
@@ -268,11 +270,11 @@ $(document).on('click','.trigger-modal-block', function(e){
 });
 
 function findModalBlock(elementClicked){
-  var $this = $(elementClicked); // on récup l'élément cliqué en jQuery
-  var $block = $this.closest('.createContent') // ça récupère l'élément le plus proche avec cette classe (le bloc parent dans l'idée)
+  var $this = $(elementClicked);
+  var $block = $this.closest('.createContent')
   var block_id = $block.attr('id');
   current_block_id = block_id;
-  send_block_id = current_block_id;
+ /* send_block_id = current_block_id;*/
 }
 
 /**ajout dynamique de texte */
@@ -282,7 +284,7 @@ function populateText(){
   $('#trigger'+current_block_id).addClass('filled-block');
   document.getElementById('trigger'+current_block_id).style.border ="none";  
   document.getElementById('content-added'+current_block_id).style.display ="inline-block";  
-
+  $('#'+current_block_id).addClass('user-content');
 }
 
 
@@ -340,6 +342,7 @@ function readBlockURL(){
     var reader = new FileReader();
     reader.onloadend = function(){
       $('#trigger'+current_block_id).removeClass("removed-content");
+      $('#'+current_block_id).addClass('user-content');
       document.getElementById('trigger'+current_block_id).style.border ="none";  
       document.getElementById('trigger'+current_block_id).style.backgroundImage = "url(" + reader.result + ")";  
       document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
@@ -360,6 +363,7 @@ function readVideoBlockurl(){
     var reader = new FileReader();
     reader.onloadend = function(){
       $('#trigger'+current_block_id).removeClass("removed-content");
+      $('#'+current_block_id).addClass('user-content');
       document.getElementById('trigger'+current_block_id).style.border ="none";  
       document.getElementById('trigger'+current_block_id).style.backgroundImage = "none";  
       document.getElementById('trigger'+current_block_id).style.backgroundSize = "cover";  
@@ -374,7 +378,6 @@ function readVideoBlockurl(){
       return false();
     }
 }
-
 
 
 /**Gestion des popups*/
@@ -471,6 +474,7 @@ function modalTextFormContainerToggle() {
 
 /*suppression contenu block*/
   function removeContent(){
+    $('#'+current_block_id).removeClass('user-content');
     document.getElementById('trigger'+current_block_id).style.backgroundImage = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundSize = "";  
     document.getElementById('trigger'+current_block_id).style.backgroundPosition = "";  
@@ -483,6 +487,7 @@ function modalTextFormContainerToggle() {
   }
   
   function resetBlockContent(){
+    $('#'+current_block_id).removeClass('user-content');
     $('#trigger'+current_block_id).addClass("removed-content");
     $('#trigger'+current_block_id).removeClass('filled-block');
   }
@@ -509,10 +514,12 @@ function modalTextFormContainerToggle() {
  * ************************************/
 
 
-/*faire pointer URL au bon endroit*/
-
 function sendData() {
-var obj = { 'Background-image': send_image_id, 'Musique': send_audio_id, 'Layout': send_layout_value };
+/*trouver les blocs avec du contenu*/
+var send_blocks_id = $('.user-content').map(function() {
+    return $(this).attr('id');
+});
+var obj = { 'Background-image': send_image_id, 'Musique': send_audio_id, 'Layout': send_layout_value, 'Blocs Sélectionnés': send_blocks_id };
 console.log(obj);
   $.ajax({
       url: Routing.generate('pams_post'),
