@@ -2,12 +2,12 @@
 var current_block_id = null;
 var current_audio_id = null;
 var current_image_id = null;
-var current_layout_value = '4a';
+var current_layout_value = null;
 var playing = false;
 var send_audio_id = null;
 var send_image_id = null;
 var send_audio_id = null;
-var send_layout_value = null;
+var send_layout_value = '4a';
 var send_block_id = null;
 var send_background_image_uploaded = null;
 
