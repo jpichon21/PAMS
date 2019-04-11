@@ -77,6 +77,12 @@ $(document).on('click', '#faqToggle', function () {
     return false;
 });
 
+
+$(document).on('click', '#citationsToggle', function () {
+    citationsContainerToggle();
+    return false;
+});
+
 /**Toggle tempsréel des layouts***/
 $(document).on('change', '.input-disposition', function (e) {
     var $this = $(this);
@@ -264,6 +270,14 @@ $(document).on('submit', '#modalTextForm', function (e) {
     return false;
 });
 
+$('#citationsForm').on('submit', function (e) {
+    e.preventDefault();
+    populateCitation();
+    closeBsModal();
+    citationsContainerToggle();
+    return false;
+});
+
 $(document).on('click', '.trigger-modal-block', function (e) {
     findModalBlock(this);
 });
@@ -276,7 +290,7 @@ function findModalBlock(elementClicked) {
     /* send_block_id = current_block_id;*/
 }
 
-/**ajout dynamique de texte */
+/**ajout dynamique de texte wysiwyg*/
 function populateText() {
     var user_text = $("#toFill").val();
     $('#' + current_block_id).find('.to-populate').html(user_text);
@@ -285,8 +299,19 @@ function populateText() {
     document.getElementById('content-added' + current_block_id).style.display = "inline-block";
     $('#' + current_block_id).addClass('user-content');
 }
-
-
+/**ajout dynamique de texte citation*/
+function populateCitation() {
+    var citation_text = $("#citationsTextFill").val();
+    var citation_auteur = $("#citationsAuteurFill").val();
+    var citation_infos = $("#citationsInfosFill").val();
+    $('#' + current_block_id).find('.to-populate-citation').text(citation_text);
+    $('#' + current_block_id).find('.to-populate-auteur').text(citation_auteur);
+    $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
+    $('#trigger' + current_block_id).addClass('filled-block');
+    document.getElementById('trigger' + current_block_id).style.border = "none";
+    document.getElementById('content-added' + current_block_id).style.display = "inline-block";
+    $('#' + current_block_id).addClass('user-content');
+}
 /**************
  * Functions*
  ****************/
@@ -468,6 +493,17 @@ function faqContainerToggle() {
     }
 }
 
+function citationsContainerToggle() {
+    var x = document.getElementById("citationsContainer");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+
+    } else {
+        x.style.display = "none";
+    }
+}
+
+
 /*
 function showBodyBackdrop(){
   var x = document.getElementById("bodyBackdrop");
@@ -489,6 +525,9 @@ function removeContent() {
     document.getElementById(current_block_id + 'Video').setAttribute('src', '');
     document.getElementById(current_block_id + 'Video').style.display = "none";
     $('#' + current_block_id).find('.to-populate').html('');
+    $('#' + current_block_id).find('.to-populate-citation').text('');
+    $('#' + current_block_id).find('.to-populate-infos').text('');
+    $('#' + current_block_id).find('.to-populate-auteur').text('');
     resetBlockContent();
 }
 
