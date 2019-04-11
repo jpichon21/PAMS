@@ -2,13 +2,14 @@
 var current_block_id = null;
 var current_audio_id = null;
 var current_image_id = null;
-var current_layout_value = null;
+var current_layout_value = '4a';
 var playing = false;
 var send_audio_id = null;
 var send_image_id = null;
 var send_audio_id = null;
 var send_layout_value = null;
 var send_block_id = null;
+var send_background_image_uploaded = null;
 
 /*opacity & colorpicker*/
 
@@ -326,7 +327,8 @@ function readURL() {
     var reader = new FileReader();
     reader.onloadend = function () {
         document.getElementById('createBody').style.backgroundImage = "url(" + reader.result + ")";
-    }
+        send_background_image_uploaded = reader.result;
+      }
     if (file) {
         reader.readAsDataURL(file);
     } else {
@@ -334,9 +336,10 @@ function readURL() {
     }
 }
 
-/* ajout image à block */
-document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
 
+/* ajout image à block */
+var blockImages = {}
+document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
 function readBlockURL() {
     var file = document.getElementById("addImageContent").files[0];
     var reader = new FileReader();
@@ -348,6 +351,7 @@ function readBlockURL() {
         document.getElementById('trigger' + current_block_id).style.backgroundSize = "cover";
         document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
         document.getElementById('content-added' + current_block_id).style.display = "inline-block";
+        blockImages[current_block_id] = reader.result;
     }
     if (file) {
         reader.readAsDataURL(file);
@@ -357,8 +361,8 @@ function readBlockURL() {
 }
 
 /* ajout vidéo à block */
+var blockVideos = {}
 document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
-
 function readVideoBlockurl() {
     var file = document.getElementById("addVideoContent").files[0];
     var reader = new FileReader();
@@ -372,6 +376,7 @@ function readVideoBlockurl() {
         document.getElementById('content-added' + current_block_id).style.display = "inline-block";
         document.getElementById(current_block_id + 'Video').setAttribute('src', reader.result);
         document.getElementById(current_block_id + 'Video').style.display = "block";
+        blockVideos[current_block_id] = reader.result;
     }
     if (file) {
         reader.readAsDataURL(file);
@@ -516,17 +521,18 @@ function toggleDisposition(disposition) {
 
 
 function sendData() {
-    /*trouver les blocs avec du contenu*/
-    var send_blocks_id = $('.user-content').map(function () {
+    /*trouver les blocs avec du contenu
+    send_blocks_id = $('.user-content').map(function () {
         return $(this).attr('id');
-    });
-
+    });*/
     var obj = {
         'chapitre': 1,
         'backgroundImage': send_image_id,
         'music': send_audio_id,
         'layout': send_layout_value,
-        'selectedBlocks': null
+        'uploadedbackgroundImage': send_background_image_uploaded,
+        'uploadedblockImage':  blockImages,
+        'uploadedblockVideos': blockVideos,
     };
     console.log(obj);
     $.ajax({
