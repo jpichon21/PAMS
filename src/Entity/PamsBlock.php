@@ -25,6 +25,21 @@ class PamsBlock
      */
     private $chapitre;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $typeBlock;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomBlock;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $valeur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,6 +53,42 @@ class PamsBlock
     public function setChapitre(?PamsChapitre $chapitre): self
     {
         $this->chapitre = $chapitre;
+
+        return $this;
+    }
+
+    public function getTypeBlock(): ?string
+    {
+        return $this->typeBlock;
+    }
+
+    public function setTypeBlock(string $typeBlock): self
+    {
+        $this->typeBlock = $typeBlock;
+
+        return $this;
+    }
+
+    public function getNomBlock(): ?string
+    {
+        return $this->nomBlock;
+    }
+
+    public function setNomBlock(string $nomBlock): self
+    {
+        $this->nomBlock = $nomBlock;
+
+        return $this;
+    }
+
+    public function getValeur(): ?string
+    {
+        return $this->valeur;
+    }
+
+    public function setValeur(string $valeur): self
+    {
+        $this->valeur = $valeur;
 
         return $this;
     }

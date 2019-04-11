@@ -187,7 +187,7 @@ class DefaultController extends AbstractController
             } else {
                 $pamsJson = $request->request->get('pams');
                 $this->pamsCodeService->createChapitre($pams, $pamsJson);
-                $this->em->flush();
+                
 
                 return new Response('ok');
             }

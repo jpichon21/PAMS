@@ -58,6 +58,21 @@ class PamsChapitre
      */
     private $layout;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCustomImage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $opacite;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCustomMusic;
+
     public function __construct()
     {
         $this->pamsBlocks = new ArrayCollection();
@@ -170,4 +185,41 @@ class PamsChapitre
 
         return $this;
     }
+
+    public function getIsCustomImage(): ?bool
+    {
+        return $this->isCustomImage;
+    }
+
+    public function setIsCustomImage(bool $isCustomImage): self
+    {
+        $this->isCustomImage = $isCustomImage;
+
+        return $this;
+    }
+
+    public function getOpacite(): ?string
+    {
+        return $this->opacite;
+    }
+
+    public function setOpacite(?string $opacite): self
+    {
+        $this->opacite = $opacite;
+
+        return $this;
+    }
+
+    public function getIsCustomMusic(): ?bool
+    {
+        return $this->isCustomMusic;
+    }
+
+    public function setIsCustomMusic(bool $isCustomMusic): self
+    {
+        $this->isCustomMusic = $isCustomMusic;
+
+        return $this;
+    }
+
 }
