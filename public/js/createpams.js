@@ -319,7 +319,11 @@ function populateCitation() {
     document.getElementById('trigger' + current_block_id).style.border = "none";
     document.getElementById('content-added' + current_block_id).style.display = "inline-block";
     $('#' + current_block_id).addClass('user-content');
-    blockCitations[current_block_id] = citation_text + citation_auteur + citation_infos;
+    blockCitations[current_block_id] = {
+        text: citation_text,
+        auteur: citation_auteur,
+        infos: citation_infos
+    }
 }
 /**************
  * Functions*
@@ -516,15 +520,6 @@ function citationsContainerToggle() {
 }
 
 
-/*
-function showBodyBackdrop(){
-  var x = document.getElementById("bodyBackdrop");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}*/
 
 /*suppression contenu block*/
 function removeContent() {
@@ -541,12 +536,46 @@ function removeContent() {
     $('#' + current_block_id).find('.to-populate-infos').text('');
     $('#' + current_block_id).find('.to-populate-auteur').text('');
     resetBlockContent();
+    resetBlockVariables();
 }
+
 
 function resetBlockContent() {
     $('#' + current_block_id).removeClass('user-content');
     $('#trigger' + current_block_id).addClass("removed-content");
     $('#trigger' + current_block_id).removeClass('filled-block');
+}
+
+/*reset des variables*/
+function resetBlockVariables(){
+    delete blockVideos[current_block_id]; 
+    delete blockImages[current_block_id];
+    delete blockCitations[current_block_id];
+    delete blockText[current_block_id];
+}
+
+function resetBlockImages(){
+    if ( blockImages[current_block_id] == {}){
+       return(false);
+    }else{
+        blockImages[current_block_id] = {};
+    }
+}
+
+function resetBlockText(){
+    if ( blockText[current_block_id] == {}){
+       return(false);
+    }else{
+        blockText[current_block_id] = {};
+    }
+}
+
+function resetBlockCitations(){
+    if ( blockCitations[current_block_id] == {}){
+       return(false);
+    }else{
+        blockCitations[current_block_id] = {};
+    }
 }
 
 
