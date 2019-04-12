@@ -187,6 +187,10 @@ class PamsCodeService
             $this->em->persist($chapitre);
         }
 
+        //Gestion de l'opacité et couleur
+        $chapitre->setOpacite($pamsObj->backgroundOpacity);
+        $chapitre->setBackgroundColor($pamsObj->backgroundColor);
+
         //Gestion de l'image du chapitre
         if ($pamsObj->uploadedbackgroundImage !== null) {
             //On stock le fichier à supprimer
@@ -292,7 +296,44 @@ class PamsCodeService
         $pamsArray = [];
 
         $chapitre = $this->pamsChapitreRepository->findOneBy(['pams' => $pams->getId(), 'numero' => $chapitre]);
+        if($chapitre===null){
+            $pamsArray['backgroundColor'] = null;
+            $pamsArray['backgroundImage'] = null;
+            $pamsArray['backgroundOpacity'] = null;
+            $pamsArray['chapitre'] = null;
+            $pamsArray['nbChapitre'] = null;
+            $pamsArray['layout'] = null;
+        }else {
 
+            $pamsArray['backgroundColor'] = $chapitre->getBackgroundColor();
+            if ($chapitre->getIsCustomImage()) {
+                $pamsArray['backgroundImage'] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getBackgroundImage();
+            } else {
+                $pamsArray['backgroundImage'] = $chapitre->getBackgroundImage();
+            }
+            $pamsArray['backgroundOpacity'] = $chapitre->getOpacite();
+            $pamsArray['chapitre'] = $chapitre->getNumero();
+            $pamsArray['nbChapitre'] = count($chapitre->getPams()->getPamsChapitres());
+            $pamsArray['layout'] = $chapitre->getLayout();
+
+            foreach ($chapitre->getPamsBlocks() as $block) {
+                switch ($block->getTypeBlock()) {
+                    case self::TYPE_BLOCK_PHOTO :
+                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = $block->getValeur();
+                        break;
+                    case self::TYPE_BLOCK_TEXTE :
+                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = $block->getValeur();
+                        break;
+                    case self::TYPE_BLOCK_CITATION :
+                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = $block->getValeur();
+                        break;
+                    case self::TYPE_BLOCK_VIDEO :
+                        $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = $block->getValeur();
+                        break;
+                    default:
+                }
+            }
+        }
 
 
         return $pamsArray;
