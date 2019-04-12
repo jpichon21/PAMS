@@ -10,6 +10,9 @@ var send_audio_id = null;
 var send_layout_value = '4a';
 var send_block_id = null;
 var send_background_image_uploaded = null;
+var send_opacity_value = '100';
+var send_background_color = '#ffc0cb';
+var send_uploaded_audio = null;
 
 /*opacity & colorpicker*/
 
@@ -27,6 +30,7 @@ output.innerHTML = slider.value;
 
 slider.oninput = function () {
     output.innerHTML = this.value;
+    send_opacity_value = output.innerHTML;
 }
 
 /*events*/
@@ -74,6 +78,12 @@ $(document).on('click', '#imageGalleryToggleLabel', function () {
 
 $(document).on('click', '#faqToggle', function () {
     faqContainerToggle();
+    return false;
+});
+
+
+$(document).on('click', '#citationsToggle', function () {
+    citationsContainerToggle();
     return false;
 });
 
@@ -190,6 +200,7 @@ $('#musiqueUploader').change(function () {
     sound.onend = function (e) {
         URL.revokeObjectURL(this.src);
     }
+    send_uploaded_audio = sound.src;
 });
 
 $(document).on('click', '.music-list-item', function (e) {
@@ -264,6 +275,14 @@ $(document).on('submit', '#modalTextForm', function (e) {
     return false;
 });
 
+$('#citationsForm').on('submit', function (e) {
+    e.preventDefault();
+    populateCitation();
+    closeBsModal();
+    citationsContainerToggle();
+    return false;
+});
+
 $(document).on('click', '.trigger-modal-block', function (e) {
     findModalBlock(this);
 });
@@ -276,7 +295,8 @@ function findModalBlock(elementClicked) {
     /* send_block_id = current_block_id;*/
 }
 
-/**ajout dynamique de texte */
+/**ajout dynamique de texte wysiwyg*/
+var blockText= {}
 function populateText() {
     var user_text = $("#toFill").val();
     $('#' + current_block_id).find('.to-populate').html(user_text);
@@ -284,9 +304,27 @@ function populateText() {
     document.getElementById('trigger' + current_block_id).style.border = "none";
     document.getElementById('content-added' + current_block_id).style.display = "inline-block";
     $('#' + current_block_id).addClass('user-content');
+    blockText[current_block_id] = user_text;
 }
-
-
+/**ajout dynamique de texte citation*/
+var blockCitations= {}
+function populateCitation() {
+    var citation_text = $("#citationsTextFill").val();
+    var citation_auteur = $("#citationsAuteurFill").val();
+    var citation_infos = $("#citationsInfosFill").val();
+    $('#' + current_block_id).find('.to-populate-citation').text(citation_text);
+    $('#' + current_block_id).find('.to-populate-auteur').text(citation_auteur);
+    $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
+    $('#trigger' + current_block_id).addClass('filled-block');
+    document.getElementById('trigger' + current_block_id).style.border = "none";
+    document.getElementById('content-added' + current_block_id).style.display = "inline-block";
+    $('#' + current_block_id).addClass('user-content');
+    blockCitations[current_block_id] = {
+        text: citation_text,
+        auteur: citation_auteur,
+        infos: citation_infos
+    }
+}
 /**************
  * Functions*
  ****************/
@@ -310,6 +348,9 @@ function resetTextArea() {
 /*couleur arrière-plan*/
 function changeBgColor() {
     var color = $("#colorPicker").spectrum("get");
+    if (color !== null){
+        send_background_color = color.toHexString() ;
+    }
     document.getElementById("createBody").style.backgroundColor = color;
 }
 
@@ -468,15 +509,17 @@ function faqContainerToggle() {
     }
 }
 
-/*
-function showBodyBackdrop(){
-  var x = document.getElementById("bodyBackdrop");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}*/
+function citationsContainerToggle() {
+    var x = document.getElementById("citationsContainer");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+
+    } else {
+        x.style.display = "none";
+    }
+}
+
+
 
 /*suppression contenu block*/
 function removeContent() {
@@ -489,13 +532,50 @@ function removeContent() {
     document.getElementById(current_block_id + 'Video').setAttribute('src', '');
     document.getElementById(current_block_id + 'Video').style.display = "none";
     $('#' + current_block_id).find('.to-populate').html('');
+    $('#' + current_block_id).find('.to-populate-citation').text('');
+    $('#' + current_block_id).find('.to-populate-infos').text('');
+    $('#' + current_block_id).find('.to-populate-auteur').text('');
     resetBlockContent();
+    resetBlockVariables();
 }
+
 
 function resetBlockContent() {
     $('#' + current_block_id).removeClass('user-content');
     $('#trigger' + current_block_id).addClass("removed-content");
     $('#trigger' + current_block_id).removeClass('filled-block');
+}
+
+/*reset des variables*/
+function resetBlockVariables(){
+    delete blockVideos[current_block_id]; 
+    delete blockImages[current_block_id];
+    delete blockCitations[current_block_id];
+    delete blockText[current_block_id];
+}
+
+function resetBlockImages(){
+    if ( blockImages[current_block_id] == {}){
+       return(false);
+    }else{
+        blockImages[current_block_id] = {};
+    }
+}
+
+function resetBlockText(){
+    if ( blockText[current_block_id] == {}){
+       return(false);
+    }else{
+        blockText[current_block_id] = {};
+    }
+}
+
+function resetBlockCitations(){
+    if ( blockCitations[current_block_id] == {}){
+       return(false);
+    }else{
+        blockCitations[current_block_id] = {};
+    }
 }
 
 
@@ -527,12 +607,17 @@ function sendData() {
     });*/
     var obj = {
         'chapitre': 1,
+        'backgroundOpacity': send_opacity_value/100,
+        'backgroundColor': send_background_color,
         'backgroundImage': send_image_id,
         'music': send_audio_id,
         'layout': send_layout_value,
         'uploadedbackgroundImage': send_background_image_uploaded,
         'uploadedblockImage':  blockImages,
         'uploadedblockVideos': blockVideos,
+        'addedblockText': blockText,
+        'addedblockCitation': blockCitations,
+        'uploadedAudio' : send_uploaded_audio,
     };
     console.log(obj);
     $.ajax({

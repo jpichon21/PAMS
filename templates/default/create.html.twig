@@ -314,11 +314,30 @@
                             <img src="{{ asset('images/ajout-video.png') }}" id="" class="img-responsive" width="84px"/><span>Vidéo</span>
                         </label>
                     </li>
-                    <li><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
+                    <li id="citationsToggle"><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
+                    <!--Modal citation -->
+                    <div id="citationsContainer" class="container">
+                    <form id="citationsForm">
 
+                            <div class="form-group">
+                                <textarea class="form-control" id="citationsTextFill" rows="6" placeholder="Citation"></textarea>
+                            </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="citationsAuteurFill" placeholder="Nom de l'auteur">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="citationsInfosFill" placeholder="Informations complémentaires">
+                                    </div>
+                                </div>
+                                <button id="citationFormSeemore" type="" class="btn btn-primary seemore-btn">Nos citations</button>
+                                <button id="citationFormSubmit" type="submit" class="btn btn-primary submit-btn">Enregistrer</button>
+                                </form>
+                        
+                    </div>
                     <div id="modalTextFormContainer">
                         <form id="modalTextForm">
-                            <textarea id="toFill"></textarea>
+                            <textarea id="toFill" class="froala-textarea"></textarea>
                             <button type="submit"> valider</button>
                         </form>
                     </div>
@@ -328,6 +347,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 
 <!--Modal FAQ-->
@@ -383,10 +405,11 @@
         <div id="createContent1a-1" class="createContent col-12 Content100">
             <span id="content-addedcreateContent1a-1" class="content-added"></span>
             <div id="triggercreateContent1a-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent1a-1Video" class="createContentVideo">
-
-                </video>
+                <video controls autoplay-false muted id="createContent1a-1Video" class="createContentVideo"></video>
                 <p class="to-populate fr-view"></p>
+                <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -403,6 +426,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -415,6 +441,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -432,6 +461,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -442,6 +474,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -458,6 +493,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -470,6 +508,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -488,6 +529,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -498,6 +542,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                    <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -510,6 +557,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -526,6 +576,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                 <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -536,6 +589,10 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
+                
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -546,6 +603,10 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
+                
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -562,6 +623,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -572,6 +636,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -583,6 +650,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -601,6 +671,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -613,6 +686,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -623,6 +699,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -639,6 +718,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -649,6 +731,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -661,6 +746,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -671,6 +759,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -687,6 +778,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -699,6 +793,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -709,6 +806,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -721,6 +821,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -737,6 +840,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -747,6 +853,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -759,6 +868,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -769,6 +881,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -785,6 +900,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -795,6 +913,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -805,6 +926,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -817,6 +941,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -834,6 +961,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -848,6 +978,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -860,6 +993,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -872,6 +1008,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -890,6 +1029,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -904,6 +1046,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -916,6 +1061,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -931,6 +1079,9 @@
 
                     </video>
                     <p class="to-populate"></p>
+                            <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                     <span class="add-content-img"></span>
                 </div>
             </div>
@@ -948,6 +1099,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -958,6 +1112,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -970,6 +1127,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -980,6 +1140,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -996,6 +1159,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -1008,6 +1174,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -1018,6 +1187,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -1030,6 +1202,9 @@
 
                 </video>
                 <p class="to-populate"></p>
+                        <p class="to-populate-citation"></p>
+                <p class="to-populate-auteur"></p>
+                <p class="to-populate-infos"></p>
                 <span class="add-content-img"></span>
             </div>
         </div>
@@ -1059,7 +1234,7 @@
 
 <!-- Initialize the editor. -->
 <script> $(function () {
-        $('textarea').froalaEditor({
+        $('.froala-textarea').froalaEditor({
             toolbarButtons: ['fullscreen', 'emoticons', 'bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'outdent', 'indent', 'undo', 'redo']
         })
     });   </script>
