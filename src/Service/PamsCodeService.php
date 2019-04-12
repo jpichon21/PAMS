@@ -20,7 +20,7 @@ class PamsCodeService
 {
 
     const TAILLEMAXCODE = 8;
-    const PATH_TO_DATA_FOLDER = '/data';
+    const PATH_TO_DATA_FOLDER = '/public/data';
     const TYPE_BLOCK_PHOTO = 'photo';
     const TYPE_BLOCK_TEXTE = 'texte';
     const TYPE_BLOCK_CITATION = 'citation';
@@ -167,8 +167,9 @@ class PamsCodeService
      * @param PamsCode $pams
      * @param $pamsJson
      * @return null
+     * @throws Exception
      */
-    public function createChapitre($pams, $pamsJson)
+    public function createChapitre(PamsCode $pams, $pamsJson)
     {
 
         $fichiersASupprimer = [];
@@ -287,8 +288,14 @@ class PamsCodeService
         return null;
     }
 
-    public function getChapitre($pams){
+    public function getChapitre(PamsCode $pams, $chapitre){
+        $pamsArray = [];
 
+        $chapitre = $this->pamsChapitreRepository->findOneBy(['pams' => $pams->getId(), 'numero' => $chapitre]);
+
+
+
+        return $pamsArray;
     }
 
     public function decode_image($pamsId, $base64)
