@@ -10,6 +10,9 @@ var send_audio_id = null;
 var send_layout_value = '4a';
 var send_block_id = null;
 var send_background_image_uploaded = null;
+var send_opacity_value = '100';
+var send_background_color = '#ffc0cb';
+var send_uploaded_audio = null;
 
 /*opacity & colorpicker*/
 
@@ -27,6 +30,7 @@ output.innerHTML = slider.value;
 
 slider.oninput = function () {
     output.innerHTML = this.value;
+    send_opacity_value = output.innerHTML;
 }
 
 /*events*/
@@ -196,6 +200,7 @@ $('#musiqueUploader').change(function () {
     sound.onend = function (e) {
         URL.revokeObjectURL(this.src);
     }
+    send_uploaded_audio = sound.src;
 });
 
 $(document).on('click', '.music-list-item', function (e) {
@@ -291,6 +296,7 @@ function findModalBlock(elementClicked) {
 }
 
 /**ajout dynamique de texte wysiwyg*/
+var blockText= {}
 function populateText() {
     var user_text = $("#toFill").val();
     $('#' + current_block_id).find('.to-populate').html(user_text);
@@ -298,8 +304,10 @@ function populateText() {
     document.getElementById('trigger' + current_block_id).style.border = "none";
     document.getElementById('content-added' + current_block_id).style.display = "inline-block";
     $('#' + current_block_id).addClass('user-content');
+    blockText[current_block_id] = user_text;
 }
 /**ajout dynamique de texte citation*/
+var blockCitations= {}
 function populateCitation() {
     var citation_text = $("#citationsTextFill").val();
     var citation_auteur = $("#citationsAuteurFill").val();
@@ -311,6 +319,7 @@ function populateCitation() {
     document.getElementById('trigger' + current_block_id).style.border = "none";
     document.getElementById('content-added' + current_block_id).style.display = "inline-block";
     $('#' + current_block_id).addClass('user-content');
+    blockCitations[current_block_id] = citation_text + citation_auteur + citation_infos;
 }
 /**************
  * Functions*
@@ -335,6 +344,9 @@ function resetTextArea() {
 /*couleur arrière-plan*/
 function changeBgColor() {
     var color = $("#colorPicker").spectrum("get");
+    if (color !== null){
+        send_background_color = color.toHexString() ;
+    }
     document.getElementById("createBody").style.backgroundColor = color;
 }
 
@@ -566,12 +578,17 @@ function sendData() {
     });*/
     var obj = {
         'chapitre': 1,
+        'backgroundOpacity': send_opacity_value/100,
+        'backgroundColor': send_background_color,
         'backgroundImage': send_image_id,
         'music': send_audio_id,
         'layout': send_layout_value,
         'uploadedbackgroundImage': send_background_image_uploaded,
         'uploadedblockImage':  blockImages,
         'uploadedblockVideos': blockVideos,
+        'addedblockText': blockText,
+        'addedblockCitation': blockCitations,
+        'uploadedAudio' : send_uploaded_audio,
     };
     console.log(obj);
     $.ajax({
