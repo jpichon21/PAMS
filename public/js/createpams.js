@@ -213,11 +213,17 @@ $('#musiqueSelect').change(function () {
 
 $('#musiqueUploader').change(function () {
     var sound = document.getElementById('sound');
+    var reader = new FileReader();
     sound.src = URL.createObjectURL(this.files[0]);
+    reader.readAsDataURL(this.files[0]); 
+    reader.onloadend = function() {
+        send_uploaded_audio = reader.result;                
+        console.log(send_uploaded_audio);
+    }
     sound.onend = function (e) {
         URL.revokeObjectURL(this.src);
     }
-    send_uploaded_audio = sound.src;
+
 });
 
 $(document).on('click', '.music-list-item', function (e) {
@@ -628,6 +634,7 @@ function resetBlockVariables(){
 function toggleDisposition(disposition) {
     var $active = $('.disposition-active');
     var $target = $('#' + disposition);
+    console.log(disposition);
 
     // Si la sélection est celle déjà active, on fait rien
     if ($target.is($active)) return false;
