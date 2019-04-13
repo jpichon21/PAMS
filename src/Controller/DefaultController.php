@@ -161,7 +161,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/get", name="pams_get", methods={"GET"}, options={"expose"=true})
+     * @Route("/get", name="pams_get", options={"expose"=true})
      * @param Request $request
      * @return Response
      */
