@@ -209,19 +209,19 @@ class PamsCodeService
         }
 
         //Gestion de la musique du chapitre
-        if (property_exists($pamsObj, "uploadedMusic") && $pamsObj->uploadedMusic !== null) {
+        if (property_exists($pamsObj, "uploadedAudio") && $pamsObj->uploadedAudio !== null) {
             //On stock le fichier à supprimer
             if ($chapitre->getIsCustomMusic()) {
                 $fichiersASupprimer[] = $chapitre->getMusic();
             }
 
             //On cree le fichier
-            $nomFichier = $this->decode_music($pams->getId(), $pamsObj->uploadedMusic);
+            $nomFichier = $this->decode_music($pams->getId(), $pamsObj->uploadedAudio);
             $chapitre->setMusic($nomFichier);
             $chapitre->setIsCustomMusic(true);
 
         } else {
-            $chapitre->setMusic($pamsObj->backgroundImage);
+            $chapitre->setMusic($pamsObj->music);
             $chapitre->setIsCustomMusic(false);
         }
 
@@ -273,6 +273,52 @@ class PamsCodeService
             }
         }
 
+        //Gestion des blocks texte
+        if (property_exists($pamsObj, "addedblockText") && $pamsObj->addedblockText !== null) {
+            foreach ($pamsObj->addedblockText as $nomBlock => $blockData) {
+                $block = $this->pamsBlockRepository->findOneBy(['chapitre' => $chapitre->getId(), 'nomBlock' => $nomBlock]);
+
+                //Si le block est null on le créé sinon
+                if ($block === null) {
+                    $block = new PamsBlock();
+                    $block->setNomBlock($nomBlock);
+                    $this->em->persist($block);
+                } else {
+                    $blockPresent[] = $nomBlock;
+                }
+
+                $block->setChapitre($chapitre);
+                $block->setTypeBlock(self::TYPE_BLOCK_TEXTE);
+                $block->setValeur($blockData);
+            }
+        }
+
+        //Gestion des blocks citation
+        if (property_exists($pamsObj, "addedblockCitation") && $pamsObj->addedblockCitation !== null) {
+            foreach ($pamsObj->addedblockCitation as $nomBlock => $blockArray) {
+                $blockData=$blockArray->text;
+                $blockAuteur=$blockArray->auteur;
+                $blockInfos=$blockArray->infos;
+
+                $block = $this->pamsBlockRepository->findOneBy(['chapitre' => $chapitre->getId(), 'nomBlock' => $nomBlock]);
+
+                //Si le block est null on le créé sinon
+                if ($block === null) {
+                    $block = new PamsBlock();
+                    $block->setNomBlock($nomBlock);
+                    $this->em->persist($block);
+                } else {
+                    $blockPresent[] = $nomBlock;
+                }
+
+                $block->setChapitre($chapitre);
+                $block->setTypeBlock(self::TYPE_BLOCK_CITATION);
+                $block->setValeur($blockData);
+                $block->setAuteur($blockAuteur);
+                $block->setInfos($blockInfos);
+            }
+        }
+
         //On supprime les blocks qui ne servent plus
         $blocks = $this->pamsBlockRepository->findBy(['chapitre' => $chapitre->getId()]);
         foreach($blocks as $block){
@@ -294,7 +340,6 @@ class PamsCodeService
 
     public function getChapitre(PamsCode $pams, $chapitre){
         $pamsArray = [];
-
         $chapitre = $this->pamsChapitreRepository->findOneBy(['pams' => $pams->getId(), 'numero' => $chapitre]);
         if($chapitre===null){
             $pamsArray['backgroundColor'] = null;
@@ -307,9 +352,14 @@ class PamsCodeService
 
             $pamsArray['backgroundColor'] = $chapitre->getBackgroundColor();
             if ($chapitre->getIsCustomImage()) {
-                $pamsArray['backgroundImage'] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getBackgroundImage();
+                $pamsArray['uploadedbackgroundImage'] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getBackgroundImage();
             } else {
                 $pamsArray['backgroundImage'] = $chapitre->getBackgroundImage();
+            }
+            if ($chapitre->getIsCustomMusic()) {
+                $pamsArray['uploadedAudio'] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getMusic();
+            } else {
+                $pamsArray['music'] = $chapitre->getMusic();
             }
             $pamsArray['backgroundOpacity'] = $chapitre->getOpacite();
             $pamsArray['chapitre'] = $chapitre->getNumero();
@@ -322,10 +372,12 @@ class PamsCodeService
                         $pamsArray['uploadedblockImage'][$block->getNomBlock()] = $block->getValeur();
                         break;
                     case self::TYPE_BLOCK_TEXTE :
-                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = $block->getValeur();
+                        $pamsArray['addedblockText'][$block->getNomBlock()] = $block->getValeur();
                         break;
                     case self::TYPE_BLOCK_CITATION :
-                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = $block->getValeur();
+                        $pamsArray['addedblockCitation'][$block->getNomBlock()]['texte'] = $block->getValeur();
+                        $pamsArray['addedblockCitation'][$block->getNomBlock()]['auteur'] = $block->getAuteur();
+                        $pamsArray['addedblockCitation'][$block->getNomBlock()]['infos'] = $block->getInfos();
                         break;
                     case self::TYPE_BLOCK_VIDEO :
                         $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = $block->getValeur();
@@ -408,12 +460,12 @@ class PamsCodeService
     // A faire quand le front l'enverra
     public function decode_music($pamsId, $base64)
     {
-        if (preg_match('/^data:image\/(\w+);base64,/', $base64, $type)) {
+        if (preg_match('/^data:audio\/(\w+);base64,/', $base64, $type)) {
             $data = substr($base64, strpos($base64, ',') + 1);
-            $type = strtolower($type[1]); // jpg, png, gif
+            $type = strtolower($type[1]);
 
-            if (!in_array($type, ['jpg', 'jpeg', 'gif', 'png'])) {
-                throw new Exception('invalid image type');
+            if (!in_array($type, ['mp3'])) {
+                throw new Exception('invalid music type');
             }
 
             $data = base64_decode($data);
@@ -422,7 +474,7 @@ class PamsCodeService
                 throw new Exception('base64_decode failed');
             }
         } else {
-            throw new Exception('did not match data URI with image data');
+            throw new Exception('did not match data URI with music data');
         }
 
         $dir = $this->container->getParameter('kernel.project_dir') . self::PATH_TO_DATA_FOLDER . '/' . $pamsId;

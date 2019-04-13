@@ -40,6 +40,16 @@ class PamsBlock
      */
     private $valeur;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $auteur;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $infos;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +99,30 @@ class PamsBlock
     public function setValeur(string $valeur): self
     {
         $this->valeur = $valeur;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?string
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?string $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getInfos(): ?string
+    {
+        return $this->infos;
+    }
+
+    public function setInfos(?string $infos): self
+    {
+        $this->infos = $infos;
 
         return $this;
     }
