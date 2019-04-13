@@ -1,5 +1,5 @@
 /.idea
-/data/
+/public/data/
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -17,4 +17,3 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
-
