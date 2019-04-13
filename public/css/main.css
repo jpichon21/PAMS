@@ -918,36 +918,20 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 .to-populate-citation{
   padding: 10px;
-  font-size: 62px;
+  font-size: 38px;
   color: white;
 }
-
-/*
-.to-populate-citation:before{
-  content: '"' ;
-  font-size: 62px;
-  color: white;
-  text-align: left;
-}
-
-.to-populate-infos:after{
-  content: '"' ;
-  font-size: 62px;
-  color: white;
-  text-align: right;
-}
-*/
 
 .to-populate-auteur{
   text-align:right;
-  font-size: 24px;
+  font-size: 18px;
   color: black;
   margin-bottom: 0px;
 }
 
 .to-populate-infos{
   text-align:right;
-  font-size: 18px;
+  font-size: 14px;
   color: black;
 }
 
@@ -983,6 +967,9 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 
 /*citations container*/
+#citationsAllContainer{
+  display: none;
+}
 
 #citationsContainer {
   background-color: white;
@@ -997,15 +984,28 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   margin-left: auto; 
   margin-right: auto; 
   z-index: 2;
-  display: none;
-
+  margin-bottom: 12px;
 }
-
 
 #citationFormSubmit{
   float: right;
 }
 
-#citationFormSeemore{
+#citationsLibraryContainerToggle{
   float: left;
+}
+
+
+#citationsSelectionContainer{
+  height: 282px;
+  overflow: auto;
+}
+
+#citationsSelectionContainer label{
+  font-size: 18px;
+  padding: 0px;
+}
+
+#citationsSelectionContainer li{
+  margin: 10px 0px;
 }

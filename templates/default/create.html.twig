@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-lightbox.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <!--froala-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -316,24 +317,70 @@
                     </li>
                     <li id="citationsToggle"><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
                     <!--Modal citation -->
-                    <div id="citationsContainer" class="container">
-                    <form id="citationsForm">
-
-                            <div class="form-group">
-                                <textarea class="form-control" id="citationsTextFill" rows="6" placeholder="Citation"></textarea>
-                            </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" id="citationsAuteurFill" placeholder="Nom de l'auteur">
+                    <div id="citationsAllContainer">
+                        <div id="citationsContainer" class="container">
+                                <form id="citationsForm">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="citationsTextFill" rows="6" placeholder="Citation"></textarea>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" id="citationsInfosFill" placeholder="Informations complémentaires">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                         <input type="text" class="form-control" id="citationsAuteurFill" placeholder="Nom de l'auteur">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                         <input type="text" class="form-control" id="citationsInfosFill" placeholder="Informations complémentaires">
+                                        </div>
                                     </div>
-                                </div>
-                                <button id="citationFormSeemore" type="" class="btn btn-primary seemore-btn">Nos citations</button>
-                                <button id="citationFormSubmit" type="submit" class="btn btn-primary submit-btn">Enregistrer</button>
+                                    <div id="citationsLibraryContainerToggle" type="" class="btn btn-primary seemore-btn">Nos citations</div>
+                                    <button id="citationFormSubmit" type="submit" class="btn btn-primary submit-btn">Enregistrer</button>
                                 </form>
-                        
+                            
+                        </div>
+                        <!-- Librairie Citaions -->
+                        <div id="citationsLibraryContainer" class="container">
+                        <form id="citationsLibraryForm">
+                            <ul id="citationsSelectionContainer">
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">« Une amitié qui dure et ne viellit pas c'est quelque chose d'extraordinaire  »<br>Emilie Carles</label>
+                                        <input type="hidden" id="customCheck1Text" value="« Une amitié qui dure et ne viellit pas c'est quelque chose d'extraordinaire  »">
+                                        <input type="hidden" id="customCheck1Auteur" value="Emilie Carles">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2">«  Choisis tes amis avec soin, ils seront les parfums de ton chemin de vie. » <br>Romain Guilleaumes</label>
+                                        <input type="hidden" id="customCheck2Text" value="«  Choisis tes amis avec soin, ils seront les parfums de ton chemin de vie. » ">
+                                        <input type="hidden" id="customCheck2Auteur" value="Romain Guilleaumes">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck3">
+                                        <label class="custom-control-label" for="customCheck3">«  La vie est destinée aux bons amis et aux grandes aventures »</label>
+                                        <input type="hidden" id="customCheck3Text" value="«  La vie est destinée aux bons amis et aux grandes aventures »">
+                                        <input type="hidden" id="customCheck3Auteur" value="">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck4">
+                                        <label class="custom-control-label" for="customCheck4">« Je suis un peu bizarre.. Mais heureusement, j'ai trouvé des amies qui le sont autant que moi »</label>
+                                        <input type="hidden" id="customCheck4Text" value="« Je suis un peu bizarre.. Mais heureusement, j'ai trouvé des amies qui le sont autant que moi »">
+                                        <input type="hidden" id="customCheck4Auteur" value="">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5">«  Tu es la seule musique dans mon cœur qui puisse faire danser ma vie. »<br></label>
+                                        <input type="hidden" id="customCheck5Text" value="«  Tu es la seule musique dans mon cœur qui puisse faire danser ma vie. »">
+                                        <input type="hidden" id="customCheck5Auteur" value="">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck6">
+                                        <label class="custom-control-label" for="customCheck6">« L'amour est la seule condition dans laquelle le bonheur d'une autre personne est essentiel au tien. »</label>
+                                        <input type="hidden" id="customCheck6Text" value="« L'amour est la seule condition dans laquelle le bonheur d'une autre personne est essentiel au tien. »">
+                                        <input type="hidden" id="customCheck6Auteur" value="">
+                                    </li>
+                            </ul>
+                            <div id="citationsLibraryContainerToggle2" type="" class="btn btn-primary seemore-btn">Créer une citation</div>
+                            <button id="citationsLibraryFormSubmit" type="submit" class="btn btn-primary submit-btn">Enregistrer</button>
+                        </form>
+                        </div>
                     </div>
                     <div id="modalTextFormContainer">
                         <form id="modalTextForm">
@@ -405,7 +452,7 @@
         <div id="createContent1a-1" class="createContent col-12 Content100">
             <span id="content-addedcreateContent1a-1" class="content-added"></span>
             <div id="triggercreateContent1a-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent1a-1Video" class="createContentVideo"></video>
+                <video autoplay-false muted id="createContent1a-1Video" class="createContentVideo"></video>
                 <p class="to-populate fr-view"></p>
                 <p class="to-populate-citation"></p>
                 <p class="to-populate-auteur"></p>
@@ -422,9 +469,15 @@
         <div id="createContent2a-1" class="createContent col-12 Content25">
             <span id="content-addedcreateContent2a-1" class="content-added"></span>
             <div id="triggercreateContent2a-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent2a-1Video" class="createContentVideo">
+              <video autoplay-false muted id="createContent2a-1Video" class="createContentVideo">      </video>
+            <!--div id="lightBox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+                <div class='lightbox-content'>
+                    <video autoplay-false muted id="createContent2a-1Video" class="createContentVideo">      </video>
+                </div>
+            </div-->
+              
 
-                </video>
+           
                 <p class="to-populate"></p>
                     <p class="to-populate-citation"></p>
                 <p class="to-populate-auteur"></p>
@@ -437,7 +490,7 @@
         <div id="createContent2a-2" class="createContent col-12 Content75">
             <span id="content-addedcreateContent2a-2" class="content-added"></span>
             <div id="triggercreateContent2a-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent2a-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent2a-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -457,7 +510,7 @@
         <div id="createContent2b-1" class="createContent col-6 Content100">
             <span id="content-addedcreateContent2b-1" class="content-added"></span>
             <div id="triggercreateContent2b-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent2b-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent2b-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -470,7 +523,7 @@
         <div id="createContent2b-2" class="createContent col-6 Content100 ">
             <span id="content-addedcreateContent2b-2" class="content-added"></span>
             <div id="triggercreateContent2b-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent2b-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent2b-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -489,7 +542,7 @@
         <div id="createContent2c-1" class="createContent col-12 Content50 ">
             <span id="content-addedcreateContent2c-1" class="content-added"></span>
             <div id="triggercreateContent2c-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent2c-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent2c-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -504,7 +557,7 @@
         <div id="createContent2c-2" class="createContent col-12 Content50 ">
             <span id="content-addedcreateContent2c-2" class="content-added"></span>
             <div id="triggercreateContent2c-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent2c-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent2c-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -525,7 +578,7 @@
         <div id="createContent3a-1" class="createContent col-6 Content50">
             <span id="content-addedcreateContent3a-1" class="content-added"></span>
             <div id="triggercreateContent3a-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3a-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3a-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -538,7 +591,7 @@
         <div id="createContent3a-2" class="createContent col-6 Content50">
             <span id="content-addedcreateContent3a-2" class="content-added"></span>
             <div id="triggercreateContent3a-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3a-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3a-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -553,7 +606,7 @@
         <div id="createContent3a-3" class="createContent col-12 Content50">
             <span id="content-addedcreateContent3a-3" class="content-added"></span>
             <div id="triggercreateContent3a-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3a-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3a-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -572,7 +625,7 @@
         <div id="createContent3b-1" class="createContent col-3 Content100">
             <span id="content-addedcreateContent3b-1" class="content-added"></span>
             <div id="triggercreateContent3b-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3b-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3b-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -585,7 +638,7 @@
         <div id="triggercreateContent3b-2" class="createContent col-6 Content100">
             <span id="content-addedcreateContent3b-2" class="content-added"></span>
             <div id="createContent3b-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3b-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3b-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -599,7 +652,7 @@
         <div id="triggercreateContent3b-3" class="createContent col-3 Content100">
             <span id="content-addedcreateContent3b-3" class="content-added"></span>
             <div id="createContent3b-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3b-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3b-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -619,7 +672,7 @@
         <div id="createContent3c-1" class="createContent col-6 Content100">
             <span id="content-addedcreateContent3c-1" class="content-added"></span>
             <div id="triggercreateContent3c-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3c-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3c-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -632,7 +685,7 @@
         <div id="createContent3c-2" class="createContent col-6 Content50">
             <span id="content-addedcreateContent3c-2" class="content-added"></span>
             <div id="triggercreateContent3c-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3c-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3c-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -646,7 +699,7 @@
         <div id="createContent3c-3" class="createContent col-6 Content50 content-right-bottom-absolute">
             <span id="content-addedcreateContent3c-3" class="content-added"></span>
             <div id="triggercreateContent3c-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3c-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3c-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -667,7 +720,7 @@
         <div id="createContent3d-1" class="createContent col-12 Content25">
             <span id="content-addedcreateContent3d-1" class="content-added"></span>
             <div id="triggercreateContent3d-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3d-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3d-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -682,7 +735,7 @@
         <div id="createContent3d-2" class="createContent col-6 Content75">
             <span id="content-addedcreateContent3d-2" class="content-added"></span>
             <div id="triggercreateContent3d-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3d-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3d-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -695,7 +748,7 @@
         <div id="createContent3d-3" class="createContent col-6 Content75">
             <span id="content-addedcreateContent3d-3" class="content-added"></span>
             <div id="triggercreateContent3d-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent3d-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent3d-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -714,7 +767,7 @@
         <div id="createContent4a-1" class="createContent col-8 Content50">
             <span id="content-addedcreateContent4a-1" class="content-added"></span>
             <div id="triggercreateContent4a-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4a-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4a-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -727,7 +780,7 @@
         <div id="createContent4a-2" class="createContent col-4 Content50">
             <span id="content-addedcreateContent4a-2" class="content-added"></span>
             <div id="triggercreateContent4a-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4a-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4a-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -742,7 +795,7 @@
         <div id="createContent4a-3" class="createContent col-4 Content50">
             <span id="content-addedcreateContent4a-3" class="content-added"></span>
             <div id="triggercreateContent4a-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4a-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4a-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -755,7 +808,7 @@
         <div id="createContent4a-4" class="createContent col-8 Content50">
             <span id="content-addedcreateContent4a-4" class="content-added"></span>
             <div id="triggercreateContent4a-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4a-4Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4a-4Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -774,7 +827,7 @@
         <div id="createContent4b-1" class="createContent col-12 Content25">
             <span id="content-addedcreateContent4b-1" class="content-added"></span>
             <div id="triggercreateContent4b-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4b-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4b-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -789,7 +842,7 @@
         <div id="createContent4b-2" class="createContent col-6 Content50">
             <span id="content-addedcreateContent4b-2" class="content-added"></span>
             <div id="triggercreateContent4b-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4b-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4b-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -802,7 +855,7 @@
         <div id="createContent4b-3" class="createContent col-6 Content50">
             <span id="content-addedcreateContent4b-3" class="content-added"></span>
             <div id="triggercreateContent4b-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4b-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4b-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -817,7 +870,7 @@
         <div id="createContent4b-4" class="createContent col-12 Content33">
             <span id="content-addedcreateContent4b-4" class="content-added"></span>
             <div id="triggercreateContent4b-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4b-4Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4b-4Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -836,7 +889,7 @@
         <div id="createContent4c-1" class="createContent col-6 Content50">
             <span id="content-addedcreateContent4c-1" class="content-added"></span>
             <div id="triggercreateContent4c-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4c-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4c-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -849,7 +902,7 @@
         <div id="createContent4c-2" class="createContent col-6 Content50">
             <span id="content-addedcreateContent4c-2" class="content-added"></span>
             <div id="triggercreateContent4c-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4c-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4c-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -864,7 +917,7 @@
         <div id="createContent4c-3" class="createContent col-6 Content50">
             <span id="content-addedcreateContent4c-3" class="content-added"></span>
             <div id="triggercreateContent4c-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4c-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4c-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -877,7 +930,7 @@
         <div id="createContent4c-4" class="createContent col-6 Content50">
             <span id="content-addedcreateContent4c-4" class="content-added"></span>
             <div id="triggercreateContent4c-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4c-4Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4c-4Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -896,7 +949,7 @@
         <div id="createContent4d-1" class="createContent col-4 Content50">
             <span id="content-addedcreateContent4d-1" class="content-added"></span>
             <div id="triggercreateContent4d-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4d-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4d-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -909,7 +962,7 @@
         <div id="createContent4d-2" class="createContent col-4 Content50">
             <span id="content-addedcreateContent4d-2" class="content-added"></span>
             <div id="triggercreateContent4d-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4d-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4d-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -922,7 +975,7 @@
         <div id="createContent4d-3" class="createContent col-4 Content50">
             <span id="content-addedcreateContent4d-3" class="content-added"></span>
             <div id="triggercreateContent4d-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4d-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4d-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -937,7 +990,7 @@
         <div id="createContent4d-4" class="createContent col-12 Content50">
             <span id="content-addedcreateContent4d-4" class="content-added"></span>
             <div id="triggercreateContent4d-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4d-4Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4d-4Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -957,7 +1010,7 @@
             <div id="createContent4e-1" class="createContent col-6 Content100">
                 <span id="content-addedcreateContent4e-1" class="content-added"></span>
                 <div id="triggercreateContent4e-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4e-1Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4e-1Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -974,7 +1027,7 @@
             <div id="createContent4e-2" class="createContent col-6 Content33">
                 <span id="content-addedcreateContent4e-2" class="content-added"></span>
                 <div id="triggercreateContent4e-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4e-2Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4e-2Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -989,7 +1042,7 @@
             <div id="createContent4e-3" class="createContent col-6 Content33">
                 <span id="content-addedcreateContent4e-3" class="content-added"></span>
                 <div id="triggercreateContent4e-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4e-3Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4e-3Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -1004,7 +1057,7 @@
             <div id="createContent4e-4" class="createContent col-6 Content33">
                 <span id="content-addedcreateContent4e-4" class="content-added"></span>
                 <div id="triggercreateContent4e-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4e-4Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4e-4Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -1025,7 +1078,7 @@
             <div id="createContent4f-1" class="createContent col-3 Content100">
                 <span id="content-addedcreateContent4f-1" class="content-added"></span>
                 <div id="triggercreateContent4f-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4f-1Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4f-1Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -1042,7 +1095,7 @@
             <div id="createContent4f-2" class="createContent col-6 Content50">
                 <span id="content-addedcreateContent4f-2" class="content-added"></span>
                 <div id="triggercreateContent4f-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4f-2Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4f-2Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -1057,7 +1110,7 @@
             <div id="createContent4f-3" class="createContent col-6 Content50">
                 <span id="content-addedcreateContent4f-3" class="content-added"></span>
                 <div id="triggercreateContent4f-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4f-3Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4f-3Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -1075,7 +1128,7 @@
             <div id="createContent4f-4" class="createContent col-3 Content100">
                 <span id="content-addedcreateContent4f-4" class="content-added"></span>
                 <div id="triggercreateContent4f-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                    <video controls autoplay-false muted id="createContent4f-4Video" class="createContentVideo">
+                    <video autoplay-false muted id="createContent4f-4Video" class="createContentVideo">
 
                     </video>
                     <p class="to-populate"></p>
@@ -1095,7 +1148,7 @@
         <div id="createContent4g-1" class="createContent col-6 Content25">
             <span id="content-addedcreateContent4g-1" class="content-added"></span>
             <div id="triggercreateContent4g-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4g-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4g-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1108,7 +1161,7 @@
         <div id="createContent4g-2" class="createContent col-6 Content25">
             <span id="content-addedcreateContent4g-2" class="content-added"></span>
             <div id="triggercreateContent4g-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4g-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4g-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1123,7 +1176,7 @@
         <div id="createContent4g-3" class="createContent col-6 Content75">
             <span id="content-addedcreateContent4g-3" class="content-added"></span>
             <div id="triggercreateContent4g-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4g-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4g-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1136,7 +1189,7 @@
         <div id="createContent4g-4" class="createContent col-6 Content75">
             <span id="content-addedcreateContent4g-4" class="content-added"></span>
             <div id="triggercreateContent4g-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4g-4Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4g-4Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1155,7 +1208,7 @@
         <div id="createContent4h-1" class="createContent col-12 Content25">
             <span id="content-addedcreateContent4h-1" class="content-added"></span>
             <div id="triggercreateContent4h-1" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4h-1Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4h-1Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1170,7 +1223,7 @@
         <div id="createContent4h-2" class="createContent col-6 Content75">
             <span id="content-addedcreateContent4h-2" class="content-added"></span>
             <div id="triggercreateContent4h-2" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4h-2Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4h-2Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1183,7 +1236,7 @@
         <div id="createContent4h-3" class="createContent col-6 Content37">
             <span id="content-addedcreateContent4h-3" class="content-added"></span>
             <div id="triggercreateContent4h-3" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4h-3Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4h-3Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1198,7 +1251,7 @@
         <div id="createContent4h-4" class="createContent col-6 Content37 content-right-bottom-absolute">
             <span id="content-addedcreateContent4h-4" class="content-added"></span>
             <div id="triggercreateContent4h-4" class="trigger-modal-block" data-toggle="modal" data-target="#createContentModal">
-                <video controls autoplay-false muted id="createContent4h-4Video" class="createContentVideo">
+                <video autoplay-false muted id="createContent4h-4Video" class="createContentVideo">
 
                 </video>
                 <p class="to-populate"></p>
@@ -1221,7 +1274,7 @@
 <script src="{{ asset('js/createpams.js') }}"></script>
 <!--script src="{{ asset('js/dropzone.js') }}"></script-->
 <script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
-
+<script src="{{ asset('js/bootstrap-lightbox.min.js') }}"></script>
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
