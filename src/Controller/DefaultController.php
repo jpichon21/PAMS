@@ -97,6 +97,28 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/createur_view", name="pams_create_view")
+     */
+    public function createurView(Request $request)
+    {
+        /*********
+         * On contrôle que l'utilisateur est au bon endroit
+         ***************/
+        $pamsCode = $this->session->get('pamscode');
+        //$codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
+        //$route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+        //if ($route !== null) {
+         //   return $this->redirectToRoute($route);
+        //}
+        /*****************/
+
+        return $this->render('default/createur_view.html.twig', [
+
+        ]);
+
+    }
+
+    /**
      * @Route("/create", name="pams_create")
      */
     public function create(Request $request)
