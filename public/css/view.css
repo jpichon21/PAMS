@@ -1,0 +1,16 @@
+
+/************LAYOUT***************/
+
+.disposition-active {
+    margin-top: 24%;
+}
+
+.createContent div {
+    background: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 42px;
+    border: 1px dashed #ffffff8a;
+    height: 100%;
+    border-radius: 25px;
+}

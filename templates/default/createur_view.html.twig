@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/view.css') }}"/
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <!--froala-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -853,24 +853,11 @@
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
-<!--froala-->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
-
-<!-- Include Editor JS files. -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/js/froala_editor.pkgd.min.js"></script>
 
 <script>
-    let pamsJs = '{{ Pamsjson|e('js') }}';
+    var pamsJs = '{{ Pamsjson|e('js') }}'; 
     console.log(pamsJs);
 </script>
-
-<!-- Initialize the editor. -->
-<script> $(function () {
-        $('.froala-textarea').froalaEditor({
-            toolbarButtons: ['fullscreen', 'emoticons', 'bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'outdent', 'indent', 'undo', 'redo']
-        })
-    });   </script>
 
 
 <audio id="sound" controls></audio>
