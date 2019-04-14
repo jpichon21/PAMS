@@ -11,6 +11,7 @@ $( document ).ready(function() {
     var blockText = pamsJson.addedblockText;
     var uploadMusic = pamsJson.uploadedAudio;
     var blockImages = pamsJson.uploadedblockImage;
+    var blockCitations = pamsJson.addedblockCitation;
 
     /*check
     console.log(disposition);
@@ -18,14 +19,21 @@ $( document ).ready(function() {
     console.log(backgroundImage);
     console.log(blockText);
     console.log(uploadedBackgroundImage);
-    console.log(uploadMusic);*/
-    console.log(blockImages);
+    console.log(uploadMusic);
+    console.log(blockImages);*/
 
     /**récupérer le text */
     if ( blockText !== undefined){
         Object.keys(pamsJson.addedblockText);
         var textObj = pamsJson.addedblockText;
         var textKeys = Object.keys(pamsJson.addedblockText);
+    }
+
+    /**récupérer les citations */
+    if ( blockCitations !== undefined){
+        Object.keys(pamsJson.addedblockCitation);
+        var citationObj = pamsJson.addedblockCitation;
+        var citationKeys = Object.keys(pamsJson.addedblockCitation);
     }
 
     /**récupérer les images ajoutées aux blocks */
@@ -44,6 +52,10 @@ $( document ).ready(function() {
 
     if (imageObj !== null){
         addImageContent(imageObj, imageKeys);
+    }
+
+    if (citationObj !== null){
+        addBlockCitation(citationObj, citationKeys);
     }
 
     if ( backgroundImage !== null){
@@ -88,6 +100,16 @@ function addBlockTextContent(textObj, textKeys){
         $('#' + current_block_id).addClass('user-content');
     }
 }
+
+function addBlockCitation(citationObj, citationKeys){
+    for (var citationKeys in citationObj){
+        var user_citation = citationObj[citationKeys];
+        var current_block_id = citationKeys;
+        console.log(current_block_id);
+        console.log(user_citation);
+    }
+}
+
 
 function setUploadedBackgroundImage(uploadedBackgroundImage){
     document.getElementById('createBody').style.backgroundImage = "url(" + uploadedBackgroundImage + ")";
