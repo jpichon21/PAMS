@@ -1,6 +1,7 @@
 /**récuparation des variables */
 $( document ).ready(function() {
 
+    /*var pamsJson =  pamsJs;*/
     console.log(pamsJson);
     var disposition = pamsJson.layout;
     var backgroundColor = pamsJson.backgroundColor;
@@ -8,6 +9,7 @@ $( document ).ready(function() {
     var backgroundImage = pamsJson.backgroundImage;
     var uploadedBackgroundImage = pamsJson.uploadedbackgroundImage;
     var blockText = pamsJson.addedblockText;
+    var uploadedAudio = pamsJson.uploadedAudio;
 
     /*check*/
     console.log(disposition);
@@ -15,6 +17,7 @@ $( document ).ready(function() {
     console.log(backgroundImage);
     console.log(blockText);
     console.log(uploadedBackgroundImage);
+    console.log(uploadedAudio);
 
     /**récupérer le text */
     if ( blockText !== undefined){
@@ -32,6 +35,10 @@ $( document ).ready(function() {
 
     if ( backgroundImage !== null){
         defineBackgroundImage(backgroundImage);
+    }
+
+    if (uploadedBackgroundImage !== undefined){
+        setUploadedBackgroundImage(uploadedBackgroundImage);
     }
 
 });
@@ -69,3 +76,7 @@ function addBlockTextContent(textObj, textKeys){
     }
 }
 
+function setUploadedBackgroundImage(uploadedBackgroundImage){
+    document.getElementById('createBody').style.backgroundImage = "url(" + uploadedBackgroundImage + ")";
+    console.log("ok");
+}
