@@ -7,18 +7,29 @@ $( document ).ready(function() {
     var backgroundColor = pamsJson.backgroundColor;
     var backgroundOpacity = pamsJson.backgroundOpacity
     var backgroundImage = pamsJson.backgroundImage;
-    var uploadedbackgroundImage = pamsJson.uploadedbackgroundImage;
-    var blockText = {};
-    
-    
+    var uploadedBackgroundImage = pamsJson.uploadedbackgroundImage;
+    var blockText = pamsJson.addedblockText;
+
     /*check*/
     console.log(disposition);
     console.log(backgroundColor);
     console.log(backgroundImage);
+    console.log(blockText);
+    console.log(uploadedBackgroundImage);
+
+    /**récupérer le text */
+    if ( blockText !== undefined){
+        Object.keys(pamsJson.addedblockText);
+        var textObj = pamsJson.addedblockText;
+        var textKeys = Object.keys(pamsJson.addedblockText);
+    }
 
     defineDisposition(disposition);
     defineBackgroundColor(backgroundColor, backgroundOpacity);
 
+    if (textObj !== null){
+        addBlockTextContent(textObj, textKeys);
+    }
 
     if ( backgroundImage !== null){
         defineBackgroundImage(backgroundImage);
@@ -47,3 +58,15 @@ function defineBackgroundImage(backgroundImage, backgroundOpacity){
     document.getElementById('createBody').style.backgroundImage = "url(" + file + ")";
     console.log(file);
 }
+
+function addBlockTextContent(textObj, textKeys){
+    for (var textKeys in textObj){
+        var user_text = textObj[textKeys];
+        var current_block_id = textKeys;
+        $('#' + current_block_id).find('.to-populate').html(user_text);
+        $('#trigger' + current_block_id).addClass('filled-block');
+        document.getElementById('trigger' + current_block_id).style.border = "none";
+        $('#' + current_block_id).addClass('user-content');
+    }
+}
+
