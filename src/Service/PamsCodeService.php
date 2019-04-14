@@ -21,6 +21,7 @@ class PamsCodeService
 
     const TAILLEMAXCODE = 8;
     const PATH_TO_DATA_FOLDER = '/public/data';
+    const PATH_TO_PUBLIC_DATA_FOLDER = '/data';
     const TYPE_BLOCK_PHOTO = 'photo';
     const TYPE_BLOCK_TEXTE = 'texte';
     const TYPE_BLOCK_CITATION = 'citation';
@@ -352,12 +353,12 @@ class PamsCodeService
 
             $pamsArray['backgroundColor'] = $chapitre->getBackgroundColor();
             if ($chapitre->getIsCustomImage()) {
-                $pamsArray['uploadedbackgroundImage'] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getBackgroundImage();
+                $pamsArray['uploadedbackgroundImage'] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getBackgroundImage();
             } else {
                 $pamsArray['backgroundImage'] = $chapitre->getBackgroundImage();
             }
             if ($chapitre->getIsCustomMusic()) {
-                $pamsArray['uploadedAudio'] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getMusic();
+                $pamsArray['uploadedAudio'] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/' . $chapitre->getMusic();
             } else {
                 $pamsArray['music'] = $chapitre->getMusic();
             }
@@ -369,7 +370,7 @@ class PamsCodeService
             foreach ($chapitre->getPamsBlocks() as $block) {
                 switch ($block->getTypeBlock()) {
                     case self::TYPE_BLOCK_PHOTO :
-                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
+                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
                         break;
                     case self::TYPE_BLOCK_TEXTE :
                         $pamsArray['addedblockText'][$block->getNomBlock()] = $block->getValeur();
@@ -380,7 +381,7 @@ class PamsCodeService
                         $pamsArray['addedblockCitation'][$block->getNomBlock()]['infos'] = $block->getInfos();
                         break;
                     case self::TYPE_BLOCK_VIDEO :
-                        $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
+                        $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
                         break;
                     default:
                 }
