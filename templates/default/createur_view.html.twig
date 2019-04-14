@@ -20,6 +20,52 @@
 <body>
 <div id="createBody"></div>
 
+<div id="imageGalleryContainer" class="container">
+    <form id="bgImageForm" action="" class="dropzone">
+        <div id="imageUploaderContainer">
+            <h2>Faites Glisser un fichier</h2>
+            <span>ou</span>
+            <label for="imagePicker" id="imagePickerLabel">
+                <input type='file' id='imagePicker' value=""/>
+            </label>
+        </div>
+        <div id="imageGallery">
+            <span id="imageGalleryTitle">Notre sélection</span>
+            <div id="imageGalleryList">
+                <ul class="submenu">
+                    <li id="image1-1" class="image-list-item"><img src="{{ asset('images/image-library/gift1.jpg') }} " width="100px" height="100px"/><input id="image1-1input" type="hidden" value="../images/image-library/gift1.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-2" class="image-list-item"><img src="{{ asset('images/image-library/gift2.jpg') }} " width="100px" height="100px"/><input id="image1-2input" type="hidden" value="../images/image-library/gift2.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-3" class="image-list-item"><img src="{{ asset('images/image-library/gift3.jpg') }} " width="100px" height="100px"/><input id="image1-3input" type="hidden" value="../images/image-library/gift3.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-4" class="image-list-item"><img src="{{ asset('images/image-library/gift4.jpg') }} " width="100px" height="100px"/><input id="image1-4input" type="hidden" value="../images/image-library/gift4.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-5" class="image-list-item"><img src="{{ asset('images/image-library/gift5.jpg') }} " width="100px" height="100px"/><input id="image1-5input" type="hidden" value="../images/image-library/gift5.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-6" class="image-list-item"><img src="{{ asset('images/image-library/gift6.jpg') }} " width="100px" height="100px"/><input id="image1-6input" type="hidden" value="../images/image-library/gift6.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-7" class="image-list-item"><img src="{{ asset('images/image-library/gift7.jpg') }} " width="100px" height="100px"/><input id="image1-7input" type="hidden" value="../images/image-library/gift7.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-8" class="image-list-item"><img src="{{ asset('images/image-library/gift8.jpg') }} " width="100px" height="100px"/><input id="image1-8input" type="hidden" value="../images/image-library/gift8.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-9" class="image-list-item"><img src="{{ asset('images/image-library/gift9.jpg') }} " width="100px" height="100px"/><input id="image1-9input" type="hidden" value="../images/image-library/gift9.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-10" class="image-list-item"><img src="{{ asset('images/image-library/gift10.jpg') }} " width="100px" height="100px"/><input id="image1-10input" type="hidden" value="../images/image-library/gift10.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-11" class="image-list-item"><img src="{{ asset('images/image-library/gift11.jpg') }} " width="100px" height="100px"/><input id="image1-11input" type="hidden" value="../images/image-library/gift11.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                    <li id="image1-12" class="image-list-item"><img src="{{ asset('images/image-library/gift12.jpg') }} " width="100px" height="100px"/><input id="image1-12input" type="hidden" value="../images/image-library/gift12.jpg"/>
+                        <p>Lorem Ipsum Dolor</p><span class="categorie">1</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary submit-btn" id="imageGallerySubmit">Valider</button>
+        </div>
+    </form>
+</div>
+
 <!--//////////////////////////////////////////////////////
 /////////////////////// ALL LAYOUTS //////////////////////
 ////////////////////////////////////////////////////////// -->
