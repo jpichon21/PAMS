@@ -369,7 +369,7 @@ class PamsCodeService
             foreach ($chapitre->getPamsBlocks() as $block) {
                 switch ($block->getTypeBlock()) {
                     case self::TYPE_BLOCK_PHOTO :
-                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = $block->getValeur();
+                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
                         break;
                     case self::TYPE_BLOCK_TEXTE :
                         $pamsArray['addedblockText'][$block->getNomBlock()] = $block->getValeur();
@@ -380,7 +380,7 @@ class PamsCodeService
                         $pamsArray['addedblockCitation'][$block->getNomBlock()]['infos'] = $block->getInfos();
                         break;
                     case self::TYPE_BLOCK_VIDEO :
-                        $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = $block->getValeur();
+                        $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = self::PATH_TO_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
                         break;
                     default:
                 }

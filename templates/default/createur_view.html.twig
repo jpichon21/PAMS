@@ -901,7 +901,7 @@
 
 
 <script>
-    var pamsJs = '{{ Pamsjson|e('js') }}'; 
+    var pamsJs = {{ Pamsjson|raw }};
     console.log(pamsJs);
 </script>
 
