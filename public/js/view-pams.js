@@ -1,7 +1,6 @@
 /**récuparation des variables */
 $( document ).ready(function() {
 
-    var pamsJson = JSON.parse(pamsJs)
     console.log(pamsJson);
     var disposition = pamsJson.layout;
     var backgroundColor = pamsJson.backgroundColor;
