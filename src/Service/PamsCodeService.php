@@ -242,6 +242,8 @@ class PamsCodeService
                     $block->setNomBlock($nomBlock);
                     $this->em->persist($block);
                 } else {
+                    $block->setInfos(null);
+                    $block->setAuteur(null);
                     $fichiersASupprimer[] = $block->getValeur();
                     $blockPresent[] = $nomBlock;
                 }
@@ -264,6 +266,8 @@ class PamsCodeService
                     $block->setNomBlock($nomBlock);
                     $this->em->persist($block);
                 } else {
+                    $block->setInfos(null);
+                    $block->setAuteur(null);
                     $fichiersASupprimer[] = $block->getValeur();
                     $blockPresent[] = $nomBlock;
                 }
@@ -285,6 +289,8 @@ class PamsCodeService
                     $block->setNomBlock($nomBlock);
                     $this->em->persist($block);
                 } else {
+                    $block->setInfos(null);
+                    $block->setAuteur(null);
                     $blockPresent[] = $nomBlock;
                 }
 
@@ -299,7 +305,11 @@ class PamsCodeService
             foreach ($pamsObj->addedblockCitation as $nomBlock => $blockArray) {
                 $blockData=$blockArray->text;
                 $blockAuteur=$blockArray->auteur;
-                $blockInfos=$blockArray->infos;
+                //Dans le cas où c'est une citation pre-saisie il n'y a pas de champs info
+                $blockInfos = null;
+                if (property_exists($blockArray, "infos")) {
+                    $blockInfos = $blockArray->infos;
+                }
 
                 $block = $this->pamsBlockRepository->findOneBy(['chapitre' => $chapitre->getId(), 'nomBlock' => $nomBlock]);
 

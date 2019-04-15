@@ -236,7 +236,11 @@ class DefaultController extends AbstractController
                 throw $this->createAccessDeniedException();
             } else {
                 $pamsJson = $request->request->get('pams');
-                $this->pamsCodeService->createChapitre($pams, $pamsJson);
+                if($pamsJson !== null) {
+                    $this->pamsCodeService->createChapitre($pams, $pamsJson);
+                }else{
+                    throw new \Exception('Something is wrong!',500);
+                }
 
                 return new Response('ok');
             }
