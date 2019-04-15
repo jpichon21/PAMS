@@ -11,6 +11,7 @@ $( document ).ready(function() {
     var blockText = pamsJson.addedblockText;
     var uploadMusic = pamsJson.uploadedAudio;
     var blockImages = pamsJson.uploadedblockImage;
+    var blockVideos = pamsJson.uploadedblockVideos;
     var blockCitations = pamsJson.addedblockCitation;
 
     /*check
@@ -21,6 +22,7 @@ $( document ).ready(function() {
     console.log(uploadedBackgroundImage);
     console.log(uploadMusic);
     console.log(blockImages);*/
+    console.log(blockVideos);
 
     /**récupérer le text */
     if ( blockText !== undefined){
@@ -42,6 +44,8 @@ $( document ).ready(function() {
         var imageObj = pamsJson.uploadedblockImage;
         var imageKeys = Object.keys(pamsJson.uploadedblockImage);
     }
+
+    /**récupérer les vidéos ajoutées aux blocks */
 
     defineDisposition(disposition);
     defineBackgroundColor(backgroundColor, backgroundOpacity);
@@ -118,7 +122,7 @@ function addBlockCitation(citationObj, citationKeys){
         $('#' + current_block_id).addClass('user-content');
     }
 }
-var user_citation_text = citationObj.text[citationKeys];
+
 
 function setUploadedBackgroundImage(uploadedBackgroundImage){
     document.getElementById('createBody').style.backgroundImage = "url(" + uploadedBackgroundImage + ")";
