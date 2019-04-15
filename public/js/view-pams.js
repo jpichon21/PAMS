@@ -118,7 +118,7 @@ function addBlockCitation(citationObj, citationKeys){
     for (var citationKeys in citationObj){
         var user_citation = citationObj[citationKeys];
         var current_block_id = citationKeys;
-        var citation_text = citationObj[citationKeys].text;
+        var citation_text = citationObj[citationKeys].texte;
         var citation_auteur = citationObj[citationKeys].auteur;
         var citation_infos = citationObj[citationKeys].infos;
         console.log(current_block_id);
