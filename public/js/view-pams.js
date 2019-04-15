@@ -46,6 +46,11 @@ $( document ).ready(function() {
     }
 
     /**récupérer les vidéos ajoutées aux blocks */
+    if (blockVideos !== undefined){
+        Object.keys(pamsJson.uploadedblockVideos);
+        var vidObj = pamsJson.uploadedblockVideos;
+        var vidKeys = Object.keys(pamsJson.uploadedblockVideos);
+    }
 
     defineDisposition(disposition);
     defineBackgroundColor(backgroundColor, backgroundOpacity);
@@ -56,6 +61,10 @@ $( document ).ready(function() {
 
     if (imageObj !== null){
         addImageContent(imageObj, imageKeys);
+    }
+
+    if (vidObj !== null){
+        addVideoContent(vidObj, vidKeys);
     }
 
     if (citationObj !== null){
@@ -139,5 +148,15 @@ function addImageContent(imageObj, imageKeys){
         document.getElementById('trigger' + current_block_id).style.backgroundImage = "url(" + user_image + ")";
         document.getElementById('trigger' + current_block_id).style.backgroundSize = "cover";
         document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
+    }
+}
+
+
+function addVideoContent(vidObj, vidKeys){
+    for (var vidKeys in vidObj){
+        var user_video = vidObj[vidKeys];
+        var current_block_id = vidKeys;
+        $('#' + current_block_id).addClass('user-content');
+
     }
 }
