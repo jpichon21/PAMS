@@ -13,6 +13,7 @@ $( document ).ready(function() {
     var blockImages = pamsJson.uploadedblockImage;
     var blockVideos = pamsJson.uploadedblockVideos;
     var blockCitations = pamsJson.addedblockCitation;
+    var chooseAudio = pamsJson.music;
 
     /*check
     console.log(disposition);
@@ -22,7 +23,9 @@ $( document ).ready(function() {
     console.log(uploadedBackgroundImage);
     console.log(blockVideos);
     console.log(blockImages);
-    console.log(uploadMusic);*/
+    console.log(uploadMusic);
+    console.log(chooseAudio);
+     console.log(blockVideos);*/
 
     /**récupérer le text */
     if ( blockText !== undefined){
@@ -54,6 +57,10 @@ $( document ).ready(function() {
 
     defineDisposition(disposition);
     defineBackgroundColor(backgroundColor, backgroundOpacity);
+
+    if (chooseAudio !== null){
+        chooseMusic(chooseAudio);
+    }
 
     if (uploadMusic !== undefined){
         defineUploadedMusic(uploadMusic);
@@ -146,6 +153,12 @@ function defineUploadedMusic(uploadMusic){
 }
 
 
+function chooseMusic(chooseAudio){
+    var audiofile = $('#' + chooseAudio + 'input').val();
+    document.getElementById('sound').src = "/audio/" + audiofile + "";
+}
+
+
 
 function addImageContent(imageObj, imageKeys){
     for (var imageKeys in imageObj){
@@ -164,6 +177,13 @@ function addVideoContent(vidObj, vidKeys){
     for (var vidKeys in vidObj){
         var user_video = vidObj[vidKeys];
         var current_block_id = vidKeys;
+        $('#trigger' + current_block_id).removeClass("removed-content");
         $('#' + current_block_id).addClass('user-content');
+        document.getElementById('trigger' + current_block_id).style.border = "none";
+        document.getElementById('trigger' + current_block_id).style.backgroundImage = "none";
+        document.getElementById('trigger' + current_block_id).style.backgroundSize = "cover";
+        document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
+        document.getElementById(current_block_id + 'Video').setAttribute('src', user_video);
+        document.getElementById(current_block_id + 'Video').style.display = "block";
     }
 }
