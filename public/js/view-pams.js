@@ -105,11 +105,20 @@ function addBlockCitation(citationObj, citationKeys){
     for (var citationKeys in citationObj){
         var user_citation = citationObj[citationKeys];
         var current_block_id = citationKeys;
+        var citation_text = citationObj[citationKeys].text;
+        var citation_auteur = citationObj[citationKeys].auteur;
+        var citation_infos = citationObj[citationKeys].infos;
         console.log(current_block_id);
         console.log(user_citation);
+        $('#' + current_block_id).find('.to-populate-citation').text("« "+citation_text+" »");
+        $('#' + current_block_id).find('.to-populate-auteur').text(citation_auteur);
+        $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
+        $('#trigger' + current_block_id).addClass('filled-block');
+        document.getElementById('trigger' + current_block_id).style.border = "none";
+        $('#' + current_block_id).addClass('user-content');
     }
 }
-
+var user_citation_text = citationObj.text[citationKeys];
 
 function setUploadedBackgroundImage(uploadedBackgroundImage){
     document.getElementById('createBody').style.backgroundImage = "url(" + uploadedBackgroundImage + ")";
