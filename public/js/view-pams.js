@@ -20,9 +20,9 @@ $( document ).ready(function() {
     console.log(backgroundImage);
     console.log(blockText);
     console.log(uploadedBackgroundImage);
-    console.log(uploadMusic);
-    console.log(blockImages);*/
     console.log(blockVideos);
+    console.log(blockImages);
+    console.log(uploadMusic);*/
 
     /**récupérer le text */
     if ( blockText !== undefined){
@@ -54,6 +54,10 @@ $( document ).ready(function() {
 
     defineDisposition(disposition);
     defineBackgroundColor(backgroundColor, backgroundOpacity);
+
+    if (uploadMusic !== undefined){
+        defineUploadedMusic(uploadMusic);
+    }
 
     if (textObj !== null){
         addBlockTextContent(textObj, textKeys);
@@ -116,13 +120,11 @@ function addBlockTextContent(textObj, textKeys){
 
 function addBlockCitation(citationObj, citationKeys){
     for (var citationKeys in citationObj){
-        var user_citation = citationObj[citationKeys];
+        /*var user_citation = citationObj[citationKeys];*/
         var current_block_id = citationKeys;
         var citation_text = citationObj[citationKeys].texte;
         var citation_auteur = citationObj[citationKeys].auteur;
         var citation_infos = citationObj[citationKeys].infos;
-        console.log(current_block_id);
-        console.log(user_citation);
         $('#' + current_block_id).find('.to-populate-citation').text("« "+citation_text+" »");
         $('#' + current_block_id).find('.to-populate-auteur').text(citation_auteur);
         $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
@@ -135,8 +137,14 @@ function addBlockCitation(citationObj, citationKeys){
 
 function setUploadedBackgroundImage(uploadedBackgroundImage){
     document.getElementById('createBody').style.backgroundImage = "url(" + uploadedBackgroundImage + ")";
-    console.log("ok");
 }
+
+
+function defineUploadedMusic(uploadMusic){
+    var audiofile = uploadMusic;
+    document.getElementById('sound').src = "" + audiofile + "";
+}
+
 
 
 function addImageContent(imageObj, imageKeys){
@@ -157,6 +165,5 @@ function addVideoContent(vidObj, vidKeys){
         var user_video = vidObj[vidKeys];
         var current_block_id = vidKeys;
         $('#' + current_block_id).addClass('user-content');
-
     }
 }
