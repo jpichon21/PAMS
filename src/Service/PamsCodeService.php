@@ -26,6 +26,7 @@ class PamsCodeService
     const TYPE_BLOCK_TEXTE = 'texte';
     const TYPE_BLOCK_CITATION = 'citation';
     const TYPE_BLOCK_VIDEO = 'video';
+    const TAILLE_MAX = 10000000;
 
     private $em;
 

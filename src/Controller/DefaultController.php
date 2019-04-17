@@ -224,25 +224,28 @@ class DefaultController extends AbstractController
     public function postPams(Request $request)
     {
         if ($request->isXMLHttpRequest()) {
+            if($request->server->get('CONTENT_LENGTH')<PamsCodeService::TAILLE_MAX) {
+                $pamsCode = $this->session->get('pamscode');
+                $retour = $this->pamsCodeService->getCodeValid($pamsCode);
+                $codeRetour = $retour[0];
+                /* @var $pams PamsCode */
+                $pams = $retour[1];
+                $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
 
-            $pamsCode = $this->session->get('pamscode');
-            $retour = $this->pamsCodeService->getCodeValid($pamsCode);
-            $codeRetour = $retour[0];
-            /* @var $pams PamsCode */
-            $pams = $retour[1];
-            $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+                if ($route !== null || $pams === null) {
+                    throw $this->createAccessDeniedException();
+                } else {
+                    $pamsJson = $request->request->get('pams');
+                    if ($pamsJson !== null) {
+                        $this->pamsCodeService->createChapitre($pams, $pamsJson);
+                    } else {
+                        return new Response('Pas de données', 500);
+                    }
 
-            if ($route !== null || $pams === null) {
-                throw $this->createAccessDeniedException();
-            } else {
-                $pamsJson = $request->request->get('pams');
-                if($pamsJson !== null) {
-                    $this->pamsCodeService->createChapitre($pams, $pamsJson);
-                }else{
-                    throw new \Exception('Something is wrong!',500);
+                    return new Response('ok');
                 }
-
-                return new Response('ok');
+            }else{
+                return new Response('Données trop importantes', 500);
             }
         }
 
