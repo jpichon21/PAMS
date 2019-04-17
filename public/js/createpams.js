@@ -469,10 +469,10 @@ function readVideoBlockurl() {
         document.getElementById('content-added' + current_block_id).style.display = "inline-block";
         document.getElementById(current_block_id + 'Video').setAttribute('src', reader.result);
         document.getElementById(current_block_id + 'Video').style.display = "block";
+        document.getElementById(current_block_id + 'VideoModal').setAttribute('src', reader.result);
+        document.getElementById(current_block_id + 'VideoModal').style.display = "block";
+        document.getElementById('trigger' + current_block_id).setAttribute('data-target', '');
         blockVideos[current_block_id] = reader.result;
-        /*$(document).on('click', '.videoTrigger', function () {
-            $('#demoLightbox').lightbox()
-        });*/
     }
     if (file) {
         reader.readAsDataURL(file);
@@ -605,11 +605,13 @@ function removeContent() {
     document.getElementById('trigger' + current_block_id).style.border = "";
     document.getElementById('content-added' + current_block_id).style.display = "none";
     document.getElementById(current_block_id + 'Video').setAttribute('src', '');
+    document.getElementById(current_block_id + 'VideoModal').setAttribute('src', '');
     document.getElementById(current_block_id + 'Video').style.display = "none";
     $('#' + current_block_id).find('.to-populate').html('');
     $('#' + current_block_id).find('.to-populate-citation').text('');
     $('#' + current_block_id).find('.to-populate-infos').text('');
     $('#' + current_block_id).find('.to-populate-auteur').text('');
+    document.getElementById('trigger' + current_block_id).setAttribute('data-target', '#createContentModal');
     resetBlockContent();
     resetBlockVariables();
 }

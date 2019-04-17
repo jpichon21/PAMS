@@ -1009,3 +1009,25 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 #citationsSelectionContainer li{
   margin: 10px 0px;
 }
+
+/** popup video **/
+
+.video-modal .modal-content{
+  background-color: transparent;
+    border-radius: 0px;
+    border: none;
+}
+
+.video-modal button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  text-align: right;
+  color: white !important;
+}
+
+.video-modal .modal-dialog-centered{
+  max-width: 920px !important;
+  width: 920px !important;
+}

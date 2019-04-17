@@ -185,5 +185,10 @@ function addVideoContent(vidObj, vidKeys){
         document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
         document.getElementById(current_block_id + 'Video').setAttribute('src', user_video);
         document.getElementById(current_block_id + 'Video').style.display = "block";
+        document.getElementById(current_block_id + 'VideoModal').setAttribute('src', user_video);
+        document.getElementById(current_block_id + 'VideoModal').style.display = "block";
+        document.getElementById('trigger' + current_block_id).setAttribute('data-target', '');
     }
 }
+
+    
