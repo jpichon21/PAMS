@@ -201,6 +201,7 @@ ul{
    background-color: #FFF;
    min-height: 920px;
    height: 100%;
+   overflow: auto;
  }
 
  /*
