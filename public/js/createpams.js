@@ -186,10 +186,6 @@ $('#sendDataSubmit').on('click', function (e) {
     sendData();
 });
 
-$('#sendDataView').on('click', function (e) {
-    sendData();
-});
-
 
 function resetImageId() {
     current_image_id = null;
