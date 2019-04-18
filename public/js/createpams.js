@@ -292,6 +292,13 @@ $('#musiqueSelectForm').submit(function (e) {
     return false;
 });
 
+$('#publicationPopupEmailForm').submit(function (e) {
+    e.preventDefault();
+});
+
+
+
+
 /********************* ajout de texte ****************************/
 
 $(document).on('submit', '#modalTextForm', function (e) {
@@ -493,6 +500,7 @@ function resetAllPopups() {
     document.getElementById("dispositionContainer").style.display = "none";
     document.getElementById("colorPickerContainer").style.display = "none";
     document.getElementById("modalTextFormContainer").style.display = "none";
+    document.getElementById("publicationPopup").style.display = "none";
 }
 
 function backgroundPopupToggle() {
@@ -596,6 +604,10 @@ function citationsLibraryToggle() {
     }
 }
 
+function publicationPopupContainerShow(){
+    document.getElementById("publicationPopup").style.display = "block";
+}
+
 function closeContentModalOptions(){
     document.getElementById("citationsContainer").style.display = "none";
     document.getElementById("citationsLibraryContainer").style.display = "none";
@@ -671,10 +683,7 @@ function toggleDisposition(disposition) {
 
 
 function sendData() {
-    /*trouver les blocs avec du contenu
-    send_blocks_id = $('.user-content').map(function () {
-        return $(this).attr('id');
-    });*/
+    publicationPopupContainerShow();
     var obj = {
         'chapitre': 1,
         'backgroundOpacity': send_opacity_value/100,
