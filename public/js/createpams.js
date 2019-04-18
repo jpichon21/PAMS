@@ -37,6 +37,7 @@ slider.oninput = function () {
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
+   
 });
 
 
@@ -67,6 +68,7 @@ $(document).on('click', '#audioToggle', function () {
 
 $(document).on('click', '#modalTextFormToggle', function () {
     modalTextFormContainerToggle();
+    closeCitationsContainer();
     return false;
 });
 
@@ -84,6 +86,7 @@ $(document).on('click', '#faqToggle', function () {
 
 $(document).on('click', '#citationsToggle', function () {
     citationsContainerToggle();
+    closeTextFormModal();
     return false;
 });
 
@@ -290,6 +293,13 @@ $('#musiqueSelectForm').submit(function (e) {
     return false;
 });
 
+$('#publicationPopupEmailForm').submit(function (e) {
+    e.preventDefault();
+});
+
+
+
+
 /********************* ajout de texte ****************************/
 
 $(document).on('submit', '#modalTextForm', function (e) {
@@ -391,6 +401,7 @@ function closeBsModal() {
     $('#createContentModal').modal('hide');
     resetCurrentBlockValue();
     resetTextArea();
+    closeContentModalOptions();
 }
 
 function resetTextArea() {
@@ -445,12 +456,14 @@ function readBlockURL() {
         document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
         document.getElementById('content-added' + current_block_id).style.display = "inline-block";
         blockImages[current_block_id] = reader.result;
+        console.log(reader.result);
     }
     if (file) {
         reader.readAsDataURL(file);
     } else {
         return false;
     }
+
 }
 
 /* ajout vidéo à block */
@@ -481,9 +494,7 @@ function readVideoBlockurl() {
     }
 }
 
-
 /**Gestion des popups*/
-
 function resetAllPopups() {
     document.getElementById("imageGalleryContainer").style.display = "none";
     document.getElementById("FAQContainer").style.display = "none";
@@ -492,6 +503,7 @@ function resetAllPopups() {
     document.getElementById("dispositionContainer").style.display = "none";
     document.getElementById("colorPickerContainer").style.display = "none";
     document.getElementById("modalTextFormContainer").style.display = "none";
+    document.getElementById("publicationPopup").style.display = "none";
 }
 
 function backgroundPopupToggle() {
@@ -595,6 +607,25 @@ function citationsLibraryToggle() {
     }
 }
 
+function publicationPopupContainerShow(){
+    document.getElementById("publicationPopup").style.display = "block";
+}
+
+function closeContentModalOptions(){
+    document.getElementById("citationsContainer").style.display = "none";
+    document.getElementById("citationsLibraryContainer").style.display = "none";
+    document.getElementById("modalTextFormContainer").style.display = "none";
+}
+
+function closeCitationsContainer(){
+    document.getElementById("citationsAllContainer").style.display = "none";
+}
+
+function closeTextFormModal(){
+    document.getElementById("modalTextFormContainer").style.display = "none";
+}
+
+
 
 /*suppression contenu block*/
 function removeContent() {
@@ -655,10 +686,7 @@ function toggleDisposition(disposition) {
 
 
 function sendData() {
-    /*trouver les blocs avec du contenu
-    send_blocks_id = $('.user-content').map(function () {
-        return $(this).attr('id');
-    });*/
+    publicationPopupContainerShow();
     var obj = {
         'chapitre': 1,
         'backgroundOpacity': send_opacity_value/100,

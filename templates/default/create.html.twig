@@ -10,13 +10,24 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-lightbox.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    <!--froala-->
+
+    <!--froala
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
-    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css"/>-->
+
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js?yk5tfcnfy2w2giibj5ecfd781lyz2w0bec63hvn17mppalhm"></script>
+    <script>tinymce.init({
+        selector: '#toFill', 
+        plugins: "emoticons",
+        toolbar: 'fontselect fontsizeselect bold italic underline strikethrough | forecolor backcolor | emoticons | undo redo',
+        menubar: ' '
+        });
+    </script>
+
+
 </head>
 <body>
 <div id="createBody"></div>
@@ -245,48 +256,23 @@
     </div>
 </div>
 
-<!--Modal FAQ-->
-<div id="FAQContainer" class="container">
-    <h2>FAQ</h2>
-    <div id="FAQQuestionsContainer">
-        <ul>
-            <li data-toggle="modal" data-target="#question1Modal">Comment modifier l'image d'arrière plan ?</li>
-            <li data-toggle="modal" data-target="#question2Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question3Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question4Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question5Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question6Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question7Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question8Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question9Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-            <li data-toggle="modal" data-target="#question10Modal">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</li>
-        </ul>
-        <div>
-        </div>
+{% include 'faq-library.html.twig' %}
 
-
-        <!--Popups FAQ-->
-        <div class="modal fade" id="question1Modal" tabindex="0" role="dialog" aria-labelledby="question1Modal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Comment modifier l'image d'arrière plan ?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Suspendisse ullamcorper auctor feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta augue eu porta congue. Aliquam malesuada quam vitae tincidunt maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis risus lacus, aliquam ac urna sit amet, ultricies fermentum magna. Integer rhoncus quis tortor hendrerit bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta nunc quam, eu gravida
-                        lectus sollicitudin elementum. Aliquam ex metus, euismod nec volutpat vitae, ornare a lorem. Integer vitae ex quis elit sodales sagittis. Curabitur pretium nisi sollicitudin odio condimentum, a commodo turpis semper. Suspendisse a elit eget sem vestibulum tincidunt a eget dolor.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
-            </div>
+<!-- Popup publication-->
+<div id="publicationPopup" class="container">
+    <form id="publicationPopupEmailForm">
+        <div class="row">
+        <h1>Félicitations !</h1>
+        <h2>Votre histoire a bien été publiée</h2>
+        <p>Souhaitez-vous recevoir une notification lorsque votre histoire sera lue par le destinataire? <br> Si oui, inscrivez votre email-ci-dessous</p>
+                        <div id="publicationInputContainer">
+                            <input type='emaik' id="publicationInput" value="" placeholder= "Votre adresse email"/>
+                            <button type="submit"><img src="{{ asset('images/envoi.png') }}"></button>
+                        </div>
         </div>
-    </div>
+    </form>
 </div>
+
 
 {% include 'layouts.html.twig' %}
 
@@ -297,23 +283,22 @@
 <script src="{{ asset('js/createpams.js') }}"></script>
 <!--script src="{{ asset('js/dropzone.js') }}"></script-->
 <script src="{{ asset('js/bootstrap-new.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap-lightbox.min.js') }}"></script>
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
-<!--froala-->
+<!--froala
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 
-<!-- Include Editor JS files. -->
+<!-- Include Editor JS files.
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/js/froala_editor.pkgd.min.js"></script>
 
-<!-- Initialize the editor. -->
+<!-- Initialize the editor
 <script> $(function () {
         $('.froala-textarea').froalaEditor({
-            toolbarButtons: ['fullscreen', 'emoticons', 'bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'outdent', 'indent', 'undo', 'redo']
+            toolbarButtons: [ 'emoticons', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'fullscreen']
         })
-    });   </script>
+    });   </script>-->
 
 
 <audio id="sound" controls></audio>
