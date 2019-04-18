@@ -67,6 +67,7 @@ $(document).on('click', '#audioToggle', function () {
 
 $(document).on('click', '#modalTextFormToggle', function () {
     modalTextFormContainerToggle();
+    closeCitationsContainer();
     return false;
 });
 
@@ -84,6 +85,7 @@ $(document).on('click', '#faqToggle', function () {
 
 $(document).on('click', '#citationsToggle', function () {
     citationsContainerToggle();
+    closeTextFormModal();
     return false;
 });
 
@@ -391,6 +393,7 @@ function closeBsModal() {
     $('#createContentModal').modal('hide');
     resetCurrentBlockValue();
     resetTextArea();
+    closeContentModalOptions();
 }
 
 function resetTextArea() {
@@ -481,9 +484,7 @@ function readVideoBlockurl() {
     }
 }
 
-
 /**Gestion des popups*/
-
 function resetAllPopups() {
     document.getElementById("imageGalleryContainer").style.display = "none";
     document.getElementById("FAQContainer").style.display = "none";
@@ -594,6 +595,21 @@ function citationsLibraryToggle() {
         ly.style.display = "none";
     }
 }
+
+function closeContentModalOptions(){
+    document.getElementById("citationsContainer").style.display = "none";
+    document.getElementById("citationsLibraryContainer").style.display = "none";
+    document.getElementById("modalTextFormContainer").style.display = "none";
+}
+
+function closeCitationsContainer(){
+    document.getElementById("citationsAllContainer").style.display = "none";
+}
+
+function closeTextFormModal(){
+    document.getElementById("modalTextFormContainer").style.display = "none";
+}
+
 
 
 /*suppression contenu block*/

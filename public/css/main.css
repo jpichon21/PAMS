@@ -334,6 +334,11 @@ ul{
 .button-container{
   text-align: center;
 }
+
+button:focus{
+  outline:none!important;
+}
+
 .submit-btn, .submit-btn:focus, .submit-btn:hover, .submit-btn:active{
   background-color: #5cb85c;
   border-color: #5cb85c;
@@ -964,6 +969,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   width: 116px;
   border-radius: 12px;
   outline: none;
+  box-shadow: none;
 }
 
 /*citations container*/
