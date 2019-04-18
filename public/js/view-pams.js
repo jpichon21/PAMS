@@ -60,10 +60,12 @@ $( document ).ready(function() {
 
     if (chooseAudio !== null){
         chooseMusic(chooseAudio);
+        displayAudioElement();
     }
 
     if (uploadMusic !== undefined){
         defineUploadedMusic(uploadMusic);
+        displayAudioElement();
     }
 
     if (textObj !== null){
@@ -158,7 +160,9 @@ function chooseMusic(chooseAudio){
     document.getElementById('sound').src = "/audio/" + audiofile + "";
 }
 
-
+function displayAudioElement(){
+    document.getElementById('sound').style.display = "block";
+}
 
 function addImageContent(imageObj, imageKeys){
     for (var imageKeys in imageObj){

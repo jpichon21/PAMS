@@ -1,6 +1,10 @@
 
 /************LAYOUT***************/
 
+#sound{
+    display: none;
+}
+
 .disposition-active {
     margin-top: 24%;
 }
