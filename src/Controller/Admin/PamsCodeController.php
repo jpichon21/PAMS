@@ -18,9 +18,7 @@ class PamsCodeController extends AbstractController
      */
     public function index(PamsCodeRepository $pamsCodeRepository): Response
     {
-        return $this->render('admin/pams_code/index.html.twig', [
-            'pams_codes' => $pamsCodeRepository->findAll(),
-        ]);
+        return $this->render('admin/pams_code/index.html.twig', []);
     }
 
     /**
