@@ -69,6 +69,19 @@ class PamsCodeService
 
     }
 
+    public function checkCodeExist($code){
+        $pamsCode = $this->pamsCodeRepository->findByCreateurCode($code);
+        if(count($pamsCode)>0){
+            return true;
+        }
+        $pamsCode = $this->pamsCodeRepository->findByDestinataireCode($code);
+        if(count($pamsCode)>0){
+            return true;
+        }
+
+        return false;
+    }
+
     // 1 : Createur
     // 2 : Destinataire
     // 3 : premiere connexion createur
@@ -100,7 +113,7 @@ class PamsCodeService
     // 1 : Createur
     // 2 : Destinataire
     // 3 : premiere connexion createur
-    // 0 : Introuvable
+    // 99 : Introuvable
     // Si -1 on ne s'occupe du code retour envoyé
     public function checkCodeRoute($codeRetourEnvoye, $codeRetourAttendu)
     {
