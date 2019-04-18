@@ -24,8 +24,6 @@
 {% include 'music-library.html.twig' %}
 {% include 'layouts.html.twig' %}
 
-
-
 <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -34,11 +32,9 @@
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
-
 <script>
     var pamsJson = {{ Pamsjson|raw }};
 </script>
-
 
 <audio id="sound" controls></audio>
 </body>

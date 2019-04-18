@@ -1,0 +1,7 @@
+.createContent{
+    visibility: hidden;
+}
+
+.createContentShow{
+    visibility: visible!important;
+}

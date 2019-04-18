@@ -454,7 +454,7 @@ ul{
 .createContent{
   padding: 30px;
   text-align: center;
-
+  transition: all 1s ease-out;
 }
 
 
@@ -1030,4 +1030,15 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .video-modal .modal-dialog-centered{
   max-width: 920px !important;
   width: 920px !important;
+}
+
+.slideUp{
+  transform: translate(0,-100%);
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+.slideHide{
+  visibility: hidden;
+  z-index: -10;
 }
