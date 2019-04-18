@@ -90,9 +90,6 @@ class DefaultController extends AbstractController
         }
         /*****************/
 
-        //Si il y a une notif de lecture on envoie un mail
-        $this->pamsCodeService->notifLecture($codeRetour[1]);
-
         return $this->render('default/view.html.twig', [
 
         ]);
@@ -148,28 +145,6 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/update", name="pams_update")
-     */
-    public function update(Request $request)
-    {
-        /*********
-         * On contrôle que l'utilisateur est au bon endroit
-         ***************/
-        $pamsCode = $this->session->get('pamscode');
-        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
-        $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
-        if ($route !== null) {
-            return $this->redirectToRoute($route);
-        }
-        /*****************/
-
-        return $this->render('default/update.html.twig', [
-
-        ]);
-
-    }
-
-    /**
      * @Route("/init", name="pams_init")
      */
     public function init(Request $request)
@@ -209,30 +184,6 @@ class DefaultController extends AbstractController
             'form' => $form->createView()
         ]);
 
-    }
-
-    /**
-     * @Route("/getnotif", name="get_notif", options={"expose"=true})
-     * @param Request $request
-     */
-    public function getNotif(Request $request){
-        if ($request->isXMLHttpRequest()) {
-            $email = $request->request->get('publicationInput');
-
-            if($email!=='') {
-
-                $pamsCode = $this->session->get('pamscode');
-                $retour = $this->pamsCodeService->getCodeValid($pamsCode);
-                /* @var $pams PamsCode */
-                $pams = $retour[1];
-
-                $pams->setMailAuteur($email);
-                $pams->setNotifLecture(true);
-
-                $this->em->flush();
-            }
-
-        }
     }
 
     /**

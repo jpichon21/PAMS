@@ -10,9 +10,6 @@ use App\Repository\PamsChapitreRepository;
 use App\Repository\PamsCodeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
-use Swift_Mailer;
-use Swift_Message;
-use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -43,19 +40,13 @@ class PamsCodeService
 
     private $container;
 
-    private $mailer;
-
-    private $engine;
-
     public function __construct(
         ObjectManager $em,
         PamsCodeRepository $pamsCodeRepository,
         PamsChapitreRepository $pamsChapitreRepository,
         PamsBlockRepository $pamsBlockRepository,
         FlashBagInterface $flashBag,
-        ContainerInterface $container,
-        Swift_Mailer $mailer,
-        EngineInterface $engine
+        ContainerInterface $container
     )
     {
         $this->em = $em;
@@ -64,8 +55,6 @@ class PamsCodeService
         $this->pamsChapitreRepository = $pamsChapitreRepository;
         $this->pamsBlockRepository = $pamsBlockRepository;
         $this->container = $container;
-        $this->mailer = $mailer;
-        $this->engine = $engine;
 
     }
 
@@ -425,24 +414,6 @@ class PamsCodeService
 
 
         return $pamsArray;
-    }
-
-    public function notifLecture(PamsCode $pams){
-        if($pams->getNotifLecture()){
-            $message = (new Swift_Message('Pams : Notification de lecture'))
-                ->setFrom('info@pams.com')
-                ->setTo($pams->getMailAuteur())
-                ->setBody(
-                    $this->engine->render(
-                        'emails/notifLecture.html.twig',
-                        ['name' => 'eee']
-                    ),
-                    'text/html'
-                )
-            ;
-
-            $this->mailer->send($message);
-        }
     }
 
     public function decode_image($pamsId, $base64)
