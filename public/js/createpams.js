@@ -37,6 +37,7 @@ slider.oninput = function () {
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
+   
 });
 
 
@@ -455,12 +456,14 @@ function readBlockURL() {
         document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
         document.getElementById('content-added' + current_block_id).style.display = "inline-block";
         blockImages[current_block_id] = reader.result;
+        console.log(reader.result);
     }
     if (file) {
         reader.readAsDataURL(file);
     } else {
         return false;
     }
+
 }
 
 /* ajout vidéo à block */

@@ -1101,3 +1101,5 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   visibility: hidden;
   z-index: -10;
 }
+
+.fr-quick-insert { display: none; }
