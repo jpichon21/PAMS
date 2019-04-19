@@ -134,10 +134,15 @@ class DefaultController extends AbstractController
          * On contrôle que l'utilisateur est au bon endroit
          ***************/
         $pamsCode = $this->session->get('pamscode');
-        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
-        $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
+        $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 1);
+        $pams = $codeRetour[1];
         if ($route !== null) {
             return $this->redirectToRoute($route);
+        }
+        //Si il y a dejà un pams on redirige vers l'update
+        if($pams!==null){
+            return $this->redirectToRoute('pams_update');
         }
         /*****************/
 
