@@ -430,13 +430,12 @@ class PamsCodeService
     public function notifLecture(PamsCode $pams){
         if($pams->getNotifLecture() && $pams->getDateNotifEnvoi() === null ){
             $pams->setDateNotifEnvoi(new DateTime());
-            $message = (new Swift_Message('Pams : Notification de lecture'))
-                ->setFrom('info@pams.com')
+            $message = (new Swift_Message('Votre pam\' vient d\'être lu !'))
+                ->setFrom('info@my-pams.com')
                 ->setTo($pams->getMailAuteur())
                 ->setBody(
                     $this->engine->render(
-                        'emails/notifLecture.html.twig',
-                        ['name' => 'eee']
+                        'emails/notifLecture.html.twig'
                     ),
                     'text/html'
                 )
@@ -444,7 +443,7 @@ class PamsCodeService
 
             $this->mailer->send($message);
 
-            //$this->em->flush();
+            $this->em->flush();
         }
     }
 
