@@ -156,16 +156,17 @@ class DefaultController extends AbstractController
          * On contrôle que l'utilisateur est au bon endroit
          ***************/
         $pamsCode = $this->session->get('pamscode');
-        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
-        $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
-        if ($route !== null) {
+        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
+        $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 1);
+        $pams = $codeRetour[1];
+        if ($route !== null || $pams === null) {
             return $this->redirectToRoute($route);
+        }else{
+            $pamsArray = $this->pamsCodeService->getChapitre($pams, 1);
         }
         /*****************/
 
-        return $this->render('default/update.html.twig', [
-
-        ]);
+        return $this->render('default/update.html.twig', ['Pamsjson' => json_encode($pamsArray)]);
 
     }
 
