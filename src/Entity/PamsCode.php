@@ -94,6 +94,11 @@ class PamsCode
      */
     private $dateNotifEnvoi;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreation;
+
     public function __construct()
     {
         $this->pamsChapitres = new ArrayCollection();
@@ -289,6 +294,18 @@ class PamsCode
     public function setDateNotifEnvoi(?\DateTimeInterface $dateNotifEnvoi): self
     {
         $this->dateNotifEnvoi = $dateNotifEnvoi;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(?\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
