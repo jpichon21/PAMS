@@ -1103,3 +1103,8 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 
 .fr-quick-insert { display: none; }
+
+
+.tox .tox-notification--in {
+  display: none!important;
+}
