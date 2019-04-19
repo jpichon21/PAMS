@@ -141,9 +141,9 @@ class DefaultController extends AbstractController
             return $this->redirectToRoute($route);
         }
         //Si il y a dejà un pams on redirige vers l'update
-        if($pams!==null){
-            return $this->redirectToRoute('pams_update');
-        }
+        //if($pams!==null){
+        //    return $this->redirectToRoute('pams_update');
+        //}
         /*****************/
 
         return $this->render('default/create.html.twig', [
