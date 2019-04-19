@@ -85,17 +85,20 @@ class DefaultController extends AbstractController
         $pamsCode = $this->session->get('pamscode');
         $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
         $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 2);
+        $pams = $codeRetour[1];
+        $pamsArray = [];
         if ($route !== null) {
             return $this->redirectToRoute($route);
         }
         /*****************/
 
-        //Si il y a une notif de lecture on envoie un mail
-        $this->pamsCodeService->notifLecture($codeRetour[1]);
+        if($pams!==null) {
+            //Si il y a une notif de lecture on envoie un mail
+            $this->pamsCodeService->notifLecture($pams);
+            $pamsArray = $this->pamsCodeService->getChapitre($pams, 1);
+        }
 
-        return $this->render('default/view.html.twig', [
-
-        ]);
+        return $this->render('default/view.html.twig', ['Pamsjson' => json_encode($pamsArray)]);
 
     }
 
@@ -104,9 +107,6 @@ class DefaultController extends AbstractController
      */
     public function createurView(Request $request)
     {
-        /*********
-         * On contrôle que l'utilisateur est au bon endroit
-         ***************/
 
         $pamsCode = $this->session->get('pamscode');
         $retour = $this->pamsCodeService->getCodeValid($pamsCode);
@@ -134,8 +134,8 @@ class DefaultController extends AbstractController
          * On contrôle que l'utilisateur est au bon endroit
          ***************/
         $pamsCode = $this->session->get('pamscode');
-        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
-        $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
+        $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 1);
         if ($route !== null) {
             return $this->redirectToRoute($route);
         }
@@ -156,16 +156,17 @@ class DefaultController extends AbstractController
          * On contrôle que l'utilisateur est au bon endroit
          ***************/
         $pamsCode = $this->session->get('pamscode');
-        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
-        $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
-        if ($route !== null) {
+        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
+        $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 4);
+        $pams = $codeRetour[1];
+        if ($route !== null || $pams === null) {
             return $this->redirectToRoute($route);
+        }else{
+            $pamsArray = $this->pamsCodeService->getChapitre($pams, 1);
         }
         /*****************/
 
-        return $this->render('default/update.html.twig', [
-
-        ]);
+        return $this->render('default/update.html.twig', ['Pamsjson' => json_encode($pamsArray)]);
 
     }
 

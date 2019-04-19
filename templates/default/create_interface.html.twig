@@ -1,0 +1,224 @@
+<div id="createBody"></div>
+<div id="bodyBackdrop"></div>
+
+<!-- Top Menu -->
+<nav id="createNav" class="container-fluid">
+    <div id="navLeft">
+        <ul>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier l'arrière plan" id="backgroundToggle"><img src="{{ asset('images/arriere-plan.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Modifier la disposition" id="dispositionToggle"><img src="{{ asset('images/disposition.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Ajouter une musique" id="audioToggle"><img src="{{ asset('images/musique.png') }}"/></li>
+        </ul>
+    </div>
+    <div id="navRight">
+        <ul>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Foire aux Questions" id="faqToggle"><img src="{{ asset('images/faq.png') }}"/></li>
+            <li class="grey-tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualiser le Pam's"><a href="createur_view"><img src="{{ asset('images/visualiser.png') }}"/></a></li>
+        </ul>
+        <a href="update"><button type="submit" class="btn btn-primary" id="sendDataSubmit">Publier</button></a>
+    </div>
+</nav>
+
+<!--Modal choix de l'arrière plan -->
+<div id="backgroundContainer" class="container">
+    <form>
+        <div class="row">
+            <ul>
+                <li>
+                    <label for="colorPicker" id="colorPickerLabel">
+                        <img src="{{ asset('images/couleur-fond.png') }}" class="img-responsive" width="52px"/>
+                        <h2>Couleur de fond</h2>
+                        <div id="colorPickerContainer">
+                            <input type='text' id="colorPicker" value=""/>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <ul>
+                <li>
+                    <label for="" id="imageGalleryToggleLabel">
+                        <img src="{{ asset('images/ajout-image.png') }}" class="img-responsive" width="52px"/>
+                        <h2>Image de fond</h2>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div id="backgroundOpacityContainer">
+            <h2>Opacité</h2>
+            <div id="opacityValueContainer">
+                <span id="opacityValue"></span>
+                <span>%</span>
+            </div>
+            <div class="rangecontainer">
+                <input type="range" min="1" max="100" value="" class="slider" id="opacityRange">
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--Modal choix de la disposition -->
+<div id="dispositionContainer" class="container">
+    <h2>Sélectionnez votre disposition</h2>
+    <form id="dispositionForm">
+        <div class="row disposition-text">
+            <div class="col-4">─ 1 bloc ─</div>
+            <div class="col-8">─────── 2 blocs ──────</div>
+
+        </div>
+        <div class="row">
+            <ul>
+                <li><input class="input-disposition" type="radio" id="input1a" name="position" value="1a"><label for="input1a" id="input1aLabel"><img src="{{ asset('images/create/1-bloc.png') }}" id="input1aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/1-bloc-select.png') }}" id="input1aSelect" class="img-responsive" width="84px"/><label></li>
+                <li><input class="input-disposition" type="radio" id="input2a" name="position" value="2a"><label for="input2a" id="input2aLabel"><img src="{{ asset('images/create/2-blocs-a.png') }}" id="input2aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-a-select.png') }}" id="input2aSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input2b" name="position" value="2b"><label for="input2b" id="input2bLabel"><img src="{{ asset('images/create/2-blocs-b.png') }}" id="input2bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-b-select.png') }}" id="input2bSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input2c" name="position" value="2c"><label for="input2c" id="input2cLabel"><img src="{{ asset('images/create/2-blocs-c.png') }}" id="input2cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/2-blocs-c-select.png') }}" id="input2cSelect" class="img-responsive" width="84px"/></label></li>
+            </ul>
+        </div>
+        <div class="row disposition-text">
+            <div class="col-12">───────────── 3 blocs ────────────</div>
+        </div>
+        <div class="row">
+            <ul>
+                <li><input class="input-disposition" type="radio" id="input3a" name="position" value="3a"><label for="input3a" id="input3aLabel"><img src="{{ asset('images/create/3-blocs-a.png') }}" id="input3aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-a-select.png') }}" id="input3aSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input3b" name="position" value="3b"><label for="input3b" id="input3bLabel"><img src="{{ asset('images/create/3-blocs-b.png') }}" id="input3bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-b-select.png') }}" id="input3bSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input3c" name="position" value="3c"><label for="input3c" id="input3cLabel"><img src="{{ asset('images/create/3-blocs-c.png') }}" id="input3cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-c-select.png') }}" id="input3cSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input3d" name="position" value="3d"><label for="input3d" id="input3dLabel"><img src="{{ asset('images/create/3-blocs-d.png') }}" id="input3dGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/3-blocs-d-select.png') }}" id="input3dSelect" class="img-responsive" width="84px"/></label></li>
+            </ul>
+        </div>
+        <div class="row disposition-text">
+            <div class="col-12">───────────── 4 blocs ────────────</div>
+        </div>
+        <div class="row">
+            <ul>
+                <li><input class="input-disposition" type="radio" id="input4a" name="position" value="4a"><label for="input4a" id="input4aLabel"><img src="{{ asset('images/create/4-blocs-a.png') }}" id="input4aGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-a-select.png') }}" id="input4aSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input4b" name="position" value="4b"><label for="input4b" id="input4bLabel"><img src="{{ asset('images/create/4-blocs-b.png') }}" id="input4bGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-b-select.png') }}" id="input4bSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input4c" name="position" value="4c"><label for="input4c" id="input4cLabel"><img src="{{ asset('images/create/4-blocs-c.png') }}" id="input4cGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-c-select.png') }}" id="input4cSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input4d" name="position" value="4d"><label for="input4d" id="input4dLabel"><img src="{{ asset('images/create/4-blocs-d.png') }}" id="input4dGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-d-select.png') }}" id="input4dSelect" class="img-responsive" width="84px"/></label></li>
+            </ul>
+        </div>
+        <div class="row">
+            <ul>
+                <li><input class="input-disposition" type="radio" id="input4e" name="position" value="4e"><label for="input4e" id="input4eLabel"><img src="{{ asset('images/create/4-blocs-e.png') }}" id="input4eGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-e-select.png') }}" id="input4eSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input4f" name="position" value="4f"><label for="input4f" id="input4fLabel"><img src="{{ asset('images/create/4-blocs-f.png') }}" id="input4fGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-f-select.png') }}" id="input4fSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input4g" name="position" value="4g"><label for="input4g" id="input4gLabel"><img src="{{ asset('images/create/4-blocs-h.png') }}" id="input4gGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-h-select.png') }}" id="input4gSelect" class="img-responsive" width="84px"/></label></li>
+                <li><input class="input-disposition" type="radio" id="input4h" name="position" value="4h"><label for="input4h" id="input4hLabel"><img src="{{ asset('images/create/4-blocs-i.png') }}" id="input4hGrey" class="img-responsive" width="84px"/><img src="{{ asset('images/create/4-blocs-i-select.png') }}" id="input4hSelect" class="img-responsive" width="84px"/></label></li>
+            </ul>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary" id="firstform-submit">Valider</button>
+        </div>
+    </form>
+</div>
+
+{% include 'bgimage-library.html.twig' %}
+{% include 'music-library.html.twig' %}
+
+
+<!-- Modal Create Content-->
+<div class="modal fade content-modal" id="createContentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Choisissez un type de contenu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <ul>
+                    <li id="modalTextFormToggle"><img src="{{ asset('images/ajout-texte.png') }}" id="" class="img-responsive" width="84px"/><span>Texte</span></li>
+                    <li>
+                        <label for="addImageContent" id="addImageContentLabel">
+                            <img src="{{ asset('images/ajout-image.png') }}" id="" class="img-responsive" width="84px"/>
+                            <input type='file' id='addImageContent' value=""/>
+                            <span>Photo</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="addVideoContent" id="addVideoContentLabel">
+                            <input type='file' id='addVideoContent' value=""/>
+                            <img src="{{ asset('images/ajout-video.png') }}" id="" class="img-responsive" width="84px"/><span>Vidéo</span>
+                        </label>
+                    </li>
+                    <li id="citationsToggle"><img src="{{ asset('images/ajout-citation.png') }}" id="" class="img-responsive" width="84px"/><span>Citation</span></li>
+                    <!--Modal citation -->
+                    <div id="citationsAllContainer">
+                        <div id="citationsContainer" class="container">
+                                <form id="citationsForm">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="citationsTextFill" rows="6" placeholder="Citation"></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                         <input type="text" class="form-control" id="citationsAuteurFill" placeholder="Nom de l'auteur">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                         <input type="text" class="form-control" id="citationsInfosFill" placeholder="Informations complémentaires">
+                                        </div>
+                                    </div>
+                                    <div id="citationsLibraryContainerToggle" type="" class="btn btn-primary seemore-btn">Nos citations</div>
+                                    <button id="citationFormSubmit" type="submit" class="btn btn-primary submit-btn">Enregistrer</button>
+                                </form>
+                            
+                        </div>
+                        <!-- Librairie Citaions -->
+                        <div id="citationsLibraryContainer" class="container">
+                        <form id="citationsLibraryForm">
+                            <ul id="citationsSelectionContainer">
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">« Une amitié qui dure et ne viellit pas c'est quelque chose d'extraordinaire  »<br>Emilie Carles</label>
+                                        <input type="hidden" id="customCheck1Text" value="« Une amitié qui dure et ne viellit pas c'est quelque chose d'extraordinaire  »">
+                                        <input type="hidden" id="customCheck1Auteur" value="Emilie Carles">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2">«  Choisis tes amis avec soin, ils seront les parfums de ton chemin de vie. » <br>Romain Guilleaumes</label>
+                                        <input type="hidden" id="customCheck2Text" value="«  Choisis tes amis avec soin, ils seront les parfums de ton chemin de vie. » ">
+                                        <input type="hidden" id="customCheck2Auteur" value="Romain Guilleaumes">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck3">
+                                        <label class="custom-control-label" for="customCheck3">«  La vie est destinée aux bons amis et aux grandes aventures »</label>
+                                        <input type="hidden" id="customCheck3Text" value="«  La vie est destinée aux bons amis et aux grandes aventures »">
+                                        <input type="hidden" id="customCheck3Auteur" value="">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck4">
+                                        <label class="custom-control-label" for="customCheck4">« Je suis un peu bizarre.. Mais heureusement, j'ai trouvé des amies qui le sont autant que moi »</label>
+                                        <input type="hidden" id="customCheck4Text" value="« Je suis un peu bizarre.. Mais heureusement, j'ai trouvé des amies qui le sont autant que moi »">
+                                        <input type="hidden" id="customCheck4Auteur" value="">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5">«  Tu es la seule musique dans mon cœur qui puisse faire danser ma vie. »<br></label>
+                                        <input type="hidden" id="customCheck5Text" value="«  Tu es la seule musique dans mon cœur qui puisse faire danser ma vie. »">
+                                        <input type="hidden" id="customCheck5Auteur" value="">
+                                    </li>
+                                    <li class="custom-control custom-checkbox">
+                                        <input name="citationsCheckbox" type="checkbox" class="custom-control-input" id="customCheck6">
+                                        <label class="custom-control-label" for="customCheck6">« L'amour est la seule condition dans laquelle le bonheur d'une autre personne est essentiel au tien. »</label>
+                                        <input type="hidden" id="customCheck6Text" value="« L'amour est la seule condition dans laquelle le bonheur d'une autre personne est essentiel au tien. »">
+                                        <input type="hidden" id="customCheck6Auteur" value="">
+                                    </li>
+                            </ul>
+                            <div id="citationsLibraryContainerToggle2" type="" class="btn btn-primary seemore-btn">Créer une citation</div>
+                            <button id="citationsLibraryFormSubmit" type="submit" class="btn btn-primary submit-btn">Enregistrer</button>
+                        </form>
+                        </div>
+                    </div>
+                    <div id="modalTextFormContainer">
+                        <form id="modalTextForm">
+                            <textarea id="toFill" class="froala-textarea"></textarea>
+                            <button type="submit"> valider</button>
+                        </form>
+                    </div>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
