@@ -2,30 +2,43 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Modifiez le PAM'S</title>
+    <title>Créez votre Pam's</title>
     <meta name="description" content="My Pam's est un produit innovant qui permet d'offrir plus de bonheur avec un cadeau. Connectez vous sur My Pams avec votre code pour créer un contenu, ou consulter un message."/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-new.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/spectrum.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/froala_style.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    <!--froala-->
+    <!--froala
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
-    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css"/>-->
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=yk5tfcnfy2w2giibj5ecfd781lyz2w0bec63hvn17mppalhm"></script>
+    <script>tinymce.init({
+        selector: '#toFill', 
+        plugins: "emoticons",
+        toolbar: 'fontselect fontsizeselect bold italic underline strikethrough | forecolor backcolor | emoticons | undo redo',
+        menubar: ' '
+        });
+    </script>
 </head>
 <body>
 
 {% include 'default/create_interface.html.twig' %}
+{% include 'faq-library.html.twig' %}
 {% include 'bgimage-library.html.twig' %}
 {% include 'music-library.html.twig' %}
+{% include 'publication-popup.html.twig' %}
 {% include 'layouts.html.twig' %}
+
 
 <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/spectrum.js') }}"></script>
 <script src="{{ asset('js/edit-pams.js') }}"></script>
 <script src="{{ asset('js/createpams.js') }}"></script>
 <script src="{{ asset('js/bootstrap-new.min.js') }}"></script>a
@@ -36,7 +49,6 @@
     var pamsJson = {{ Pamsjson|raw }};
 </script>
 
-<script>document.getElementById("publicationPopup").style.display = "block";</script>
 <script>document.getElementById("sendDataSubmit").innerHTML = "Modifier";</script>
 
 <audio id="sound" controls></audio>

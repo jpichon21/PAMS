@@ -1104,3 +1104,15 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .tox .tox-notification--in {
   display: none!important;
 }
+
+#createurViewReturn{
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+#createurViewReturn a{
+ color:white;
+ text-decoration: none;
+ font-weight: 600;
+} 

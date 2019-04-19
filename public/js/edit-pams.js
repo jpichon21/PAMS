@@ -1,6 +1,9 @@
 /**récuparation des variables */
 $( document ).ready(function() {
 
+    document.getElementById("publicationPopup").style.display = "block";
+    $('#updateLink').removeAttr('href');
+
     /*var pamsJson =  pamsJs;*/
     console.log(pamsJson);
     var disposition = pamsJson.layout;

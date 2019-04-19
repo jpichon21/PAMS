@@ -1,19 +1,3 @@
-/*initialisation des variables*/
-var current_block_id = null;
-var current_audio_id = null;
-var current_image_id = null;
-var current_layout_value = null;
-var playing = false;
-var send_audio_id = null;
-var send_image_id = null;
-var send_audio_id = null;
-var send_layout_value = '4a';
-var send_block_id = null;
-var send_background_image_uploaded = null;
-var send_opacity_value = '100';
-var send_background_color = '#ffc0cb';
-var send_uploaded_audio = null;
-
 /*opacity & colorpicker*/
 
 $("#colorPicker").spectrum({
@@ -186,10 +170,6 @@ $('#bgImageForm').submit(function (e) {
 });
 
 $('#sendDataSubmit').on('click', function (e) {
-    sendData();
-});
-
-$('#seePams').on('click', function (e) {
     sendData();
 });
 
