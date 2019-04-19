@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -78,6 +80,16 @@ class PamsCode
      * @ORM\Column(type="boolean")
      */
     private $notifLecture;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PamsChapitre", mappedBy="pams")
+     */
+    private $pamsChapitres;
+
+    public function __construct()
+    {
+        $this->pamsChapitres = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -226,6 +238,37 @@ class PamsCode
     public function setNotifLecture(bool $notifLecture): self
     {
         $this->notifLecture = $notifLecture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PamsChapitre[]
+     */
+    public function getPamsChapitres(): Collection
+    {
+        return $this->pamsChapitres;
+    }
+
+    public function addPamsChapitre(PamsChapitre $pamsChapitre): self
+    {
+        if (!$this->pamsChapitres->contains($pamsChapitre)) {
+            $this->pamsChapitres[] = $pamsChapitre;
+            $pamsChapitre->setPams($this);
+        }
+
+        return $this;
+    }
+
+    public function removePamsChapitre(PamsChapitre $pamsChapitre): self
+    {
+        if ($this->pamsChapitres->contains($pamsChapitre)) {
+            $this->pamsChapitres->removeElement($pamsChapitre);
+            // set the owning side to null (unless already changed)
+            if ($pamsChapitre->getPams() === $this) {
+                $pamsChapitre->setPams(null);
+            }
+        }
 
         return $this;
     }
