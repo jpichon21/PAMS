@@ -187,7 +187,6 @@ class DefaultController extends AbstractController
     }
 
     /**
-<<<<<<< HEAD
      * @Route("/get", name="pams_get", options={"expose"=true})
      * @param Request $request
      * @return Response
@@ -246,25 +245,5 @@ class DefaultController extends AbstractController
         return new Response('This is not ajax!', 400);
 
     }
-=======
-     * @Route("/check-code-valid", name="pams_check_code_valid", options={"expose"=true})
-     */
-    public function checkCodeValid(Request $request)
-    {
-        $pamsCode = $request->query->get('data');
-
-        $pamsCode = json_decode($pamsCode);
-        $pamsCode = $pamsCode[0]->value;
-
-        $retour = $this->pamsCodeService->getCodeValid($pamsCode);
-        if($retour[0] === 99){
-            return new Response('Oups Pas de pams trouvé');
-        }else{
-            return new Response('ok');
-        }
-
-    }
-
->>>>>>> master
 
 }
