@@ -378,12 +378,15 @@ class PamsCodeService
         $pamsArray = [];
         $chapitre = $this->pamsChapitreRepository->findOneBy(['pams' => $pams->getId(), 'numero' => $chapitre]);
         if($chapitre===null){
+            $pamsArray['uploadedbackgroundImage'] = null;
             $pamsArray['backgroundColor'] = null;
             $pamsArray['backgroundImage'] = null;
             $pamsArray['backgroundOpacity'] = null;
             $pamsArray['chapitre'] = null;
             $pamsArray['nbChapitre'] = null;
             $pamsArray['layout'] = null;
+            $pamsArray['uploadedAudio'] = null;
+            $pamsArray['music'] = null;
         }else {
 
             $pamsArray['backgroundColor'] = $chapitre->getBackgroundColor();
