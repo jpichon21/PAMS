@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PamsCodeRepository")
+ * @UniqueEntity("createurCode")
+ * @UniqueEntity("destinataireCode")
  * @ORM\HasLifecycleCallbacks
  */
 class PamsCode
@@ -85,6 +88,11 @@ class PamsCode
      * @ORM\OneToMany(targetEntity="App\Entity\PamsChapitre", mappedBy="pams")
      */
     private $pamsChapitres;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateNotifEnvoi;
 
     public function __construct()
     {
@@ -269,6 +277,18 @@ class PamsCode
                 $pamsChapitre->setPams(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateNotifEnvoi(): ?\DateTimeInterface
+    {
+        return $this->dateNotifEnvoi;
+    }
+
+    public function setDateNotifEnvoi(?\DateTimeInterface $dateNotifEnvoi): self
+    {
+        $this->dateNotifEnvoi = $dateNotifEnvoi;
 
         return $this;
     }
