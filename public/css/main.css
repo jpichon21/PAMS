@@ -201,13 +201,9 @@ ul{
    background-color: #FFF;
    min-height: 920px;
    height: 100%;
+   overflow: auto;
  }
 
- /*
- #firstform-footer{
-   height: 80px;
-   background-color: #3b271c;
- }*/
 
   #firstform-content{
     margin-top: 15px;
