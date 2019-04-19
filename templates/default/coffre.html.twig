@@ -1,3 +1,15 @@
+{% form_theme form _self %}
+
+{% use 'form_div_layout.html.twig' with integer_widget as base_integer_widget %}
+
+{% block form_errors %}
+    {% if errors is defined and errors|length > 0 %}
+        {% for error in errors %}
+            <div id="check-error" class="flash-warning">{{ error.message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endblock form_errors %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +61,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
+                        <div id="check-error" style="display: none" class="flash-warning"></div>
                         {% for label, messages in app.flashes %}
                             {% for message in messages %}
                             <div id="errorContainer">
@@ -85,6 +98,9 @@
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script src="{{ asset('js/checkError.js') }}"></script>
 
 </body>
 </html>

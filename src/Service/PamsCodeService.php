@@ -88,7 +88,7 @@ class PamsCodeService
     // 1 : Createur
     // 2 : Destinataire
     // 3 : premiere connexion createur
-    // 0 : Introuvable
+    // 99 : Introuvable
     // Si -1 on ne s'occupe du code retour envoyé
     public function checkCodeRoute($codeRetourEnvoye, $codeRetourAttendu)
     {
