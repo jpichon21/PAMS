@@ -303,7 +303,6 @@ $('#publicationPopupEmailForm').submit(function (e) {
 /********************* ajout de texte ****************************/
 
 $(document).on('submit', '#modalTextForm', function (e) {
-    e.preventDefault();
     populateText();
     closeBsModal();
     return false;
@@ -407,7 +406,6 @@ function closeBsModal() {
 
 function resetTextArea() {
     $('#modalTextFormContainer').froalaEditor('html.set', '');
-    $('#modalTextFormContainer').tinymce.activeEditor.setContent('');
 }
 
 /*couleur arrière-plan*/
