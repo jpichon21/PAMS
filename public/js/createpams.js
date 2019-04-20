@@ -46,6 +46,12 @@ $("#bodyBackdrop").click(function (event) {
     resetAllPopups();
 });
 
+
+$(document).on('click', '.updatePopup', function () {
+    updatePopupShow();
+    return false;
+});
+
 $(document).on('click', '#backgroundToggle', function () {
     backgroundPopupToggle();
     return false;
@@ -510,7 +516,7 @@ function resetAllPopups() {
     document.getElementById("colorPickerContainer").style.display = "none";
     document.getElementById("modalTextFormContainer").style.display = "none";
     document.getElementById("publicationPopup").style.display = "none";
-
+    document.getElementById("updatePopup").style.display = "none";
 }
 
 function backgroundPopupToggle() {
@@ -616,6 +622,10 @@ function citationsLibraryToggle() {
 
 function publicationPopupContainerShow(){
     document.getElementById("publicationPopup").style.display = "block";
+}
+
+function updatePopupShow(){
+    document.getElementById("updatePopup").style.display = "block";
 }
 
 function closeContentModalOptions(){

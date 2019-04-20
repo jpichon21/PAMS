@@ -32,6 +32,7 @@
 {% include 'bgimage-library.html.twig' %}
 {% include 'music-library.html.twig' %}
 {% include 'publication-popup.html.twig' %}
+{% include 'update-popup.html.twig' %}
 {% include 'layouts.html.twig' %}
 
 
@@ -49,7 +50,11 @@
     var pamsJson = {{ Pamsjson|raw }};
 </script>
 
-<script>document.getElementById("sendDataSubmit").innerHTML = "Modifier";</script>
+<script>
+    document.getElementById("sendDataSubmit").innerHTML = "Mettre à jour";
+    document.getElementById("sendDataSubmit").classList.add("updatePopup");
+
+</script>
 
 <audio id="sound" controls></audio>
 </body>
