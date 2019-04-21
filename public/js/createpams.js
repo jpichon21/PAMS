@@ -13,6 +13,11 @@ var send_background_image_uploaded = null;
 var send_opacity_value = '100';
 var send_background_color = '#ffc0cb';
 var send_uploaded_audio = null;
+var blockText= {};
+var blockCitations= {};
+var blockVideos = {};
+var blockImages = {};
+
 
 /*opacity & colorpicker*/
 
@@ -347,7 +352,6 @@ function findModalBlock(elementClicked) {
 }
 
 /**ajout dynamique de texte wysiwyg*/
-var blockText= {}
 function populateText() {
     var user_text = $("#toFill").val();
     $('#' + current_block_id).find('.to-populate').html(user_text);
@@ -358,7 +362,6 @@ function populateText() {
     blockText[current_block_id] = user_text;
 }
 /**ajout dynamique de texte citation*/
-var blockCitations= {}
 function populateCitation() {
     var citation_text = $("#citationsTextFill").val();
     var citation_auteur = $("#citationsAuteurFill").val();
@@ -454,7 +457,6 @@ function readURL() {
 
 
 /* ajout image à block */
-var blockImages = {}
 document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
 function readBlockURL() {
     var file = document.getElementById("addImageContent").files[0];
@@ -479,7 +481,6 @@ function readBlockURL() {
 }
 
 /* ajout vidéo à block */
-var blockVideos = {}
 document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
 function readVideoBlockurl() {
     var file = document.getElementById("addVideoContent").files[0];
