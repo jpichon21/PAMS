@@ -85,6 +85,7 @@ class PamsCodeService
     // 1 : Createur
     // 2 : Destinataire
     // 3 : premiere connexion createur
+    // 4 : update
     // 99 : Introuvable
     public function getCodeValid(string $code)
     {
@@ -95,7 +96,11 @@ class PamsCodeService
             if ($pamsCode->getPremiereConnexion() === null) {
                 $retour[0] = 3;
             } else {
-                $retour[0] = 1;
+                if($pamsCode->getDateCreation() !== null){
+                    $retour[0] = 4;
+                }else{
+                    $retour[0] = 1;
+                }
             }
         } else {
             $pamsCode = $this->pamsCodeRepository->findOneByDestinataireCode($code);
@@ -113,6 +118,7 @@ class PamsCodeService
     // 1 : Createur
     // 2 : Destinataire
     // 3 : premiere connexion createur
+    // 4 : update
     // 99 : Introuvable
     // Si -1 on ne s'occupe du code retour envoyé
     public function checkCodeRoute($codeRetourEnvoye, $codeRetourAttendu)
@@ -120,19 +126,15 @@ class PamsCodeService
         $route = null;
         if (($codeRetourAttendu !== 1 && $codeRetourEnvoye === 1) || $codeRetourAttendu === -1) {
             $route = 'pams_create';
-        } else {
-            if (($codeRetourAttendu !== 2 && $codeRetourEnvoye === 2) || $codeRetourAttendu === -2) {
-                $route = 'pams_view';
-            } else {
-                if (($codeRetourAttendu !== 3 && $codeRetourEnvoye === 3) || $codeRetourAttendu === -3) {
-                    $route = 'pams_init';
-                } else {
-                    if (($codeRetourAttendu !== 99 && $codeRetourEnvoye === 99) || $codeRetourAttendu === -99) {
-                        $this->flashBag->add('warning', 'Oups Pas de pams trouvé !');
-                        $route = 'homepage';
-                    }
-                }
-            }
+        } elseif (($codeRetourAttendu !== 2 && $codeRetourEnvoye === 2) || $codeRetourAttendu === -2) {
+            $route = 'pams_view';
+        } elseif (($codeRetourAttendu !== 3 && $codeRetourEnvoye === 3) || $codeRetourAttendu === -3) {
+            $route = 'pams_init';
+        } elseif (($codeRetourAttendu !== 4 && $codeRetourEnvoye === 4) || $codeRetourAttendu === -4) {
+            $route = 'pams_update';
+        } elseif (($codeRetourAttendu !== 99 && $codeRetourEnvoye === 99) || $codeRetourAttendu === -99) {
+            $this->flashBag->add('warning', 'Oups Pas de pams trouvé !');
+            $route = 'homepage';
         }
 
         return $route;
@@ -200,6 +202,7 @@ class PamsCodeService
 
         $fichiersASupprimer = [];
         $pamsObj = json_decode($pamsJson);
+        $pams->setDateCreation(new \DateTime());
 
         //On verifie que le chapitre existe
         //Si non on le cree
@@ -433,13 +436,12 @@ class PamsCodeService
     public function notifLecture(PamsCode $pams){
         if($pams->getNotifLecture() && $pams->getDateNotifEnvoi() === null ){
             $pams->setDateNotifEnvoi(new DateTime());
-            $message = (new Swift_Message('Pams : Notification de lecture'))
-                ->setFrom('info@pams.com')
+            $message = (new Swift_Message('Votre pam\' vient d\'être lu !'))
+                ->setFrom('info@my-pams.com')
                 ->setTo($pams->getMailAuteur())
                 ->setBody(
                     $this->engine->render(
-                        'emails/notifLecture.html.twig',
-                        ['name' => 'eee']
+                        'emails/notifLecture.html.twig'
                     ),
                     'text/html'
                 )
@@ -447,7 +449,7 @@ class PamsCodeService
 
             $this->mailer->send($message);
 
-            //$this->em->flush();
+            $this->em->flush();
         }
     }
 
