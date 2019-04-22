@@ -24,8 +24,9 @@ class PamsCodeService
 {
 
     const TAILLEMAXCODE = 8;
-    const PATH_TO_DATA_FOLDER = '/public/data';
     const PATH_TO_PUBLIC_DATA_FOLDER = '/data';
+    const PATH_TO_PUBLIC_FOLDER = '/public';
+    const PATH_TO_DATA_FOLDER = self::PATH_TO_PUBLIC_FOLDER . self::PATH_TO_PUBLIC_DATA_FOLDER;
     const TYPE_BLOCK_PHOTO = 'photo';
     const TYPE_BLOCK_TEXTE = 'texte';
     const TYPE_BLOCK_CITATION = 'citation';
@@ -69,13 +70,14 @@ class PamsCodeService
         $this->engine = $engine;
     }
 
-    public function checkCodeExist($code){
+    public function checkCodeExist($code)
+    {
         $pamsCode = $this->pamsCodeRepository->findByCreateurCode($code);
-        if(count($pamsCode)>0){
+        if (count($pamsCode) > 0) {
             return true;
         }
         $pamsCode = $this->pamsCodeRepository->findByDestinataireCode($code);
-        if(count($pamsCode)>0){
+        if (count($pamsCode) > 0) {
             return true;
         }
 
@@ -96,9 +98,9 @@ class PamsCodeService
             if ($pamsCode->getPremiereConnexion() === null) {
                 $retour[0] = 3;
             } else {
-                if($pamsCode->getDateCreation() !== null){
+                if ($pamsCode->getDateCreation() !== null) {
                     $retour[0] = 4;
-                }else{
+                } else {
                     $retour[0] = 1;
                 }
             }
@@ -222,15 +224,18 @@ class PamsCodeService
 
         //Gestion de l'image du chapitre
         if ($pamsObj->uploadedbackgroundImage !== null) {
-            //On stock le fichier à supprimer
-            if ($chapitre->getIsCustomImage()) {
-                $fichiersASupprimer[] = $chapitre->getBackgroundImage();
-            }
+            //Si c'est un chemin, et c'est que c'est un update et donc il ne faut pas mettre à jour le fichier
+            if (!file_exists($this->container->getParameter('kernel.project_dir') . self::PATH_TO_PUBLIC_FOLDER . $pamsObj->uploadedbackgroundImage)) {
+                //On stock le fichier à supprimer
+                if ($chapitre->getIsCustomImage()) {
+                    $fichiersASupprimer[] = $chapitre->getBackgroundImage();
+                }
 
-            //On cree le fichier
-            $nomFichier = $this->decode_image($pams->getId(), $pamsObj->uploadedbackgroundImage);
-            $chapitre->setBackgroundImage($nomFichier);
-            $chapitre->setIsCustomImage(true);
+                //On cree le fichier
+                $nomFichier = $this->decode_image($pams->getId(), $pamsObj->uploadedbackgroundImage);
+                $chapitre->setBackgroundImage($nomFichier);
+                $chapitre->setIsCustomImage(true);
+            }
 
         } else {
             $chapitre->setBackgroundImage($pamsObj->backgroundImage);
@@ -239,15 +244,19 @@ class PamsCodeService
 
         //Gestion de la musique du chapitre
         if (property_exists($pamsObj, "uploadedAudio") && $pamsObj->uploadedAudio !== null) {
-            //On stock le fichier à supprimer
-            if ($chapitre->getIsCustomMusic()) {
-                $fichiersASupprimer[] = $chapitre->getMusic();
-            }
+            //Si c'est un chemin, et c'est que c'est un update et donc il ne faut pas mettre à jour le fichier
+            if (!file_exists($this->container->getParameter('kernel.project_dir') . self::PATH_TO_PUBLIC_FOLDER . $pamsObj->uploadedAudio)) {
+                //On stock le fichier à supprimer
+                if ($chapitre->getIsCustomMusic()) {
+                    $fichiersASupprimer[] = $chapitre->getMusic();
+                }
 
-            //On cree le fichier
-            $nomFichier = $this->decode_music($pams->getId(), $pamsObj->uploadedAudio);
-            $chapitre->setMusic($nomFichier);
-            $chapitre->setIsCustomMusic(true);
+                //On cree le fichier
+
+                $nomFichier = $this->decode_music($pams->getId(), $pamsObj->uploadedAudio);
+                $chapitre->setMusic($nomFichier);
+                $chapitre->setIsCustomMusic(true);
+            }
 
         } else {
             $chapitre->setMusic($pamsObj->music);
@@ -261,48 +270,59 @@ class PamsCodeService
         //Gestion des blocks photo
         if (property_exists($pamsObj, "uploadedblockImage") && $pamsObj->uploadedblockImage !== null) {
             foreach ($pamsObj->uploadedblockImage as $nomBlock => $blockData) {
-                $block = $this->pamsBlockRepository->findOneBy(['chapitre' => $chapitre->getId(), 'nomBlock' => $nomBlock]);
-                $nomFichier = $this->decode_image($pams->getId(), $blockData);
+                //Si c'est un chemin c'est que c'est un update et donc il ne faut pas mettre à jour le fichier
+                if (!file_exists($this->container->getParameter('kernel.project_dir') . self::PATH_TO_PUBLIC_FOLDER . $blockData)) {
 
-                //Si le block est null on le créé sinon
-                if ($block === null) {
-                    $block = new PamsBlock();
-                    $block->setNomBlock($nomBlock);
-                    $this->em->persist($block);
-                } else {
-                    $block->setInfos(null);
-                    $block->setAuteur(null);
-                    $fichiersASupprimer[] = $block->getValeur();
+                    $block = $this->pamsBlockRepository->findOneBy(['chapitre' => $chapitre->getId(), 'nomBlock' => $nomBlock]);
+                    $nomFichier = $this->decode_image($pams->getId(), $blockData);
+
+                    //Si le block est null on le créé sinon
+                    if ($block === null) {
+                        $block = new PamsBlock();
+                        $block->setNomBlock($nomBlock);
+                        $this->em->persist($block);
+                    } else {
+                        $block->setInfos(null);
+                        $block->setAuteur(null);
+                        $fichiersASupprimer[] = $block->getValeur();
+                        $blockPresent[] = $nomBlock;
+                    }
+
+                    $block->setChapitre($chapitre);
+                    $block->setTypeBlock(self::TYPE_BLOCK_PHOTO);
+                    $block->setValeur($nomFichier);
+                }else{
                     $blockPresent[] = $nomBlock;
                 }
-
-                $block->setChapitre($chapitre);
-                $block->setTypeBlock(self::TYPE_BLOCK_PHOTO);
-                $block->setValeur($nomFichier);
             }
         }
 
         //Gestion des blocks video
         if (property_exists($pamsObj, "uploadedblockVideos") && $pamsObj->uploadedblockVideos !== null) {
             foreach ($pamsObj->uploadedblockVideos as $nomBlock => $blockData) {
-                $block = $this->pamsBlockRepository->findOneBy(['chapitre' => $chapitre->getId(), 'nomBlock' => $nomBlock]);
-                $nomFichier = $this->decode_video($pams->getId(), $blockData);
+                //Si c'est un chemin, et c'est que c'est un update et donc il ne faut pas mettre à jour le fichier
+                if (!file_exists($this->container->getParameter('kernel.project_dir') . self::PATH_TO_PUBLIC_FOLDER . $blockData)) {
+                    $block = $this->pamsBlockRepository->findOneBy(['chapitre' => $chapitre->getId(), 'nomBlock' => $nomBlock]);
+                    $nomFichier = $this->decode_video($pams->getId(), $blockData);
 
-                //Si le block est null on le créé sinon
-                if ($block === null) {
-                    $block = new PamsBlock();
-                    $block->setNomBlock($nomBlock);
-                    $this->em->persist($block);
-                } else {
-                    $block->setInfos(null);
-                    $block->setAuteur(null);
-                    $fichiersASupprimer[] = $block->getValeur();
+                    //Si le block est null on le créé sinon
+                    if ($block === null) {
+                        $block = new PamsBlock();
+                        $block->setNomBlock($nomBlock);
+                        $this->em->persist($block);
+                    } else {
+                        $block->setInfos(null);
+                        $block->setAuteur(null);
+                        $fichiersASupprimer[] = $block->getValeur();
+                        $blockPresent[] = $nomBlock;
+                    }
+
+                    $block->setChapitre($chapitre);
+                    $block->setTypeBlock(self::TYPE_BLOCK_VIDEO);
+                    $block->setValeur($nomFichier);
+                }else{
                     $blockPresent[] = $nomBlock;
                 }
-
-                $block->setChapitre($chapitre);
-                $block->setTypeBlock(self::TYPE_BLOCK_VIDEO);
-                $block->setValeur($nomFichier);
             }
         }
 
@@ -331,8 +351,8 @@ class PamsCodeService
         //Gestion des blocks citation
         if (property_exists($pamsObj, "addedblockCitation") && $pamsObj->addedblockCitation !== null) {
             foreach ($pamsObj->addedblockCitation as $nomBlock => $blockArray) {
-                $blockData=$blockArray->text;
-                $blockAuteur=$blockArray->auteur;
+                $blockData = $blockArray->text;
+                $blockAuteur = $blockArray->auteur;
                 //Dans le cas où c'est une citation pre-saisie il n'y a pas de champs info
                 $blockInfos = null;
                 if (property_exists($blockArray, "infos")) {
@@ -360,8 +380,8 @@ class PamsCodeService
 
         //On supprime les blocks qui ne servent plus
         $blocks = $this->pamsBlockRepository->findBy(['chapitre' => $chapitre->getId()]);
-        foreach($blocks as $block){
-            if(!in_array($block->getNomBlock(), $blockPresent)){
+        foreach ($blocks as $block) {
+            if (!in_array($block->getNomBlock(), $blockPresent)) {
                 $fichiersASupprimer[] = $block->getValeur();
                 $this->em->remove($block);
             }
@@ -377,10 +397,11 @@ class PamsCodeService
         return null;
     }
 
-    public function getChapitre(PamsCode $pams, $chapitre){
+    public function getChapitre(PamsCode $pams, $chapitre)
+    {
         $pamsArray = [];
         $chapitre = $this->pamsChapitreRepository->findOneBy(['pams' => $pams->getId(), 'numero' => $chapitre]);
-        if($chapitre===null){
+        if ($chapitre === null) {
             $pamsArray['uploadedbackgroundImage'] = null;
             $pamsArray['backgroundColor'] = null;
             $pamsArray['backgroundImage'] = null;
@@ -390,7 +411,7 @@ class PamsCodeService
             $pamsArray['layout'] = null;
             $pamsArray['uploadedAudio'] = null;
             $pamsArray['music'] = null;
-        }else {
+        } else {
 
             $pamsArray['backgroundColor'] = $chapitre->getBackgroundColor();
             if ($chapitre->getIsCustomImage()) {
@@ -411,7 +432,7 @@ class PamsCodeService
             foreach ($chapitre->getPamsBlocks() as $block) {
                 switch ($block->getTypeBlock()) {
                     case self::TYPE_BLOCK_PHOTO :
-                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
+                        $pamsArray['uploadedblockImage'][$block->getNomBlock()] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/' . $block->getValeur();
                         break;
                     case self::TYPE_BLOCK_TEXTE :
                         $pamsArray['addedblockText'][$block->getNomBlock()] = $block->getValeur();
@@ -422,7 +443,7 @@ class PamsCodeService
                         $pamsArray['addedblockCitation'][$block->getNomBlock()]['infos'] = $block->getInfos();
                         break;
                     case self::TYPE_BLOCK_VIDEO :
-                        $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/'.$block->getValeur();
+                        $pamsArray['uploadedblockVideos'][$block->getNomBlock()] = self::PATH_TO_PUBLIC_DATA_FOLDER . '/' . $pams->getId() . '/' . $block->getValeur();
                         break;
                     default:
                 }
@@ -433,8 +454,9 @@ class PamsCodeService
         return $pamsArray;
     }
 
-    public function notifLecture(PamsCode $pams){
-        if($pams->getNotifLecture() && $pams->getDateNotifEnvoi() === null ){
+    public function notifLecture(PamsCode $pams)
+    {
+        if ($pams->getNotifLecture() && $pams->getDateNotifEnvoi() === null) {
             $pams->setDateNotifEnvoi(new DateTime());
             $message = (new Swift_Message('Votre pam\' vient d\'être lu !'))
                 ->setFrom('info@my-pams.com')
@@ -444,8 +466,7 @@ class PamsCodeService
                         'emails/notifLecture.html.twig'
                     ),
                     'text/html'
-                )
-            ;
+                );
 
             $this->mailer->send($message);
 

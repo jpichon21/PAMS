@@ -296,7 +296,11 @@ class DefaultController extends AbstractController
                 $codeRetour = $retour[0];
                 /* @var $pams PamsCode */
                 $pams = $retour[1];
-                $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+                if ($pams->getPremiereConnexion() === null) {
+                    $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
+                }else{
+                    $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 4);
+                }
 
                 if ($route !== null || $pams === null) {
                     throw $this->createAccessDeniedException();
