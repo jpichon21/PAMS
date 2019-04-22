@@ -793,7 +793,6 @@ function toggleDisposition(disposition) {
  * ************OBJET JSON **************
  * ************************************/
 
-
 function sendData() {
     var obj = {
         'chapitre': 1,
@@ -823,12 +822,6 @@ function sendData() {
         }
     });
 }
-
-
-
-
-
-
 
 });
 

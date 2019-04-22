@@ -1116,3 +1116,25 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
  text-decoration: none;
  font-weight: 600;
 } 
+
+#chapitreListContainer{
+  position: absolute;
+  right: 50px;
+  top: 46vh;
+}
+
+#chapitreListContainer ul li {
+    padding: 8px 4px 4px 16px;
+    width: 42px;
+    background-color: white;
+    color: black;
+    border-radius: 200px;
+    height: 42px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#chapitreListContainer .chapitreActif{
+  background-color: black;
+  color: white;
+}
