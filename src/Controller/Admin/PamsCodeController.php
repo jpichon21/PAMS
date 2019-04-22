@@ -103,7 +103,7 @@ class PamsCodeController extends AbstractController
 
                     case 'online':
                         {
-                            $online = $pamsCode->getOnlineDate();
+                            $online = $pamsCode->getPremiereConnexion();
                             $responseTemp = $online === null ? '' : $online->format('d/m/Y');
 
                             break;
