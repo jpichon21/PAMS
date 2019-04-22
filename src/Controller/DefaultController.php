@@ -296,8 +296,8 @@ class DefaultController extends AbstractController
                 $codeRetour = $retour[0];
                 /* @var $pams PamsCode */
                 $pams = $retour[1];
-                if ($pams->getPremiereConnexion() === null) {
-                    $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
+                if (count($pams->getPamsChapitres()) === 0) {
+                    $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
                 }else{
                     $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 4);
                 }
