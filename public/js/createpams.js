@@ -697,6 +697,7 @@ function toggleDisposition(disposition) {
     $target.addClass('disposition-active');
 }
 
+/***CHAPITRES ****/
 
 /***************************************
  * ************OBJET JSON **************
