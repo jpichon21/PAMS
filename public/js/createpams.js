@@ -17,6 +17,7 @@ var blockText= {};
 var blockCitations= {};
 var blockVideos = {};
 var blockImages = {};
+var send_chapitre_value = 1;
 
 
 /*opacity & colorpicker*/
@@ -115,7 +116,8 @@ $(document).on('click', '#citationsLibraryContainerToggle2', function () {
      citationsFormContainerToggle();
      return false;
  });
- 
+
+
 
 
 /**Toggle tempsréel des layouts***/
@@ -352,6 +354,7 @@ function findModalBlock(elementClicked) {
 }
 
 /**ajout dynamique de texte wysiwyg*/
+var blockText= {}
 function populateText() {
     var user_text = $("#toFill").val();
     $('#' + current_block_id).find('.to-populate').html(user_text);
@@ -362,6 +365,7 @@ function populateText() {
     blockText[current_block_id] = user_text;
 }
 /**ajout dynamique de texte citation*/
+var blockCitations= {}
 function populateCitation() {
     var citation_text = $("#citationsTextFill").val();
     var citation_auteur = $("#citationsAuteurFill").val();
@@ -457,6 +461,7 @@ function readURL() {
 
 
 /* ajout image à block */
+var blockImages = {}
 document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
 function readBlockURL() {
     var file = document.getElementById("addImageContent").files[0];
@@ -481,6 +486,7 @@ function readBlockURL() {
 }
 
 /* ajout vidéo à block */
+var blockVideos = {}
 document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
 function readVideoBlockurl() {
     var file = document.getElementById("addVideoContent").files[0];
@@ -698,16 +704,40 @@ function toggleDisposition(disposition) {
 }
 
 /***CHAPITRES ****/
+$('.input-chapitre').on('change', function() {
+    $('.input-chapitre').not(this).prop('checked', false);  
+});
+
+$(document).on('change', '.input-chapitre', function (e) {
+    var $this = $(this);
+    var current_chapitre_value = $this.val();
+    send_chapitre_value = current_chapitre_value;
+    console.log("chapitre : " + current_chapitre_value);
+    toggleChapitre(current_chapitre_value);
+});
+
+function toggleChapitre(current_chapitre_value) {
+    var $active = $('.chapitreActif');
+    var $target = $('#chapitre' + current_chapitre_value );
+    if ($target.is($active)) return false;
+    if ($active.length > 0) {
+        $active.closest('li').removeClass('chapitreActif');
+    }
+    $target.closest('li').addClass('chapitreActif');
+}
+
+$("#chapitreListShow").click(function(){
+        $('#chapitreListHider').css({ 'height' : '+=52px' });
+})
 
 /***************************************
  * ************OBJET JSON **************
  * ************************************/
 
-
 function sendData() {
     var obj = {
-        'chapitre': 1,
-        'backgroundOpacity': send_opacity_value/100,
+        'chapitre': send_chapitre_value,
+        'backgroundOpacity': send_opacity_value,
         'backgroundColor': send_background_color,
         'backgroundImage': send_image_id,
         'music': send_audio_id,
@@ -734,6 +764,18 @@ function sendData() {
     });
 }
 
+/*
+function getChapitre(send_chapitre_value){
+    $.ajax({
+        url: Routing.generate('pams_get'),
+        data: {
+            'chapitre': JSON.stringify(send_chapitre_value)
+        },
+    success: function (result) {
+            Pamsjson = result;
+        }
+    });
+}*/
 
 
 

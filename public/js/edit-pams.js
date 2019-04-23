@@ -17,6 +17,7 @@ $( document ).ready(function() {
     var blockVideos = pamsJson.uploadedblockVideos;
     var blockCitations = pamsJson.addedblockCitation;
     var chooseAudio = pamsJson.music;
+    var chapitreJson = pamsJson.chapitre;
 
     /*initialisation des variables*/
     var current_block_id = null;
@@ -29,12 +30,10 @@ $( document ).ready(function() {
     var send_background_color = backgroundColor;
     var send_opacity_value = backgroundOpacity;
     var send_image_id = backgroundImage;
-
     var send_background_image_uploaded = null;
-
-
     var send_uploaded_audio = uploadMusic;
     var send_audio_id = chooseAudio;
+    var send_chapitre_value = 1;
 
     /**récupérer le text */
     if ( blockText !== undefined){
@@ -70,6 +69,10 @@ $( document ).ready(function() {
         var vidKeys = Object.keys(pamsJson.uploadedblockVideos);
     }else{
         blockVideos = {};
+    }
+
+    if (chapitreJson !== 1){
+        var send_chapitre = chapitreJson;
     }
 
     defineDisposition(disposition);
@@ -788,14 +791,42 @@ function toggleDisposition(disposition) {
     $target.addClass('disposition-active');
 }
 
+/***CHAPITRES ****/
+$('.input-chapitre').on('change', function() {
+    $('.input-chapitre').not(this).prop('checked', false);  
+});
+
+$(document).on('change', '.input-chapitre', function (e) {
+    var $this = $(this);
+    var current_chapitre_value = $this.val();
+    send_chapitre_value = current_chapitre_value;
+    console.log("chapitre : " + current_chapitre_value);
+    toggleChapitre(current_chapitre_value);
+    /*getChapitre(send_chapitre_value);*/
+});
+
+function toggleChapitre(current_chapitre_value) {
+    var $active = $('.chapitreActif');
+    var $target = $('#chapitre' + current_chapitre_value );
+    if ($target.is($active)) return false;
+    if ($active.length > 0) {
+        $active.closest('li').removeClass('chapitreActif');
+    }
+    $target.closest('li').addClass('chapitreActif');
+}
+
+$("#chapitreListShow").click(function(){
+        $('#chapitreListHider').css({ 'height' : '+=52px' });
+})
 
 /***************************************
  * ************OBJET JSON **************
  * ************************************/
 
+
 function sendData() {
     var obj = {
-        'chapitre': 1,
+        'chapitre': send_chapitre_value,
         'backgroundOpacity': send_opacity_value,
         'backgroundColor': send_background_color,
         'backgroundImage': send_image_id,
@@ -822,6 +853,19 @@ function sendData() {
         }
     });
 }
+
+/*
+function getChapitre(send_chapitre_value){
+    $.ajax({
+        url: Routing.generate('pams_get'),
+        data: {
+            'chapitre': send_chapitre_value
+        },
+    success: function (result) {
+            Pamsjson = result;
+        }
+    });
+}*/
 
 });
 
