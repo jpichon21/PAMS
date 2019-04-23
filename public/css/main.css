@@ -1138,3 +1138,19 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   background-color: black;
   color: white;
 }
+
+.input-chapitre{
+  display: none;
+}
+
+#chapitreListContainer label{
+  padding: 10px;
+  margin: -9px;
+}
+
+#chapitreListHider{
+  min-height: 0px;
+  height: 0px;
+  overflow: hidden;
+  max-height: 208px!important;/*taille max du container*/
+}
