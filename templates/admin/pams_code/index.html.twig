@@ -13,6 +13,7 @@
                     <div class="d-block d-md-flex justify-content-between mt-4 mt-md-0">
                         <div class="text-center mt-4 mt-md-0">
                             <a href="{{ path('admin_pams_code_new') }}" class="btn btn-outline-info">Nouveau</a>
+                            <a href="{{ path('admin_pams_code_import') }}" class="btn btn-outline-info">Import</a>
                         </div>
                     </div>
                 </div>
@@ -32,26 +33,18 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Createur</th>
+                                <th>Destinataire</th>
+                                <th>Online</th>
+                                <th>View</th>
+                                <th>Actions</th>
+                            </tr>
+                            </tfoot>
                             <tbody>
-                            {% for pamscode in pams_codes %}
-                                <tr>
-                                    <td>{{ pamscode.id }}</td>
-                                    <td>{{ pamscode.createurCode }}</td>
-                                    <td>{{ pamscode.destinataireCode }}</td>
-                                    <td>{{ pamscode.onlineDate is empty ? "Non" : pamscode.onlineDate|date }}</td>
-                                    <td>{{ pamscode.visionDate is empty ? "Jamais" : pamscode.visionDate|date }}</td>
-                                    <td>
-                                        <a href="{{ path('pams_code_show',{'id' : pamscode.id}) }}">
-                                            <button class="btn btn-outline-primary">View</button>
-                                        </a>
-                                        <form method="post" action="{{ path('admin_pams_code_delete', {id: pamscode.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes vous vraiment sûr ?')">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pamscode.id) }}">
-                                            <button class="btn btn-outline-danger">Supprimer</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+
                             </tbody>
                         </table>
                     </div>
@@ -72,6 +65,22 @@
             'use strict';
             $(function () {
                 $('#order-listing').DataTable({
+                    "columnDefs": [
+
+                        { "name": "id",   "targets": 0 },
+                        { "name": "createur",   "targets": 1 },
+                        { "name": "destinataire",  "targets": 2 },
+                        { "name": "online",  "targets": 3 },
+                        { "name": "view",  "targets": 4 },
+                        { "name": "action",  "targets": 5 },
+
+                    ],
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": {
+                        "url": '{{ path('admin_pams_code_datatable') }}',
+                        "type": 'POST'
+                    },
                     "aLengthMenu": [
                         [5, 10, 15, -1],
                         [5, 10, 15, "All"]

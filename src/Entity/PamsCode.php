@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PamsCodeRepository")
+ * @UniqueEntity("createurCode")
+ * @UniqueEntity("destinataireCode")
  * @ORM\HasLifecycleCallbacks
  */
 class PamsCode
@@ -78,6 +83,26 @@ class PamsCode
      * @ORM\Column(type="boolean")
      */
     private $notifLecture;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PamsChapitre", mappedBy="pams")
+     */
+    private $pamsChapitres;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateNotifEnvoi;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreation;
+
+    public function __construct()
+    {
+        $this->pamsChapitres = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -226,6 +251,61 @@ class PamsCode
     public function setNotifLecture(bool $notifLecture): self
     {
         $this->notifLecture = $notifLecture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PamsChapitre[]
+     */
+    public function getPamsChapitres(): Collection
+    {
+        return $this->pamsChapitres;
+    }
+
+    public function addPamsChapitre(PamsChapitre $pamsChapitre): self
+    {
+        if (!$this->pamsChapitres->contains($pamsChapitre)) {
+            $this->pamsChapitres[] = $pamsChapitre;
+            $pamsChapitre->setPams($this);
+        }
+
+        return $this;
+    }
+
+    public function removePamsChapitre(PamsChapitre $pamsChapitre): self
+    {
+        if ($this->pamsChapitres->contains($pamsChapitre)) {
+            $this->pamsChapitres->removeElement($pamsChapitre);
+            // set the owning side to null (unless already changed)
+            if ($pamsChapitre->getPams() === $this) {
+                $pamsChapitre->setPams(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDateNotifEnvoi(): ?\DateTimeInterface
+    {
+        return $this->dateNotifEnvoi;
+    }
+
+    public function setDateNotifEnvoi(?\DateTimeInterface $dateNotifEnvoi): self
+    {
+        $this->dateNotifEnvoi = $dateNotifEnvoi;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(?\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }

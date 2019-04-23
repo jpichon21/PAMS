@@ -201,13 +201,9 @@ ul{
    background-color: #FFF;
    min-height: 920px;
    height: 100%;
+   overflow: auto;
  }
 
- /*
- #firstform-footer{
-   height: 80px;
-   background-color: #3b271c;
- }*/
 
   #firstform-content{
     margin-top: 15px;
@@ -334,11 +330,23 @@ ul{
 .button-container{
   text-align: center;
 }
+
+button:focus{
+  outline:none!important;
+}
+
 .submit-btn, .submit-btn:focus, .submit-btn:hover, .submit-btn:active{
   background-color: #5cb85c;
   border-color: #5cb85c;
   padding: 5px 35px;
 }
+
+.seemore-btn, .seemore-btn:focus, .seemore-btn:hover, .seemore-btn:active{
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 5px 35px;
+}
+
 
 /*Datepicker*/
 
@@ -365,6 +373,18 @@ ul{
   width: 100%;
   height: 100%;
   z-index: -1;
+}
+
+#bodyBackdrop{
+  background-color: transparent;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 120px;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
 }
 
 #createNav{
@@ -435,7 +455,7 @@ ul{
 .createContent{
   padding: 30px;
   text-align: center;
-
+  transition: all 1s ease-out;
 }
 
 
@@ -552,7 +572,44 @@ ul{
   display: none;
  }
 
- 
+ /*Popup FAQ*/
+ #FAQContainer{
+  background-color: white;
+  border-radius: 10px;
+  border: 4px solid black;
+  width: 420px;
+  min-height: 400px;
+  position: absolute;
+  padding: 10px 0px 0px 0px;
+  right: 25px;
+  z-index: 1;
+  display: none;
+}
+
+#question1modal{
+  z-index: 1;
+}
+
+#FAQContainer h2{
+  text-align: center;
+  font-size: 24px;
+}
+
+#FAQContainer ul{
+  margin: 0 auto;
+  padding: 20px 40px;
+}
+
+#FAQContainer ul li{
+  margin-bottom: 12px;
+  color: #7575ff;
+  text-decoration: inline;
+}
+
+#FAQQuestionsContainer{
+  height: 420px;
+  overflow: auto;
+}
 
 /*Popup Background*/
 
@@ -636,7 +693,7 @@ ul{
   margin-bottom: 20px;
 }
 
- #addImageContent{
+ #addImageContent, #addVideoContent{
   display: none;
 }
 
@@ -679,8 +736,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 
 /*Widget Musique*/
-
-
 #musiqueContainer{
   display: none;
 }
@@ -739,7 +794,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   position: absolute;
   top: 22px;
   right: 200px;
-
+  outline:none;
 }
 
 .selected-audio, .selected-image{
@@ -765,8 +820,63 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   border-color: #222;
 }
 
-/*Range Opacity*/
+/* Popup publication*/
+#publicationPopup, #updatePopup{
+  background-color: white;
+  border-radius: 10px;
+  border: 4px solid black;
+  text-align: center;
+  width: 420px;
+  position: absolute;
+  padding: 25px 50px;
+  right: 42px;
+  top: 142px;
+  display: none;
+  z-index: 2;
+}
 
+#publicationPopup h1, #updatePopup h1{
+  width: 100%;
+  font-size: 32px;
+}
+
+#publicationPopup h2, #updatePopup h2{ 
+  font-size: 18px;
+  width: 100%;
+}
+
+#publicationPopup p, #updatePopup p{
+  font-size: 14px;
+}
+
+#publicationInputContainer{
+  width: 100%;
+}
+
+#publicationInput{
+  padding: 5px 10px;
+  outline: none;
+}
+
+#publicationPopupEmailForm button, #updatePopupEmailForm button{
+  padding: 15px;
+  vertical-align: top;
+  background-color: #3997d6;
+  border: none;
+  height: 38px;
+  width: 68px;
+  margin-left: -10px;
+  position: relative;
+}
+
+#publicationPopupEmailForm button img, #updatePopupEmailForm button img{
+  position: absolute;
+  width: 72px;
+  top: -17px;
+  left: -2px;
+}
+
+/*Range Opacity*/
 .rangecontainer {
   width: 100%; /* Width of the outside container */
 }
@@ -821,6 +931,10 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 /**ajout contenu bloc**/
 
+.modal-backdrop{
+  z-index: 0;
+}
+
 .modal-content{
   background-color: white;
   border-radius: 10px;
@@ -851,6 +965,31 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   padding: 10px;
 }
 
+.to-populate-citation, .to-populate-infos, .to-populate-auteur{
+
+  font-family: 'Blenda', sans-serif;
+}
+
+.to-populate-citation{
+  padding: 10px;
+  font-size: 38px;
+  color: white;
+}
+
+.to-populate-auteur{
+  text-align:right;
+  font-size: 18px;
+  color: black;
+  margin-bottom: 0px;
+}
+
+.to-populate-infos{
+  text-align:right;
+  font-size: 14px;
+  color: black;
+}
+
+
 .filled-block{
   background: none!important;
 }
@@ -861,4 +1000,141 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   top: -32px;
   right: 24px;
   display: none;
+}
+
+.createContentVideo{
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+
+#sendDataSubmit, #sendDataSubmit:hover, #sendDataSubmit:active, #sendDatasubmit:focus{
+  position: absolute;
+  right: 45px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  width: 116px;
+  border-radius: 12px;
+  outline: none;
+  box-shadow: none;
+}
+
+/*citations container*/
+#citationsAllContainer{
+  display: none;
+}
+
+#citationsContainer {
+  background-color: white;
+  border-radius: 10px;
+ /* border: 4px solid black;
+    width: 620px;*/
+  min-height: 320px;
+  padding: 40px;
+ /* position: absolute; */
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  z-index: 2;
+  margin-bottom: 12px;
+}
+
+#citationFormSubmit{
+  float: right;
+}
+
+#citationsLibraryContainerToggle{
+  float: left;
+}
+
+
+#citationsSelectionContainer{
+  height: 282px;
+  overflow: auto;
+}
+
+#citationsSelectionContainer label{
+  font-size: 18px;
+  padding: 0px;
+}
+
+#citationsSelectionContainer li{
+  margin: 10px 0px;
+}
+
+/** popup video **/
+
+.video-modal .modal-content{
+  background-color: transparent;
+    border-radius: 0px;
+    border: none;
+}
+
+.video-modal button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  text-align: right;
+  color: white !important;
+}
+
+.video-modal .modal-dialog-centered{
+  max-width: 920px !important;
+  width: 920px !important;
+}
+
+.slideUp{
+  transform: translate(0,-100%);
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+.slideHide{
+  visibility: hidden;
+  z-index: -10;
+}
+
+.fr-quick-insert { display: none; }
+
+
+.tox .tox-notification--in {
+  display: none!important;
+}
+
+#createurViewReturn{
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+#createurViewReturn a{
+ color:white;
+ text-decoration: none;
+ font-weight: 600;
+} 
+
+#chapitreListContainer{
+  position: absolute;
+  right: 50px;
+  top: 46vh;
+}
+
+#chapitreListContainer ul li {
+    padding: 8px 4px 4px 16px;
+    width: 42px;
+    background-color: white;
+    color: black;
+    border-radius: 200px;
+    height: 42px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#chapitreListContainer .chapitreActif{
+  background-color: black;
+  color: white;
 }

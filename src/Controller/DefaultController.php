@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\PamsCode;
 use App\Form\PamsEntreeType;
 use App\Form\PamsInitType;
 use App\Repository\PamsCodeRepository;
 use App\Service\PamsCodeService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -56,11 +58,11 @@ class DefaultController extends AbstractController
             $pamsCodeEntree = $form->get('pamsCode')->getData();
             $pamsCodeEntree = $this->pamsCodeService->normalizeCode($pamsCodeEntree);
 
-            $this->session->set('pamscode',$pamsCodeEntree);
+            $this->session->set('pamscode', $pamsCodeEntree);
             $codeRetour = $this->pamsCodeService->getCodeValid($pamsCodeEntree)[0];
 
-            $route = $this->pamsCodeService->checkCodeRoute($codeRetour, $codeRetour*-1);
-            if($route!==null) {
+            $route = $this->pamsCodeService->checkCodeRoute($codeRetour, $codeRetour * -1);
+            if ($route !== null) {
                 return $this->redirectToRoute($route);
             }
 
@@ -75,22 +77,51 @@ class DefaultController extends AbstractController
     /**
      * @Route("/view", name="pams_view")
      */
-    public function view(Request $request)
+    public function view(Request $request, \Swift_Mailer $mailer)
     {
         /*********
          * On contrôle que l'utilisateur est au bon endroit
          ***************/
         $pamsCode = $this->session->get('pamscode');
-        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
-        $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 2);
-        if($route!==null) {
+        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
+        $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 2);
+        $pams = $codeRetour[1];
+        $pamsArray = [];
+        if ($route !== null) {
             return $this->redirectToRoute($route);
         }
         /*****************/
 
-        return $this->render('default/view.html.twig', [
+        if($pams!==null) {
+            //Si il y a une notif de lecture on envoie un mail
+            $this->pamsCodeService->notifLecture($pams);
+            $pamsArray = $this->pamsCodeService->getChapitre($pams, 1);
+        }
 
-        ]);
+        return $this->render('default/view.html.twig', ['Pamsjson' => json_encode($pamsArray)]);
+
+    }
+
+    /**
+     * @Route("/createur_view", name="pams_create_view")
+     */
+    public function createurView(Request $request)
+    {
+
+        $pamsCode = $this->session->get('pamscode');
+        $retour = $this->pamsCodeService->getCodeValid($pamsCode);
+        //$codeRetour = $retour[0];
+        /* @var $pams PamsCode */
+        $pams = $retour[1];
+        //$route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+
+        //if ($route !== null || $pams === null) {
+        //    throw $this->createAccessDeniedException();
+        //} else {
+            $pamsArray = $this->pamsCodeService->getChapitre($pams, 1);
+        //}
+
+        return $this->render('default/createur_view.html.twig', ['Pamsjson' => json_encode($pamsArray)]);
 
     }
 
@@ -103,9 +134,9 @@ class DefaultController extends AbstractController
          * On contrôle que l'utilisateur est au bon endroit
          ***************/
         $pamsCode = $this->session->get('pamscode');
-        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode)[0];
-        $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
-        if($route!==null) {
+        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
+        $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 1);
+        if ($route !== null) {
             return $this->redirectToRoute($route);
         }
         /*****************/
@@ -113,6 +144,29 @@ class DefaultController extends AbstractController
         return $this->render('default/create.html.twig', [
 
         ]);
+
+    }
+
+    /**
+     * @Route("/update", name="pams_update")
+     */
+    public function update(Request $request)
+    {
+        /*********
+         * On contrôle que l'utilisateur est au bon endroit
+         ***************/
+        $pamsCode = $this->session->get('pamscode');
+        $codeRetour = $this->pamsCodeService->getCodeValid($pamsCode);
+        $route = $this->pamsCodeService->checkCodeRoute($codeRetour[0], 4);
+        $pams = $codeRetour[1];
+        if ($route !== null || $pams === null) {
+            return $this->redirectToRoute($route);
+        }else{
+            $pamsArray = $this->pamsCodeService->getChapitre($pams, 1);
+        }
+        /*****************/
+
+        return $this->render('default/update.html.twig', ['Pamsjson' => json_encode($pamsArray)]);
 
     }
 
@@ -130,9 +184,8 @@ class DefaultController extends AbstractController
         $codeRetour = $retour[0];
         /* @var $pams \App\Entity\PamsCode */
         $pams = $retour[1];
-        $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
         $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
-        if($route!==null) {
+        if ($route !== null) {
             return $this->redirectToRoute($route);
         }
         /*****************/
@@ -146,9 +199,8 @@ class DefaultController extends AbstractController
 
             $retour = $this->pamsCodeService->getCodeValid($pamsCode);
             $codeRetour = $retour[0];
-            $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
             $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 3);
-            if($route!==null) {
+            if ($route !== null) {
                 return $this->redirectToRoute($route);
             }
 
@@ -161,23 +213,114 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/getnotif", name="get_notif", options={"expose"=true})
+     * @param Request $request
+     */
+    public function getNotif(Request $request){
+        if ($request->isXMLHttpRequest()) {
+            $email = $request->request->get('publicationInput');
+
+            if($email!=='') {
+
+                $pamsCode = $this->session->get('pamscode');
+                $retour = $this->pamsCodeService->getCodeValid($pamsCode);
+                /* @var $pams PamsCode */
+                $pams = $retour[1];
+
+                $pams->setMailAuteur($email);
+                $pams->setNotifLecture(true);
+
+                $this->em->flush();
+            }
+
+        }
+    }
+
+    /**
      * @Route("/check-code-valid", name="pams_check_code_valid", options={"expose"=true})
      */
     public function checkCodeValid(Request $request)
     {
         $pamsCode = $request->query->get('data');
-
         $pamsCode = json_decode($pamsCode);
         $pamsCode = $pamsCode[0]->value;
-
         $retour = $this->pamsCodeService->getCodeValid($pamsCode);
         if($retour[0] === 99){
             return new Response('Oups Pas de pams trouvé');
         }else{
             return new Response('ok');
         }
-
     }
 
+    /**
+     * @Route("/get", name="pams_get", options={"expose"=true})
+     * @param Request $request
+     * @return Response
+     */
+    public function getPams(Request $request)
+    {
+        if ($request->isXMLHttpRequest()) {
+
+            $pamsCode = $this->session->get('pamscode');
+            $retour = $this->pamsCodeService->getCodeValid($pamsCode);
+            $codeRetour = $retour[0];
+            /* @var $pams PamsCode */
+            $pams = $retour[1];
+            $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+
+            if ($route !== null || $pams === null) {
+                throw $this->createAccessDeniedException();
+            } else {
+                $chapitre = $request->request->get('chapitre');
+                $pamsArray = $this->pamsCodeService->getChapitre($pams, $chapitre);
+
+                return new JsonResponse($pamsArray);
+            }
+        }
+
+        return new Response('This is not ajax!', 400);
+    }
+
+    /**
+     * @Route("/post", name="pams_post",  options={"expose"=true})
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     */
+    public function postPams(Request $request)
+    {
+        if ($request->isXMLHttpRequest()) {
+            if($request->server->get('CONTENT_LENGTH')<PamsCodeService::TAILLE_MAX) {
+                $pamsCode = $this->session->get('pamscode');
+                $retour = $this->pamsCodeService->getCodeValid($pamsCode);
+                $codeRetour = $retour[0];
+                /* @var $pams PamsCode */
+                $pams = $retour[1];
+                if (count($pams->getPamsChapitres()) === 0) {
+                    $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 1);
+                }else{
+                    $route = $this->pamsCodeService->checkCodeRoute($codeRetour, 4);
+                }
+
+                if ($route !== null || $pams === null) {
+                    throw $this->createAccessDeniedException();
+                } else {
+                    $pamsJson = $request->request->get('pams');
+                    if ($pamsJson !== null) {
+                        $this->pamsCodeService->createChapitre($pams, $pamsJson);
+                    } else {
+                        return new Response('Pas de données', 500);
+                    }
+
+                    return new Response('ok');
+                }
+            }else{
+                return new Response('Données trop importantes', 500);
+            }
+        }
+
+        return new Response('This is not ajax!', 400);
+
+    }
 
 }
