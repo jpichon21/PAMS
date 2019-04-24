@@ -15,18 +15,6 @@ $( document ).ready(function() {
     var blockCitations = pamsJson.addedblockCitation;
     var chooseAudio = pamsJson.music;
 
-    /*check
-    console.log(disposition);
-    console.log(backgroundColor);
-    console.log(backgroundImage);
-    console.log(blockText);
-    console.log(uploadedBackgroundImage);
-    console.log(blockVideos);
-    console.log(blockImages);
-    console.log(uploadMusic);
-    console.log(chooseAudio);
-     console.log(blockVideos);*/
-
     /**récupérer le text */
     if ( blockText !== undefined){
         Object.keys(pamsJson.addedblockText);

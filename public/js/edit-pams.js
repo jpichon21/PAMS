@@ -234,7 +234,7 @@ $('#dispositionForm').submit(function () {
 /*trigger reset*/
 $('#createContentModal').on('hidden.bs.modal', function () {
     resetCurrentBlockValue();
-    resetTextArea();
+    /*resetTextArea();*/
 });
 
 /**trigger delete image */
@@ -503,7 +503,7 @@ function resetCurrentBlockValue() {
 function closeBsModal() {
     $('#createContentModal').modal('hide');
     resetCurrentBlockValue();
-    resetTextArea();
+    /*resetTextArea();*/
     closeContentModalOptions();
 }
 
@@ -558,7 +558,8 @@ function readBlockURL() {
         document.getElementById('trigger' + current_block_id).style.backgroundSize = "cover";
         document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
         document.getElementById('content-added' + current_block_id).style.display = "inline-block";
-        blockImages[current_block_id] = reader.result;;
+        blockImages[current_block_id] = reader.result;
+        closeBsModal();
     }
     if (file) {
         reader.readAsDataURL(file);
@@ -587,6 +588,7 @@ function readVideoBlockurl() {
         document.getElementById(current_block_id + 'VideoModal').style.display = "block";
         document.getElementById('trigger' + current_block_id).setAttribute('data-target', '');
         blockVideos[current_block_id] = reader.result;
+        closeBsModal();
     }
     if (file) {
         reader.readAsDataURL(file);
