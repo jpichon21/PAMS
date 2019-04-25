@@ -1,125 +1,25 @@
-/**récuparation des variables */
-$( document ).ready(function() {
+/*initialisation des variables*/
+var current_block_id = null;
+var current_audio_id = null;
+var current_image_id = null;
+var current_layout_value = null;
+var playing = false;
+var send_audio_id = null;
+var send_image_id = null;
+var send_audio_id = null;
+var send_layout_value = '4a';
+var send_block_id = null;
+var send_background_image_uploaded = null;
+var send_opacity_value = '100';
+var send_background_color = '#ffc0cb';
+var send_uploaded_audio = null;
+var blockText= {};
+var blockCitations= {};
+var blockVideos = {};
+var blockImages = {};
+var send_chapitre_value = 1;
 
-    var pamsJson = {
-        'chapitre': '1',
-        'backgroundOpacity': 100,
-        'backgroundColor': send_background_color,
-        'backgroundImage': null,
-        'music': null,
-        'layout': '4a',
-        'uploadedbackgroundImage': null,
-        'uploadedblockImage':  blockImages,
-        'uploadedblockVideos': blockVideos,
-        'addedblockText': blockText,
-        'addedblockCitation': blockCitations,
-        'uploadedAudio' : null,
-    };
 
-    console.log(pamsJson);
-    var disposition = pamsJson.layout;
-    var backgroundColor = pamsJson.backgroundColor;
-    var backgroundOpacity = pamsJson.backgroundOpacity
-    var backgroundImage = pamsJson.backgroundImage;
-    var uploadedBackgroundImage = pamsJson.uploadedbackgroundImage;
-    var blockText = pamsJson.addedblockText;
-    var uploadMusic = pamsJson.uploadedAudio;
-    var blockImages = pamsJson.uploadedblockImage;
-    var blockVideos = pamsJson.uploadedblockVideos;
-    var blockCitations = pamsJson.addedblockCitation;
-    var chooseAudio = pamsJson.music;
-    var chapitreJson = pamsJson.chapitre;
-
-    /*initialisation des variables*/
-    var current_block_id = null;
-    var current_audio_id = null;
-    var current_image_id = null;
-    var current_layout_value = null;
-    var playing = false;
-
-    var send_layout_value = disposition;
-    var send_background_color = backgroundColor;
-    var send_opacity_value = backgroundOpacity;
-    var send_image_id = backgroundImage;
-    var send_background_image_uploaded = null;
-    var send_uploaded_audio = uploadMusic;
-    var send_audio_id = chooseAudio;
-    var send_chapitre_value = 1;
-
-    /**récupérer le text */
-    if ( blockText !== undefined){
-        Object.keys(pamsJson.addedblockText);
-        var textObj = pamsJson.addedblockText;
-        var textKeys = Object.keys(pamsJson.addedblockText);
-    }else{
-        blockText = {};
-    }
-
-    /**récupérer les citations */
-    if ( blockCitations !== undefined){
-        Object.keys(pamsJson.addedblockCitation);
-        var citationObj = pamsJson.addedblockCitation;
-        var citationKeys = Object.keys(pamsJson.addedblockCitation);
-    }else{
-        blockCitations = {};
-    }
-
-    /**récupérer les images ajoutées aux blocks */
-    if (blockImages !== undefined){
-        Object.keys(pamsJson.uploadedblockImage);
-        var imageObj = pamsJson.uploadedblockImage;
-        var imageKeys = Object.keys(pamsJson.uploadedblockImage);
-    }else{
-        blockImages = {};
-    }
-
-    /**récupérer les vidéos ajoutées aux blocks */
-    if (blockVideos !== undefined){
-        Object.keys(pamsJson.uploadedblockVideos);
-        var vidObj = pamsJson.uploadedblockVideos;
-        var vidKeys = Object.keys(pamsJson.uploadedblockVideos);
-    }else{
-        blockVideos = {};
-    }
-
-    defineDisposition(disposition);
-    defineBackgroundColor(backgroundColor, backgroundOpacity);
-
-    if (chooseAudio !== null){
-        chooseMusic(chooseAudio);
-        displayAudioElement();
-    }
-
-    if (uploadMusic !== undefined){
-        defineUploadedMusic(uploadMusic);
-        displayAudioElement();
-    }
-
-    if (textObj !== null){
-        addBlockTextContent(textObj, textKeys);
-    }
-
-    if (imageObj !== null){
-        addImageContent(imageObj, imageKeys);
-    }
-
-    if (vidObj !== null){
-        addVideoContent(vidObj, vidKeys);
-    }
-
-    if (citationObj !== null){
-        addBlockCitation(citationObj, citationKeys);
-    }
-
-    if ( backgroundImage !== null){
-        defineBackgroundImage(backgroundImage);
-    }
-
-    if (uploadedBackgroundImage !== undefined){
-        setUploadedBackgroundImage(uploadedBackgroundImage);
-    }
-
-    
 /*opacity & colorpicker*/
 
 $("#colorPicker").spectrum({
@@ -143,7 +43,6 @@ slider.oninput = function () {
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
-   
 });
 
 
@@ -216,7 +115,7 @@ $(document).on('click', '#citationsLibraryContainerToggle2', function () {
      citationsFormContainerToggle();
      return false;
  });
- 
+
 
 
 /**Toggle tempsréel des layouts***/
@@ -245,6 +144,7 @@ $('#dispositionForm').submit(function () {
 /*trigger reset*/
 $('#createContentModal').on('hidden.bs.modal', function () {
     resetCurrentBlockValue();
+    resetTextArea();
 });
 
 /**trigger delete image */
@@ -336,6 +236,7 @@ $('#musiqueUploader').change(function () {
     reader.readAsDataURL(this.files[0]); 
     reader.onloadend = function() {
         send_uploaded_audio = reader.result;                
+        console.log(send_uploaded_audio);
     }
     sound.onend = function (e) {
         URL.revokeObjectURL(this.src);
@@ -451,6 +352,7 @@ function findModalBlock(elementClicked) {
 }
 
 /**ajout dynamique de texte wysiwyg*/
+var blockText= {}
 function populateText() {
     var user_text = $("#toFill").val();
     $('#' + current_block_id).find('.to-populate').html(user_text);
@@ -461,6 +363,7 @@ function populateText() {
     blockText[current_block_id] = user_text;
 }
 /**ajout dynamique de texte citation*/
+var blockCitations= {}
 function populateCitation() {
     var citation_text = $("#citationsTextFill").val();
     var citation_auteur = $("#citationsAuteurFill").val();
@@ -513,6 +416,7 @@ function resetCurrentBlockValue() {
 function closeBsModal() {
     $('#createContentModal').modal('hide');
     resetCurrentBlockValue();
+    resetTextArea();
     closeContentModalOptions();
 }
 
@@ -555,6 +459,7 @@ function readURL() {
 
 
 /* ajout image à block */
+var blockImages = {}
 document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
 function readBlockURL() {
     var file = document.getElementById("addImageContent").files[0];
@@ -568,7 +473,7 @@ function readBlockURL() {
         document.getElementById('trigger' + current_block_id).style.backgroundPosition = "center";
         document.getElementById('content-added' + current_block_id).style.display = "inline-block";
         blockImages[current_block_id] = reader.result;
-        closeBsModal();
+        console.log(reader.result);
     }
     if (file) {
         reader.readAsDataURL(file);
@@ -579,6 +484,7 @@ function readBlockURL() {
 }
 
 /* ajout vidéo à block */
+var blockVideos = {}
 document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
 function readVideoBlockurl() {
     var file = document.getElementById("addVideoContent").files[0];
@@ -597,7 +503,6 @@ function readVideoBlockurl() {
         document.getElementById(current_block_id + 'VideoModal').style.display = "block";
         document.getElementById('trigger' + current_block_id).setAttribute('data-target', '');
         blockVideos[current_block_id] = reader.result;
-        closeBsModal();
     }
     if (file) {
         reader.readAsDataURL(file);
@@ -784,6 +689,7 @@ function resetBlockVariables(){
 function toggleDisposition(disposition) {
     var $active = $('.disposition-active');
     var $target = $('#' + disposition);
+    console.log(disposition);
 
     // Si la sélection est celle déjà active, on fait rien
     if ($target.is($active)) return false;
@@ -795,7 +701,7 @@ function toggleDisposition(disposition) {
     $target.addClass('disposition-active');
 }
 
-/***CHAPITRES ****/
+/***CHAPITRES 
 $('.input-chapitre').on('change', function() {
     $('.input-chapitre').not(this).prop('checked', false);  
 });
@@ -806,8 +712,7 @@ $(document).on('change', '.input-chapitre', function (e) {
     send_chapitre_value = current_chapitre_value;
     console.log("chapitre : " + current_chapitre_value);
     toggleChapitre(current_chapitre_value);
-    getChapitre(send_chapitre_value);
-
+    sendData();
 });
 
 function toggleChapitre(current_chapitre_value) {
@@ -822,12 +727,10 @@ function toggleChapitre(current_chapitre_value) {
 
 $("#chapitreListShow").click(function(){
         $('#chapitreListHider').css({ 'height' : '+=52px' });
-})
-
+})****/
 /***************************************
  * ************OBJET JSON **************
  * ************************************/
-
 
 function sendData() {
     var obj = {
@@ -854,272 +757,11 @@ function sendData() {
             'pams': JSON.stringify(obj)
         },
         success: function (result) {
-            return (result);
+            console.log(result);
         }
     });
 }
 
-function getChapitre(send_chapitre_value) {
-    $.ajax({
-        url: Routing.generate('pams_get'),
-        async: true,
-        type: 'POST',
-        data: {
-            'chapitre': send_chapitre_value
-        },
-        success: function (result) {
-            pamsJson = result;
-            refreshPams(result);
-            console.log(pamsJson);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
-        }
-    });    
-}
 
-function refreshPams(result){
-    console.log("refresh");
-    disposition = result.layout;
-    backgroundColor = result.backgroundColor;
-    backgroundOpacity = result.backgroundOpacity
-    backgroundImage = result.backgroundImage;
-    uploadedBackgroundImage = result.uploadedbackgroundImage;
-    blockText = result.addedblockText;
-    uploadMusic = result.uploadedAudio;
-    blockImages = result.uploadedblockImage;
-    blockVideos = result.uploadedblockVideos;
-    blockCitations = result.addedblockCitation;
-    chooseAudio = result.music;
-    
-    
-    /**récupérer le text */
-    if ( blockText !== undefined && blockText !== null ){
-        Object.keys(result.addedblockText);
-        var textObj = result.addedblockText;
-        var textKeys = Object.keys(result.addedblockText);
-    }else{
-        removeAllBlockText();
-        blockText = {};
-    }
-
-    /**récupérer les citations */
-    if ( blockCitations !== undefined && blockCitations !== null){
-        Object.keys(result.addedblockCitation);
-        var citationObj = result.addedblockCitation;
-        var citationKeys = Object.keys(result.addedblockCitation);
-    }else{
-        removeAllBlockCitation();
-        blockCitations = {};
-    }
-
-    /**récupérer les images ajoutées aux blocks */
-    if (blockImages !== undefined && blockImages !== null){
-        Object.keys(result.uploadedblockImage);
-        var imageObj = result.uploadedblockImage;
-        var imageKeys = Object.keys(result.uploadedblockImage);
-    }else{
-        removeAllBlockImages();
-        blockImages = {};
-    }
-
-    /**récupérer les vidéos ajoutées aux blocks */
-    if (blockVideos !== undefined && blockVideos !== null){
-        Object.keys(result.uploadedblockVideos);
-        var vidObj = result.uploadedblockVideos;
-        var vidKeys = Object.keys(result.uploadedblockVideos);
-    }else{
-        removeAllBlockVideos();
-        blockVideos = {};
-    }
-
-    if (disposition !== null){
-        defineDisposition(disposition);
-    } else{
-        pamsJson.layout = '4a';
-    }
-
-    defineBackgroundColor(backgroundColor, backgroundOpacity);
-    if (chooseAudio !== null){
-        chooseMusic(chooseAudio);
-        displayAudioElement();
-    }
-
-    if (uploadMusic !== undefined){
-        defineUploadedMusic(uploadMusic);
-        displayAudioElement();
-    }
-
-    if (textObj !== null){
-        addBlockTextContent(textObj, textKeys);
-    }
-
-    if (imageObj !== null){
-        addImageContent(imageObj, imageKeys);
-    }
-
-    if (vidObj !== null){
-        addVideoContent(vidObj, vidKeys);
-    }
-
-    if (citationObj !== null){
-        addBlockCitation(citationObj, citationKeys);
-    }
-
-    if ( backgroundImage !== null){
-        defineBackgroundImage(backgroundImage);
-    }
-
-    if (uploadedBackgroundImage !== undefined){
-        setUploadedBackgroundImage(uploadedBackgroundImage);
-    }
-}
-
-});//end doc ready
-/*******initialisation du layout******************/
-function defineDisposition(disposition) {
-    var $active = $('.disposition-active');
-    var $target = $('#' + disposition);
-    if ($target.is($active)) return false;
-    if ($active.length > 0) {
-        $active.removeClass('disposition-active');
-    }
-    $target.addClass('disposition-active');
-}
-
-function defineBackgroundColor(backgroundColor, backgroundOpacity) {
-    document.getElementById("createBody").style.backgroundColor = backgroundColor;
-    document.getElementById("createBody").style.opacity = backgroundOpacity;
-}
-
-function defineBackgroundImage(backgroundImage, backgroundOpacity){
-    var file = $('#' + backgroundImage + 'input').val();
-    document.getElementById('createBody').style.backgroundImage = "url(" + file + ")";
-}
-
-function addBlockTextContent(textObj, textKeys){
-    for (var textKeys in textObj){
-        var user_text = textObj[textKeys];
-        var current_block_text_id = textKeys;
-        $('#' + current_block_text_id).find('.to-populate').html(user_text);
-        $('#trigger' + current_block_text_id).addClass('filled-block');
-        document.getElementById('trigger' + current_block_text_id).style.border = "none";
-        $('#' + current_block_text_id).addClass('user-content');
-        document.getElementById('content-added' + current_block_text_id).style.display = "inline-block";
-    }
-}
-
-function removeAllBlockText(){
-    $('.to-populate').html("");
-    $('.trigger-modal-block').removeClass('filled-block');
-    $('.trigger-modal-block').addClass('removed-content');
-    $('.trigger-modal-block').css('border', '');
-    $('.content-added').css('display', "none");
-}
-
-
-function addBlockCitation(citationObj, citationKeys){
-    for (var citationKeys in citationObj){
-        /*var user_citation = citationObj[citationKeys];*/
-        var current_block_citation_id = citationKeys;
-        var citation_text = citationObj[citationKeys].texte;
-        var citation_auteur = citationObj[citationKeys].auteur;
-        var citation_infos = citationObj[citationKeys].infos;
-        $('#' + current_block_citation_id).find('.to-populate-citation').text("« "+citation_text+" »");
-        $('#' + current_block_citation_id).find('.to-populate-auteur').text(citation_auteur);
-        $('#' + current_block_citation_id).find('.to-populate-infos').text(citation_infos);
-        $('#trigger' + current_block_citation_id).addClass('filled-block');
-        document.getElementById('trigger' + current_block_citation_id).style.border = "none";
-        $('#' + current_block_citation_id).addClass('user-content');
-        document.getElementById('content-added' + current_block_citation_id).style.display = "inline-block";
-    }
-}
-
-function removeAllBlockCitation(){
-    $('.to-populate-auteur').text("");
-    $('.to-populate-infos').text("");
-    $('.to-populate-citation').text("");
-    $('.trigger-modal-block').removeClass('filled-block');
-    $('.trigger-modal-block').addClass('removed-content');
-    $('.trigger-modal-block').addClass('removed-content');
-    $('.trigger-modal-block').css('border', '');
-    $('.content-added').css('display', "none");
-}
-
-
-function setUploadedBackgroundImage(uploadedBackgroundImage){
-    document.getElementById('createBody').style.backgroundImage = "url(" + uploadedBackgroundImage + ")";
-}
-
-
-function defineUploadedMusic(uploadMusic){
-    var audiofile = uploadMusic;
-    document.getElementById('sound').src = "" + audiofile + "";
-}
-
-
-function chooseMusic(chooseAudio){
-    var audiofile = $('#' + chooseAudio + 'input').val();
-    document.getElementById('sound').src = "/audio/" + audiofile + "";
-}
-
-function displayAudioElement(){
-    document.getElementById('sound').style.display = "block";
-}
-
-function addImageContent(imageObj, imageKeys){
-    for (var imageKeys in imageObj){
-        var user_image = imageObj[imageKeys];
-        var current_block_image_id = imageKeys;
-        $('#' + current_block_image_id).addClass('user-content');
-        document.getElementById('trigger' + current_block_image_id).style.border = "none";
-        document.getElementById('trigger' + current_block_image_id).style.backgroundImage = "url(" + user_image + ")";
-        document.getElementById('trigger' + current_block_image_id).style.backgroundSize = "cover";
-        document.getElementById('trigger' + current_block_image_id).style.backgroundPosition = "center";
-        document.getElementById('content-added' + current_block_image_id).style.display = "inline-block";
-    }
-}
-
-function removeAllBlockImages(){
-    $('.trigger-modal-block').css('background-image', '');
-    $('.trigger-modal-block').removeClass('filled-block');
-    $('.trigger-modal-block').addClass('removed-content');
-    $('.trigger-modal-block').css('border', '');
-    $('.content-added').css('display', "none");
-}
-
-
-
-function addVideoContent(vidObj, vidKeys){
-    for (var vidKeys in vidObj){
-        var user_video = vidObj[vidKeys];
-        var current_block_video_id = vidKeys;
-        $('#trigger' + current_block_video_id).removeClass("removed-content");
-        $('#' + current_block_video_id).addClass('user-content');
-        document.getElementById('trigger' + current_block_video_id).style.border = "none";
-        document.getElementById('trigger' + current_block_video_id).style.backgroundImage = "none";
-        document.getElementById('trigger' + current_block_video_id).style.backgroundSize = "cover";
-        document.getElementById('trigger' + current_block_video_id).style.backgroundPosition = "center";
-        document.getElementById(current_block_video_id + 'Video').setAttribute('src', user_video);
-        document.getElementById(current_block_video_id + 'Video').style.display = "block";
-        document.getElementById(current_block_video_id + 'VideoModal').setAttribute('src', user_video);
-        document.getElementById(current_block_video_id + 'VideoModal').style.display = "block";
-        document.getElementById('trigger' + current_block_video_id).setAttribute('data-target', '');
-        document.getElementById('content-added' + current_block_video_id).style.display = "inline-block";
-    }
-}
-
-function removeAllBlockVideos(){
-    $('.trigger-modal-block').css('background-image', '');
-    $('.trigger-modal-block').css('background-size', '');
-    $('.trigger-modal-block').css('background-position', '');
-    $('.trigger-modal-block').removeClass('filled-block');
-    $('.trigger-modal-block').addClass('removed-content');
-    $('.trigger-modal-block').css('border', '');
-    $('.content-added').css('display', "none");
-    $('.createContentVideo').css('display', "none");
-    $('.createContentVideo').attr('src', "");
-}
 
 

@@ -17,13 +17,11 @@ $( document ).ready(function() {
     var blockVideos = pamsJson.uploadedblockVideos;
     var blockCitations = pamsJson.addedblockCitation;
     var chooseAudio = pamsJson.music;
-    var chapitreJson = pamsJson.chapitre;
 
     /*initialisation des variables*/
     var current_block_id = null;
     var current_audio_id = null;
     var current_image_id = null;
-    var current_layout_value = null;
     var playing = false;
 
     var send_layout_value = disposition;
@@ -73,7 +71,6 @@ $( document ).ready(function() {
 
     defineDisposition(disposition);
     defineBackgroundColor(backgroundColor, backgroundOpacity);
-
     if (chooseAudio !== null){
         chooseMusic(chooseAudio);
         displayAudioElement();
@@ -107,10 +104,8 @@ $( document ).ready(function() {
     if (uploadedBackgroundImage !== undefined){
         setUploadedBackgroundImage(uploadedBackgroundImage);
     }
-
     
 /*opacity & colorpicker*/
-
 $("#colorPicker").spectrum({
     preferredFormat: "hex",
     flat: true,
@@ -129,7 +124,6 @@ slider.oninput = function () {
 }
 
 /*events*/
-
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
    
@@ -234,7 +228,7 @@ $('#dispositionForm').submit(function () {
 /*trigger reset*/
 $('#createContentModal').on('hidden.bs.modal', function () {
     resetCurrentBlockValue();
-    /*resetTextArea();*/
+    resetTextArea();
 });
 
 /**trigger delete image */
@@ -246,7 +240,6 @@ $('.content-added').click(function () {
 /*******************************************
  **** Widget choix de l'image de fond*********
  *******************************************/
-
 /*cibler la vignette musique*/
 $('.image-list-item').on('click', function (e) {
     var $this = $(this);
@@ -255,7 +248,6 @@ $('.image-list-item').on('click', function (e) {
     send_image_id = current_image_id;
     chooseImage();
 });
-
 
 function chooseImage() {
     var file = $('#' + current_image_id + 'input').val();
@@ -503,12 +495,11 @@ function resetCurrentBlockValue() {
 function closeBsModal() {
     $('#createContentModal').modal('hide');
     resetCurrentBlockValue();
-    /*resetTextArea();*/
+    resetTextArea();
     closeContentModalOptions();
 }
 
 function resetTextArea() {
-   /* $('#modalTextFormContainer').froalaEditor('html.set', '');*/
     tinymce.activeEditor.setContent('');
 }
 
@@ -543,7 +534,6 @@ function readURL() {
         return false;
     }
 }
-
 
 /* ajout image à block */
 document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
@@ -686,7 +676,6 @@ function citationsContainerToggle() {
     var x = document.getElementById("citationsAllContainer");
     if (x.style.display === "none") {
         x.style.display = "block";
-
     } else {
         x.style.display = "none";
     }
@@ -700,7 +689,6 @@ function citationsFormContainerToggle() {
         ly.style.display = "none";
     }
 }
-
 
 function citationsLibraryToggle() {
     var ly = document.getElementById("citationsLibraryContainer");
@@ -734,7 +722,6 @@ function closeTextFormModal(){
 }
 
 
-
 /*suppression contenu block*/
 function removeContent() {
     $('#' + current_block_id).removeClass('user-content');
@@ -755,7 +742,6 @@ function removeContent() {
     resetBlockVariables();
 }
 
-
 function resetBlockContent() {
     $('#' + current_block_id).removeClass('user-content');
     $('#trigger' + current_block_id).addClass("removed-content");
@@ -769,7 +755,6 @@ function resetBlockVariables(){
     delete blockCitations[current_block_id];
     delete blockText[current_block_id];
 }
-
 
 /*Layouts*/
 function toggleDisposition(disposition) {
@@ -786,7 +771,7 @@ function toggleDisposition(disposition) {
     $target.addClass('disposition-active');
 }
 
-/***CHAPITRES ****/
+/***CHAPITRES
 $('.input-chapitre').on('change', function() {
     $('.input-chapitre').not(this).prop('checked', false);  
 });
@@ -798,7 +783,6 @@ $(document).on('change', '.input-chapitre', function (e) {
     console.log("chapitre : " + current_chapitre_value);
     toggleChapitre(current_chapitre_value);
     getChapitre(send_chapitre_value);
-
 });
 
 function toggleChapitre(current_chapitre_value) {
@@ -813,13 +797,11 @@ function toggleChapitre(current_chapitre_value) {
 
 $("#chapitreListShow").click(function(){
         $('#chapitreListHider').css({ 'height' : '+=52px' });
-})
+}) ****/
 
 /***************************************
  * ************OBJET JSON **************
  * ************************************/
-
-
 function sendData() {
     var obj = {
         'chapitre': send_chapitre_value,
@@ -849,124 +831,6 @@ function sendData() {
         }
     });
 }
-
-function getChapitre(send_chapitre_value) {
-    $.ajax({
-        url: Routing.generate('pams_get'),
-        async: true,
-        type: 'POST',
-        data: {
-            'chapitre': send_chapitre_value
-        },
-        success: function (result) {
-            pamsJson = result;
-            refreshPams(result);
-            console.log(pamsJson);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
-        }
-    });    
-}
-
-function refreshPams(result){
-    console.log("refresh");
-    disposition = result.layout;
-    backgroundColor = result.backgroundColor;
-    backgroundOpacity = result.backgroundOpacity
-    backgroundImage = result.backgroundImage;
-    uploadedBackgroundImage = result.uploadedbackgroundImage;
-    blockText = result.addedblockText;
-    uploadMusic = result.uploadedAudio;
-    blockImages = result.uploadedblockImage;
-    blockVideos = result.uploadedblockVideos;
-    blockCitations = result.addedblockCitation;
-    chooseAudio = result.music;
-    
-    
-    /**récupérer le text */
-    if ( blockText !== undefined && blockText !== null ){
-        Object.keys(result.addedblockText);
-        var textObj = result.addedblockText;
-        var textKeys = Object.keys(result.addedblockText);
-    }else{
-        removeAllBlockText();
-        blockText = {};
-    }
-
-    /**récupérer les citations */
-    if ( blockCitations !== undefined && blockCitations !== null){
-        Object.keys(result.addedblockCitation);
-        var citationObj = result.addedblockCitation;
-        var citationKeys = Object.keys(result.addedblockCitation);
-    }else{
-        removeAllBlockCitation();
-        blockCitations = {};
-    }
-
-    /**récupérer les images ajoutées aux blocks */
-    if (blockImages !== undefined && blockImages !== null){
-        Object.keys(result.uploadedblockImage);
-        var imageObj = result.uploadedblockImage;
-        var imageKeys = Object.keys(result.uploadedblockImage);
-    }else{
-        removeAllBlockImages();
-        blockImages = {};
-    }
-
-    /**récupérer les vidéos ajoutées aux blocks */
-    if (blockVideos !== undefined && blockVideos !== null){
-        Object.keys(result.uploadedblockVideos);
-        var vidObj = result.uploadedblockVideos;
-        var vidKeys = Object.keys(result.uploadedblockVideos);
-    }else{
-        removeAllBlockVideos();
-        blockVideos = {};
-    }
-
-    if (disposition !== null){
-        defineDisposition(disposition);
-    } else{
-        pamsJson.layout = '4a';
-    }
-
-    defineBackgroundColor(backgroundColor, backgroundOpacity);
-    if (chooseAudio !== null){
-        chooseMusic(chooseAudio);
-        displayAudioElement();
-    }
-
-    if (uploadMusic !== undefined){
-        defineUploadedMusic(uploadMusic);
-        displayAudioElement();
-    }
-
-    if (textObj !== null){
-        addBlockTextContent(textObj, textKeys);
-    }
-
-    if (imageObj !== null){
-        addImageContent(imageObj, imageKeys);
-    }
-
-    if (vidObj !== null){
-        addVideoContent(vidObj, vidKeys);
-    }
-
-    if (citationObj !== null){
-        addBlockCitation(citationObj, citationKeys);
-    }
-
-    if ( backgroundImage !== null){
-        defineBackgroundImage(backgroundImage);
-    }
-
-    if (uploadedBackgroundImage !== undefined){
-        setUploadedBackgroundImage(uploadedBackgroundImage);
-    }
-}
-
 });//end doc ready
 /*******initialisation du layout******************/
 function defineDisposition(disposition) {

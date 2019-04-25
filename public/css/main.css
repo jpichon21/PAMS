@@ -1154,3 +1154,8 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   overflow: hidden;
   max-height: 208px!important;/*taille max du container*/
 }
+
+.trigger-modal-block, #createContentModal ul label, #createContentModal ul li, #navLeft ul li, #navright ul li, #musiqueGalleryList ul li, #imageGalleryList ul li, #dispositionForm label{
+  cursor: pointer;
+}
+
