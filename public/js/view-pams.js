@@ -80,7 +80,7 @@ $( document ).ready(function() {
         setUploadedBackgroundImage(uploadedBackgroundImage);
     }
 
-});
+});//end doc ready
 
 /*******initialisation du layout******************/
 function defineDisposition(disposition) {
