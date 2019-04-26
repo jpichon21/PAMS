@@ -123,8 +123,12 @@ function addBlockCitation(citationObj, citationKeys){
         var citation_auteur = citationObj[citationKeys].auteur;
         var citation_infos = citationObj[citationKeys].infos;
         $('#' + current_block_id).find('.to-populate-citation').text("« "+citation_text+" »");
+        if( citation_infos !== null){
+           $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
+        }else{
+           $('#' + current_block_id).find('.to-populate-infos').text('');    
+        }
         $('#' + current_block_id).find('.to-populate-auteur').text(citation_auteur);
-        $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
         $('#trigger' + current_block_id).addClass('filled-block');
         document.getElementById('trigger' + current_block_id).style.border = "none";
         $('#' + current_block_id).addClass('user-content');

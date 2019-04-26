@@ -370,7 +370,11 @@ function populateCitation() {
     var citation_infos = $("#citationsInfosFill").val();
     $('#' + current_block_id).find('.to-populate-citation').text("« "+citation_text+" »");
     $('#' + current_block_id).find('.to-populate-auteur').text(citation_auteur);
-    $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
+    if( citation_infos !== null){
+        $('#' + current_block_id).find('.to-populate-infos').text(citation_infos);
+     }else{
+        $('#' + current_block_id).find('.to-populate-infos').text('');    
+     }
     $('#trigger' + current_block_id).addClass('filled-block');
     document.getElementById('trigger' + current_block_id).style.border = "none";
     document.getElementById('content-added' + current_block_id).style.display = "inline-block";
