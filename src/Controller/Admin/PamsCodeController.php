@@ -198,8 +198,8 @@ class PamsCodeController extends AbstractController
             if (($handle = fopen($request->files->get('file')->getRealPath(), "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                     if ($row > 1) {
-                        $codeCreateur = $string = str_replace(' ', '', $data[1]);
-                        $codeDestinataire = $string = str_replace(' ', '', $data[2]);
+                        $codeCreateur =  str_replace(' ', '', $data[1]);
+                        $codeDestinataire =  str_replace(' ', '', $data[2]);
 
                         //On verifie qu'il n'y a pas doublon
                         //Ce n'est pas optimisé mais c'est du one shot
