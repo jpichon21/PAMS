@@ -15,6 +15,26 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
+     * @Route("/inituser", name="app_init_user")
+     */
+    public function initUser(UserPasswordEncoderInterface $encoder): Response
+    {
+        $user = new User();
+        $user->setEmail('g.ponty@dev-web.io');
+        $user->setRoles(['ROLE_USER','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
+        $user->setPassword($encoder->encodePassword(
+            $user,
+            'tghj87e'
+        ));
+        $user->setEnable(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return new Response('ok');
+    }
+
+    /**
      * @Route("/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
