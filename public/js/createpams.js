@@ -353,7 +353,12 @@ function findModalBlock(elementClicked) {
     var $block = $this.closest('.createContent')
     var block_id = $block.attr('id');
     current_block_id = block_id;
-    /* send_block_id = current_block_id;*/
+    getTextFormContent();
+}
+
+function getTextFormContent(){
+    var user_text_content = $('#' + current_block_id).find('.to-populate').html();
+    tinymce.activeEditor.setContent(user_text_content);
 }
 
 /**ajout dynamique de texte wysiwyg*/

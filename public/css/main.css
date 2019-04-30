@@ -821,6 +821,14 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 
 /* Popup publication*/
+.popup-closer{
+  float: right;
+  position: absolute;
+  right: 11px;
+  top: 6px;
+  opacity: 0.6;
+}
+
 #publicationPopup, #updatePopup{
   background-color: white;
   border-radius: 10px;
@@ -847,9 +855,11 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 #publicationPopup p, #updatePopup p{
   font-size: 14px;
+  margin: 6px auto;
 }
 
 #publicationInputContainer{
+  margin-top: 12px;
   width: 100%;
 }
 
@@ -1155,7 +1165,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   max-height: 208px!important;/*taille max du container*/
 }
 
-.trigger-modal-block, #createContentModal ul label, #createContentModal ul li, #navLeft ul li, #navright ul li, #musiqueGalleryList ul li, #imageGalleryList ul li, #dispositionForm label{
+.trigger-modal-block, #createContentModal ul label, #createContentModal ul li, #navLeft ul li, #navright ul li, #musiqueGalleryList ul li, #imageGalleryList ul li, #dispositionForm label, #colorPickerLabel, #imageGalleryToggleLabel, .popup-closer{
   cursor: pointer;
 }
 
