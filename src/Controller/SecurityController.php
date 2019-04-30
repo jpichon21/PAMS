@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,31 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
+     * @Route("/inituser", name="app_init_user")
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
+     */
+    public function initUser(UserPasswordEncoderInterface $encoder): Response
+    {
+        $user = new User();
+        $user->setEmail('g.ponty@dev-web.io');
+        $user->setRoles(['ROLE_USER','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
+        $user->setPassword($encoder->encodePassword(
+            $user,
+            'tghj87e'
+        ));
+        $user->setEnable(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return new Response('ok');
+    }
+
+    /**
      * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -37,11 +62,14 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/forgotten_password", name="app_forgotten_password")
+     * @param Request $request
+     * @param Swift_Mailer $mailer
+     * @param TokenGeneratorInterface $tokenGenerator
+     * @return Response
      */
     public function forgottenPassword(
         Request $request,
-        UserPasswordEncoderInterface $encoder,
-        \Swift_Mailer $mailer,
+        Swift_Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ): Response
     {
@@ -90,6 +118,10 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/reset_password/{token}", name="app_reset_password")
+     * @param Request $request
+     * @param string $token
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
     {
