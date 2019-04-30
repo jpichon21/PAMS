@@ -1159,3 +1159,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   cursor: pointer;
 }
 
+[type="date"]{
+  left: 200px;
+}

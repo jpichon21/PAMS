@@ -110,8 +110,7 @@ $("#colorPicker").spectrum({
     preferredFormat: "hex",
     flat: true,
     showInput: true,
-    showAlpha: true,
-    allowEmpty: true
+    showAlpha: true
 });
 
 var slider = document.getElementById("opacityRange");
@@ -129,6 +128,9 @@ $(document).ready(function () {
    
 });
 
+$(".sp-choose").click(function (event) {
+    resetAllPopups();
+});
 
 $("#bodyBackdrop").click(function (event) {
     event.stopPropagation();
@@ -399,6 +401,7 @@ $('#publicationPopupEmailForm').submit(function (e) {
 /********************* ajout de texte ****************************/
 
 $(document).on('submit', '#modalTextForm', function (e) {
+    removeContent();
     e.preventDefault();
     populateText();
     closeBsModal();
@@ -406,6 +409,7 @@ $(document).on('submit', '#modalTextForm', function (e) {
 });
 
 $('#citationsForm').on('submit', function (e) {
+    removeContent();
     e.preventDefault();
     populateCitation();
     closeBsModal();
@@ -414,6 +418,7 @@ $('#citationsForm').on('submit', function (e) {
 
 
 $('#citationsLibraryForm').on('submit', function (e) {
+    removeContent();
     e.preventDefault();
     populateCitationLibrary();
     closeBsModal();
@@ -434,6 +439,7 @@ function findModalBlock(elementClicked) {
 
 /**ajout dynamique de texte wysiwyg*/
 function populateText() {
+ 
     var user_text = $("#toFill").val();
     $('#' + current_block_id).find('.to-populate').html(user_text);
     $('#trigger' + current_block_id).addClass('filled-block');
@@ -441,6 +447,7 @@ function populateText() {
     document.getElementById('content-added' + current_block_id).style.display = "inline-block";
     $('#' + current_block_id).addClass('user-content');
     blockText[current_block_id] = user_text;
+    
 }
 /**ajout dynamique de texte citation*/
 function populateCitation() {
@@ -538,6 +545,7 @@ function readURL() {
 /* ajout image à block */
 document.getElementById('addImageContent').addEventListener('change', readBlockURL, true);
 function readBlockURL() {
+    removeContent();
     var file = document.getElementById("addImageContent").files[0];
     var reader = new FileReader();
     reader.onloadend = function () {
@@ -562,6 +570,7 @@ function readBlockURL() {
 /* ajout vidéo à block */
 document.getElementById('addVideoContent').addEventListener('change', readVideoBlockurl, true);
 function readVideoBlockurl() {
+    removeContent();
     var file = document.getElementById("addVideoContent").files[0];
     var reader = new FileReader();
     reader.onloadend = function () {
@@ -820,7 +829,7 @@ function sendData() {
     console.log(obj);
     $.ajax({
         url: Routing.generate('pams_post'),
-        async: true,
+        async: false,
         type: 'POST',
         dataType: 'json',
         data: {
